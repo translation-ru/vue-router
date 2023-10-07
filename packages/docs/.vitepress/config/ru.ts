@@ -2,9 +2,9 @@ import type { DefaultTheme, LocaleSpecificConfig } from 'vitepress'
 
 export const META_URL = 'https://router.vuejs.org'
 export const META_TITLE = 'Vue Router'
-export const META_DESCRIPTION = 'The official Router for Vue.js'
+export const META_DESCRIPTION = 'Официальный маршрутизатор для Vue.js'
 
-export const enConfig: LocaleSpecificConfig<DefaultTheme.Config> = {
+export const ruConfig: LocaleSpecificConfig<DefaultTheme.Config> = {
   description: META_DESCRIPTION,
   head: [
     ['meta', { property: 'og:url', content: META_URL }],
@@ -16,15 +16,16 @@ export const enConfig: LocaleSpecificConfig<DefaultTheme.Config> = {
 
   themeConfig: {
     editLink: {
-      pattern: 'https://github.com/vuejs/router/edit/main/packages/docs/:path',
-      text: 'Suggest changes to this page',
+      pattern:
+        'https://github.com/translation-ru/vue-router/edit/main/packages/docs/:path',
+      text: 'Предложить изменения к этой странице',
     },
 
     nav: [
       // { text: 'Config', link: '/config/' },
       // { text: 'Plugins', link: '/plugins/' },
       {
-        text: 'Guide',
+        text: 'Руководство',
         link: '/guide/',
         activeMatch: '^/guide/',
       },
@@ -34,18 +35,18 @@ export const enConfig: LocaleSpecificConfig<DefaultTheme.Config> = {
         items: [{ text: 'v3.x', link: 'https://v3.router.vuejs.org' }],
       },
       {
-        text: 'Links',
+        text: 'Ссылки',
         items: [
           {
-            text: 'Discussions',
+            text: 'Обсуждения',
             link: 'https://github.com/vuejs/router/discussions',
           },
           {
-            text: 'Changelog',
+            text: 'Список изменений',
             link: 'https://github.com/vuejs/router/blob/main/packages/router/CHANGELOG.md',
           },
           {
-            text: 'Vue.js Certification',
+            text: 'Сертификация по Vue.js',
             link: 'https://certification.vuejs.org/?friend=VUEROUTER',
           },
         ],
@@ -56,78 +57,78 @@ export const enConfig: LocaleSpecificConfig<DefaultTheme.Config> = {
       // catch-all fallback
       '/': [
         {
-          text: 'Setup',
+          text: 'Настройка',
           items: [
             {
-              text: 'Introduction',
+              text: 'Вступление',
               link: '/introduction.html',
             },
             {
-              text: 'Installation',
+              text: 'Установка',
               link: '/installation.html',
             },
           ],
         },
         {
-          text: 'Essentials',
+          text: 'Основы',
           collapsible: false,
           items: [
             {
-              text: 'Getting Started',
+              text: 'Начало работы',
               link: '/guide/',
             },
             {
-              text: 'Dynamic Route Matching',
+              text: 'Динамическое сопоставление маршрутов',
               link: '/guide/essentials/dynamic-matching.html',
             },
             {
-              text: "Routes' Matching Syntax",
+              text: 'Синтаксис сопоставления маршрутов',
               link: '/guide/essentials/route-matching-syntax.html',
             },
             {
-              text: 'Nested Routes',
+              text: 'Вложенные маршруты',
               link: '/guide/essentials/nested-routes.html',
             },
             {
-              text: 'Programmatic Navigation',
+              text: 'Программная навигация',
               link: '/guide/essentials/navigation.html',
             },
             {
-              text: 'Named Routes',
+              text: 'Именованные маршруты',
               link: '/guide/essentials/named-routes.html',
             },
             {
-              text: 'Named Views',
+              text: 'Именованные представления',
               link: '/guide/essentials/named-views.html',
             },
             {
-              text: 'Redirect and Alias',
+              text: 'Перенаправления и псевдонимы',
               link: '/guide/essentials/redirect-and-alias.html',
             },
             {
-              text: 'Passing Props to Route Components',
+              text: 'Передача входных параметров в компоненты маршрута',
               link: '/guide/essentials/passing-props.html',
             },
             {
-              text: 'Different History modes',
+              text: 'Разные режимы History',
               link: '/guide/essentials/history-mode.html',
             },
           ],
         },
         {
-          text: 'Advanced',
+          text: 'Продвинутые темы',
           collapsible: false,
           items: [
             {
-              text: 'Navigation guards',
+              text: 'Навигационные хуки',
               link: '/guide/advanced/navigation-guards.html',
             },
             {
-              text: 'Route Meta Fields',
+              text: 'Мета-данные маршрута',
               link: '/guide/advanced/meta.html',
             },
             {
-              text: 'Data Fetching',
+              text: 'Загрузка данных',
               link: '/guide/advanced/data-fetching.html',
             },
             {
@@ -135,31 +136,31 @@ export const enConfig: LocaleSpecificConfig<DefaultTheme.Config> = {
               link: '/guide/advanced/composition-api.html',
             },
             {
-              text: 'Transitions',
+              text: 'Анимация переходов',
               link: '/guide/advanced/transitions.html',
             },
             {
-              text: 'Scroll Behavior',
+              text: 'Поведение прокрутки страницы',
               link: '/guide/advanced/scroll-behavior.html',
             },
             {
-              text: 'Lazy Loading Routes',
+              text: 'Отложенная загрузка маршрутов',
               link: '/guide/advanced/lazy-loading.html',
             },
             {
-              text: 'Typed Routes',
+              text: 'Типизированные маршруты',
               link: '/guide/advanced/typed-routes.html',
             },
             {
-              text: 'Extending RouterLink',
+              text: 'Расширение RouterLink',
               link: '/guide/advanced/extending-router-link.html',
             },
             {
-              text: 'Navigation Failures',
+              text: 'Сбои при навигации',
               link: '/guide/advanced/navigation-failures.html',
             },
             {
-              text: 'Dynamic Routing',
+              text: 'Динамическая маршрутизация',
               link: '/guide/advanced/dynamic-routing.html',
             },
           ],
@@ -167,7 +168,7 @@ export const enConfig: LocaleSpecificConfig<DefaultTheme.Config> = {
         {
           items: [
             {
-              text: 'Migrating from Vue 2',
+              text: 'Миграция с Vue 2',
               link: '/guide/migration/index.html',
             },
           ],
