@@ -78,7 +78,7 @@ export const ruConfig: LocaleSpecificConfig<DefaultTheme.Config> = {
               link: '/guide/',
             },
             {
-              text: 'Динамическое сопоставление маршрутов',
+              text: 'Cопоставление динамических маршрутов',
               link: '/guide/essentials/dynamic-matching.html',
             },
             {
