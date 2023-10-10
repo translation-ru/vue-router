@@ -1,24 +1,24 @@
-# Installation
+# Установка %{#installation}%
 
 <VueMasteryLogoLink></VueMasteryLogoLink>
 
-## Direct Download / CDN
+## Прямое скачивание / CDN %{#direct-download-cdn}%
 
 [https://unpkg.com/vue-router@4](https://unpkg.com/vue-router@4)
 
 <!--email_off-->
 
-[Unpkg.com](https://unpkg.com) provides npm-based CDN links. The above link will always point to the latest release on npm. You can also use a specific version/tag via URLs like `https://unpkg.com/vue-router@4.0.15/dist/vue-router.global.js`.
+[Unpkg.com](https://unpkg.com) предоставляет ссылки на CDN, основанные на npm. Ссылка выше всегда будет указывать на последний релиз на npm. Вы также можете использовать конкретную версию/тег с помощью URL-адресов, например https://unpkg.com/vue-router@4.0.15/dist/vue-router.global.js.
 
 <!--/email_off-->
 
-## npm
+## npm %{#npm}%
 
 ```bash
 npm install vue-router@4
 ```
 
-## yarn
+## yarn %{#yarn}%
 
 ```bash
 yarn add vue-router@4
