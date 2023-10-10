@@ -1,24 +1,24 @@
-# Introduction
+# Вступление %{#introduction}%
 
 <VueSchoolLink
   href="https://vueschool.io/courses/vue-router-4-for-everyone"
-  title="Learn how to build powerful Single Page Applications with the Vue Router on Vue School"
->Watch a Free Vue Router Video Course</VueSchoolLink>
+  title="Узнайте, как создавать мощные одностраничные приложения с помощью Vue Router в Vue School"
+>Посмотреть бесплатный видеокурс по Vue Router</VueSchoolLink>
 
-Vue Router is the official router for [Vue.js](https://vuejs.org). It deeply integrates with Vue.js core to make building Single Page Applications with Vue.js a breeze. Features include:
+Vue Router - это официальный маршрутизатор для [Vue.js](https://vuejs.org). Он глубоко интегрируется с ядром Vue.js, чтобы облегчить создание одностраничных приложений с использованием Vue.js. Его особенности в следующем:
 
-- Nested routes mapping
-- Dynamic Routing
-- Modular, component-based router configuration
-- Route params, query, wildcards
-- View transition effects powered by Vue.js' transition system
-- Fine-grained navigation control
-- Links with automatic active CSS classes
-- HTML5 history mode or hash mode
-- Customizable Scroll Behavior
-- Proper encoding for URLs
+- Вложенное сопоставление маршрутов
+- Динамическая маршрутизация
+- Модульная конфигурация маршрутизатора на основе компонентов
+- Параметры маршрута, query-запросы, маски
+- Эффекты перехода между представлениями, реализованные с помощью системы анимаций Vue.js
+- Точное управление навигацией
+- Ссылки с автоматическими активными CSS-классами
+- Режимы HTML5 history или hash
+- Настраиваемое поведение прокрутки
+- Правильное кодирование для URL
 
-[Get started](./guide/) or play with the [playground](https://github.com/vuejs/router/tree/main/packages/playground) (see [`README.md`](https://github.com/vuejs/router) to run them).
+[Давайте начнем](./guide/) или попробуйте в [песочнице](https://github.com/vuejs/router/tree/main/packages/playground) (см. [`README.md`](https://github.com/vuejs/router) для запуска).
 
 <HomeSponsors />
 
