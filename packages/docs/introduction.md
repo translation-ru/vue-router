@@ -3,7 +3,7 @@
 <VueSchoolLink
   href="https://vueschool.io/courses/vue-router-4-for-everyone"
   title="Узнайте, как создавать мощные одностраничные приложения с помощью Vue Router в Vue School"
->Посмотреть бесплатный видеокурс по Vue Router</VueSchoolLink>
+>Смотреть бесплатный видеокурс по Vue Router</VueSchoolLink>
 
 Vue Router - это официальный маршрутизатор для [Vue.js](https://vuejs.org). Он глубоко интегрируется с ядром Vue.js, чтобы облегчить создание одностраничных приложений с использованием Vue.js. Его особенности в следующем:
 
