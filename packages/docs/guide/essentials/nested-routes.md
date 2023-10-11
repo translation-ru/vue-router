@@ -1,11 +1,11 @@
-# Nested Routes
+# Вложенные маршруты %{#nested-routes}%
 
 <VueSchoolLink
   href="https://vueschool.io/lessons/nested-routes"
-  title="Learn about nested routes"
+  title="Узнайте о вложенных маршрутах"
 />
 
-Some applications' UIs are composed of components that are nested multiple levels deep. In this case, it is very common that the segments of a URL correspond to a certain structure of nested components, for example:
+Некоторые пользовательские интерфейсы приложений состоят из вложенных на нескольких уровнях компонентов. В этом случае часто бывает так, что сегменты URL соответствуют определенной структуре вложенных компонентов, например:
 
 ```
 /user/johnny/profile                     /user/johnny/posts
@@ -18,9 +18,9 @@ Some applications' UIs are composed of components that are nested multiple level
 +------------------+                  +-----------------+
 ```
 
-With Vue Router, you can express this relationship using nested route configurations.
+Во Vue Router эти отношения можно выразить с помощью настройки вложенных маршрутов.
 
-Given the app we created in the last chapter:
+В качестве примера можно привести приложение, созданное нами в предыдущей главе:
 
 ```html
 <div id="app">
@@ -33,11 +33,11 @@ const User = {
   template: '<div>User {{ $route.params.id }}</div>',
 }
 
-// these are passed to `createRouter`
+// маршруты передаются в `createRouter`
 const routes = [{ path: '/user/:id', component: User }]
 ```
 
-The `<router-view>` here is a top-level `router-view`. It renders the component matched by a top level route. Similarly, a rendered component can also contain its own, nested `<router-view>`. For example, if we add one inside the `User` component's template:
+Здесь `<router-view>` - это `router-view` верхнего уровня. Он отображает компонент, соответствующий маршруту верхнего уровня. Аналогично, рендеримый компонент может содержать собственные вложенные `<router-view>`. Например, если мы добавим его внутрь шаблона компонента `User`:
 
 ```js
 const User = {
@@ -50,7 +50,7 @@ const User = {
 }
 ```
 
-To render components into this nested `router-view`, we need to use the `children` option in any of the routes:
+Чтобы рендерить компоненты в этот вложенный `router-view`, необходимо использовать опцию `children` в любом из маршрутов:
 
 ```js
 const routes = [
@@ -59,14 +59,14 @@ const routes = [
     component: User,
     children: [
       {
-        // UserProfile will be rendered inside User's <router-view>
-        // when /user/:id/profile is matched
+        // UserProfile будет отрендерен внутри <router-view> компонента User
+        // при соответствии /user/:id/profile
         path: 'profile',
         component: UserProfile,
       },
       {
-        // UserPosts will be rendered inside User's <router-view>
-        // when /user/:id/posts is matched
+        // UserPosts будет отрендерен внутри <router-view> компонента User
+        // при соответствии /user/:id/posts
         path: 'posts',
         component: UserPosts,
       },
@@ -75,11 +75,11 @@ const routes = [
 ]
 ```
 
-**Note that nested paths that start with `/` will be treated as root paths. This allows you to leverage the component nesting without having to use a nested URL.**
+**Обратите внимание, что вложенные пути, начинающиеся с `/`, будут рассматриваться как корневые. Это позволяет вам использовать вложенность компонентов без необходимости использовать вложенного URL.**
 
-As you can see, the `children` option is just another Array of routes like `routes` itself. Therefore, you can keep nesting views as much as you need.
+Как видите, опция `children` представляет собой еще один массив маршрутов, подобно самим `routes`. Следовательно, вы можете вкладывать представления насколько вам нужно.
 
-At this point, with the above configuration, when you visit `/user/eduardo`, nothing will be rendered inside `User`'s `router-view`, because no nested route is matched. Maybe you do want to render something there. In such case you can provide an empty nested path:
+На этом этапе, при посещении `/user/eduardo`, внутри `router-view` компонента `User` рендерится ничего не будет, потому что не будет совпадать ни один вложенный маршрут. Возможно, вы хотите что-то отображать там. В таком случае вы можете предоставить пустой вложенный путь:
 
 ```js
 const routes = [
@@ -87,36 +87,36 @@ const routes = [
     path: '/user/:id',
     component: User,
     children: [
-      // UserHome will be rendered inside User's <router-view>
-      // when /user/:id is matched
+      // UserHome будет отрендерен внутри <router-view> компонента User
+      // при соответствии /user/:id
       { path: '', component: UserHome },
 
-      // ...other sub routes
+      // ...другие вложенные маршруты
     ],
   },
 ]
 ```
 
-A working demo of this example can be found [here](https://codesandbox.io/s/nested-views-vue-router-4-examples-hl326?initialpath=%2Fusers%2Feduardo).
+Рабочее демо этого примера можно найти [здесь](https://codesandbox.io/s/nested-views-vue-router-4-examples-hl326?initialpath=%2Fusers%2Feduardo).
 
-## Nested Named Routes
+## Вложенные именованные маршруты %{#nested-names-routes}%
 
-When dealing with [Named Routes](./named-routes.md), you usually **name the children routes**:
+При работе с [Именованными маршрутами](./named-routes.md) обычно **именуют дочерние маршруты**:
 
 ```js
 const routes = [
   {
     path: '/user/:id',
     component: User,
-    // notice how only the child route has a name
+    // обратите внимание, что только дочерний маршрут имеет имя
     children: [{ path: '', name: 'user', component: UserHome }],
   },
 ]
 ```
 
-This will ensure navigating to `/user/:id` will always display the nested route.
+Таким образом, при переходе к `/user/:id` всегда будет отображаться вложенный маршрут.
 
-In some scenarios, you may want to navigate to a named route without navigating to the nested route. For example, if you want to navigate to `/user/:id` without displaying the nested route. In that case, you can **also** name the parent route but note **that reloading the page will always display the nested child** as it's considered a navigation to the path `/users/:id` instead of the named route:
+В некоторых сценариях вы можете захотеть перейти на именованный маршрут, не переходя на вложенный. Например, если вы хотите перейти на `/user/:id` без отображения вложенного маршрута. В этом случае вы **также** можете дать имя родительскому маршруту, но имейте в виду, **что перезагрузка страницы всегда отобразит вложенного потомка**, так как она рассматривается как переход на `/users/:id`, а не к именованному маршруту:
 
 ```js
 const routes = [
