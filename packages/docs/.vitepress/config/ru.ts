@@ -106,7 +106,7 @@ export const ruConfig: LocaleSpecificConfig<DefaultTheme.Config> = {
               link: '/guide/essentials/redirect-and-alias.html',
             },
             {
-              text: 'Передача входных параметров в компоненты маршрута',
+              text: 'Передача входных параметров компонентам маршрута',
               link: '/guide/essentials/passing-props.html',
             },
             {

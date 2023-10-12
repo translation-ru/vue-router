@@ -1,41 +1,41 @@
-# Passing Props to Route Components
+# Передача входных параметров компонентам маршрута %{#passing-props-to-route-components}%
 
 <VueSchoolLink
   href="https://vueschool.io/lessons/route-props"
-  title="Learn how to pass props to route components"
+  title="Узнайте, как передавать входные параметры компонентам маршрута"
 />
 
-Using `$route` in your component creates a tight coupling with the route which limits the flexibility of the component as it can only be used on certain URLs. While this is not necessarily a bad thing, we can decouple this behavior with a `props` option:
+Использование `$route` в компоненте создает тесную связь с маршрутом, что ограничивает гибкость компонента, так как его можно использовать только на определенных URL-адресах. Хотя это не обязательно плохо, мы можем изменить это поведение с помощью опции `props`:
 
-We can replace
+Мы можем заменить
 
 ```js
 const User = {
-  template: '<div>User {{ $route.params.id }}</div>'
+  template: '<div>User {{ $route.params.id }}</div>',
 }
 const routes = [{ path: '/user/:id', component: User }]
 ```
 
-with
+на
 
 ```js
 const User = {
-  // make sure to add a prop named exactly like the route param
+  // обязательно добавьте входной параметр, названный точно так же, как параметр маршрута
   props: ['id'],
   template: '<div>User {{ id }}</div>'
 }
 const routes = [{ path: '/user/:id', component: User, props: true }]
 ```
 
-This allows you to use the component anywhere, which makes the component easier to reuse and test.
+Это позволяет использовать компонент в любом месте, что облегчает его повторное использование и тестирование.
 
-## Boolean mode
+## Логический режим %{#boolean-mode}%
 
-When `props` is set to `true`, the `route.params` will be set as the component props.
+Если `props` имеет значение `true`, то в качестве входных параметров компонента будут установлены `route.params`.
 
-## Named views
+## Именованные представления %{#named-views}%
 
-For routes with named views, you have to define the `props` option for each named view:
+Для маршрутов с именованными представлениями необходимо определить опцию `props` для каждого именованного представления:
 
 ```js
 const routes = [
@@ -47,9 +47,9 @@ const routes = [
 ]
 ```
 
-## Object mode
+## Объектный режим %{#object-mode}%
 
-When `props` is an object, this will be set as the component props as-is. Useful for when the props are static.
+Если `props` является объектом, то именно его свойства будут установлены как входные параметры компонента. Полезно для случаев, когда входной параметр статичен.
 
 ```js
 const routes = [
@@ -61,9 +61,9 @@ const routes = [
 ]
 ```
 
-## Function mode
+## Функциональный режим %{#function-mode}%
 
-You can create a function that returns props. This allows you to cast parameters into other types, combine static values with route-based values, etc.
+Можно создать функцию, возвращающую входные параметры. Это позволяет приводить параметры к другим типам, комбинировать статические значения со значениями, основанными на маршрутах, и т.д.
 
 ```js
 const routes = [
@@ -75,6 +75,6 @@ const routes = [
 ]
 ```
 
-The URL `/search?q=vue` would pass `{query: 'vue'}` as props to the `SearchUser` component.
+URL `/search?q=vue` будет передавать `{query: 'vue'}` в качестве входных параметров компоненту `SearchUser`.
 
-Try to keep the `props` function stateless, as it's only evaluated on route changes. Use a wrapper component if you need state to define the props, that way Vue can react to state changes.
+Постарайтесь, чтобы функция `props` не имела состояния (была stateless), поскольку она выполняется только при изменении маршрута. Если для определения входных параметров требуется состояние, используйте компонент-обертку, тогда Vue сможет реагировать на изменения состояния.
