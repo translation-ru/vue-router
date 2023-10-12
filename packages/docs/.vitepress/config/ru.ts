@@ -21,6 +21,15 @@ export const ruConfig: LocaleSpecificConfig<DefaultTheme.Config> = {
       text: 'Предложить изменения к этой странице',
     },
 
+    outline: {
+      label: 'На этой странице',
+    },
+
+    docFooter: {
+      prev: 'Предыдущая страница',
+      next: 'Следующая страница',
+    },
+
     nav: [
       // { text: 'Config', link: '/config/' },
       // { text: 'Plugins', link: '/plugins/' },
