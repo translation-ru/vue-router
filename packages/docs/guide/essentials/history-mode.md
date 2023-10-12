@@ -1,15 +1,15 @@
-# Different History modes
+# Различные режимы history %{#different-history-modes}%
 
 <VueSchoolLink
   href="https://vueschool.io/lessons/history-mode"
-  title="Learn about the differences between Hash Mode and HTML5 Mode"
+  title="Узнайте о различиях между режимами хэша и HTML5"
 />
 
-The `history` option when creating the router instance allows us to choose among different history modes.
+Опция `history` при создании экземпляра маршрутизатора позволяет выбрать один из нескольких history-режимов.
 
-## Hash Mode
+## Режим Hash %{#hash-mode}%
 
-The hash history mode is created with `createWebHashHistory()`:
+Hash-режим history создается с помощью функции `createWebHashHistory()`:
 
 ```js
 import { createRouter, createWebHashHistory } from 'vue-router'
@@ -22,11 +22,11 @@ const router = createRouter({
 })
 ```
 
-It uses a hash character (`#`) before the actual URL that is internally passed. Because this section of the URL is never sent to the server, it doesn't require any special treatment on the server level. **It does however have a bad impact in SEO**. If that's a concern for you, use the HTML5 history mode.
+Он использует символ хэша (`#`) перед фактическим URL, который внутренне передается. Поскольку этот раздел URL никогда не отправляется на сервер, на сервере он не требует специальной обработки. Однако у нее есть плохое воздействие на SEO. Если это вас беспокоит, используйте history режим HTML5.
 
-## HTML5 Mode
+## Режим HTML5 %{#html5-mode}%
 
-The HTML5 mode is created with `createWebHistory()` and is the recommended mode:
+Режим HTML5 создается с помощью `createWebHistory()` и является рекомендуемым режимом:
 
 ```js
 import { createRouter, createWebHistory } from 'vue-router'
@@ -39,15 +39,15 @@ const router = createRouter({
 })
 ```
 
-When using `createWebHistory()`, the URL will look "normal," e.g. `https://example.com/user/id`. Beautiful!
+При использовании `createWebHistory()` URL будет выглядеть "нормально", например, `https://example.com/user/id`. Прекрасно!
 
-Here comes a problem, though: Since our app is a single page client side app, without a proper server configuration, the users will get a 404 error if they access `https://example.com/user/id` directly in their browser. Now that's ugly.
+Возникает проблема: поскольку наше приложение - это одностраничное клиентское приложение, без правильной конфигурации сервера, пользователи получат 404 ошибку, если они попробуют перейти в своем браузере напрямую по адресу `https://example.com/user/id`. Это не очень красиво.
 
-Not to worry: To fix the issue, all you need to do is add a simple catch-all fallback route to your server. If the URL doesn't match any static assets, it should serve the same `index.html` page that your app lives in. Beautiful, again!
+Не переживайте: чтобы решить эту проблему, достаточно добавить на свой сервер простой резервный маршрут (fallback). Если URL-адрес не соответствует никаким статическим файлам (assets), он должен возвращать ту же самую страницу `index.html`, на которой живет ваше приложение. И снова красота!
 
-## Memory mode
+## Режим Memory %{#memory-mode}%
 
-The memory history mode doesn't assume a browser environment and therefore doesn't interact with the URL **nor automatically triggers the initial navigation**. This makes it perfect for Node environment and SSR. It is created with `createMemoryHistory()` and **requires you to push the initial navigation** after calling `app.use(router)`.
+Memory-режим не предполагает наличия окружения браузера и, следовательно, не взаимодействует с URL, **автоматически не запускает начальную навигацию**. Это делает его идеальным для среды Node и рендеринга на стороне сервера (SSR). Он создается с помощью `createMemoryHistory()` и **требует вручную запустить начальную навигацию** после вызова `app.use(router)`.
 
 ```js
 import { createRouter, createMemoryHistory } from 'vue-router'
@@ -60,13 +60,13 @@ const router = createRouter({
 })
 ```
 
-While it's not recommended, you can use this mode inside Browser applications but note **there will be no history**, meaning you won't be able to go _back_ or _forward_.
+Хотя это и не рекомендуется, вы можете использовать этот режим в приложениях браузера, но учтите, что **в нем не будет истории**, то есть вы не сможете вернуться _назад_ или _вперед_.
 
-## Example Server Configurations
+## Примеры конфигураций сервера %{#example-server-configuration}%
 
-**Note**: The following examples assume you are serving your app from the root folder. If you deploy to a subfolder, you should use [the `publicPath` option of Vue CLI](https://cli.vuejs.org/config/#publicpath) and the related [`base` property of the router](../../api/#Functions-createWebHistory). You also need to adjust the examples below to use the subfolder instead of the root folder (e.g. replacing `RewriteBase /` with `RewriteBase /name-of-your-subfolder/`).
+**Примечание**: В приведенных ниже примерах предполагается, что приложение запускается из корневой папки. При развертывании в подпапку необходимо использовать [опцию `publicPath` из Vue CLI](https://cli.vuejs.org/config/#publicpath) и соответствующее [свойство `base` маршрутизатора](../../api/#Functions-createWebHistory). Также необходимо скорректировать приведенные ниже примеры, чтобы использовать подпапку вместо корневой папки (например, заменить `RewriteBase /` на `RewriteBase /name-of-your-subfolder/`).
 
-### Apache
+### Apache %{#apache}%
 
 ```
 <IfModule mod_negotiation.c>
@@ -83,9 +83,9 @@ While it's not recommended, you can use this mode inside Browser applications bu
 </IfModule>
 ```
 
-Instead of `mod_rewrite`, you could also use [`FallbackResource`](https://httpd.apache.org/docs/2.4/mod/mod_dir.html#fallbackresource).
+Заместо `mod_rewrite` можно также использовать [`FallbackResource`](https://httpd.apache.org/docs/2.4/mod/mod_dir.html#fallbackresource).
 
-### nginx
+### nginx %{#nginx}%
 
 ```nginx
 location / {
@@ -93,7 +93,7 @@ location / {
 }
 ```
 
-### Native Node.js
+### Нативный Node.js %{#native-node-js}%
 
 ```js
 const http = require('http')
@@ -119,14 +119,14 @@ http
   })
 ```
 
-### Express with Node.js
+### Express c Node.js %{#express-with-node-js}%
 
-For Node.js/Express, consider using [connect-history-api-fallback middleware](https://github.com/bripkens/connect-history-api-fallback).
+Для Node.js/Express рассмотрите возможность использования [миддлвары connect-history-api-fallback middleware](https://github.com/bripkens/connect-history-api-fallback).
 
-### Internet Information Services (IIS)
+### Internet Information Services (IIS) %{#internet-information-services-iis}%
 
-1. Install [IIS UrlRewrite](https://www.iis.net/downloads/microsoft/url-rewrite)
-2. Create a `web.config` file in the root directory of your site with the following:
+1. Установите [IIS UrlRewrite](https://www.iis.net/downloads/microsoft/url-rewrite)
+2. Создайте в корневом каталоге сайта файл `web.config` со следующими параметрами:
 
 ```xml
 <?xml version="1.0" encoding="UTF-8"?>
@@ -148,13 +148,13 @@ For Node.js/Express, consider using [connect-history-api-fallback middleware](ht
 </configuration>
 ```
 
-### Caddy v2
+### Caddy v2 %{#caddy-v2}%
 
 ```
 try_files {path} /
 ```
 
-### Caddy v1
+### Caddy v1 %{#caddy-v1}%
 
 ```
 rewrite {
@@ -163,9 +163,9 @@ rewrite {
 }
 ```
 
-### Firebase hosting
+### Хостинг Firebase %{#firebase-hosting}%
 
-Add this to your `firebase.json`:
+Добавьте это в файл `firebase.json`:
 
 ```json
 {
@@ -181,21 +181,21 @@ Add this to your `firebase.json`:
 }
 ```
 
-### Netlify
+### Netlify %{#netlify}%
 
-Create a `_redirects` file that is included with your deployed files:
+Создайте файл `_redirects`, который включается в состав опубликованных файлов:
 
 ```
 /* /index.html 200
 ```
 
-In vue-cli, nuxt, and vite projects, this file usually goes under a folder named `static` or `public`.
+В проектах vue-cli, nuxt и vite этот файл обычно располагается в папке с именем `static` или `public`.
 
-You can read more about the syntax on [Netlify documentation](https://docs.netlify.com/routing/redirects/rewrites-proxies/#history-pushstate-and-single-page-apps). You can also [create a `netlify.toml`](https://docs.netlify.com/configure-builds/file-based-configuration/) to combine _redirections_ with other Netlify features.
+Подробнее о синтаксисе можно прочитать в [документации Netlify](https://docs.netlify.com/routing/redirects/rewrites-proxies/#history-pushstate-and-single-page-apps). Вы также можете [создать файл `netlify.toml`](https://docs.netlify.com/configure-builds/file-based-configuration/), чтобы объединить _перенаправления_ с другими возможностями Netlify.
 
-### Vercel
+### Vercel %{#vercel}%
 
-Create a `vercel.json` file under the root directory of your project with the following:
+Создайте в корневом каталоге проекта файл `vercel.json`, содержащий следующее:
 
 ```json
 {
@@ -203,9 +203,9 @@ Create a `vercel.json` file under the root directory of your project with the fo
 }
 ```
 
-## Caveat
+## Caveat %{#caveat}%
 
-There is a caveat to this: Your server will no longer report 404 errors as all not-found paths now serve up your `index.html` file. To get around the issue, you should implement a catch-all route within your Vue app to show a 404 page:
+Есть один нюанс: ваш сервер больше не будет сообщать об ошибках 404, так как все несуществующие пути теперь открывают ваш файл `index.html`. Чтобы избежать этой проблемы, вы должны внедрить обработку всех маршрутов в вашем приложении Vue, чтобы показать страницу ошибки 404:
 
 ```js
 const router = createRouter({
@@ -214,4 +214,4 @@ const router = createRouter({
 })
 ```
 
-Alternatively, if you are using a Node.js server, you can implement the fallback by using the router on the server side to match the incoming URL and respond with 404 if no route is matched. Check out the [Vue server side rendering documentation](https://v3.vuejs.org/guide/ssr/introduction.html#what-is-server-side-rendering-ssr) for more information.
+Либо, если вы используете сервер Node.js, вы можете внедрить поддержку 404 ошибки, используя маршрутизатор на сервере для сопоставления входящего URL и ответа с ошибкой 404, если маршрут не был найден. Подробнее ознакомьтесь с документацией [по серверному рендерингу Vue](https://v3.vuejs.org/guide/ssr/introduction.html#what-is-server-side-rendering-ssr) для дополнительной информации.
