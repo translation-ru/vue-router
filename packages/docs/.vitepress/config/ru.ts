@@ -110,7 +110,7 @@ export const ruConfig: LocaleSpecificConfig<DefaultTheme.Config> = {
               link: '/guide/essentials/passing-props.html',
             },
             {
-              text: 'Разные режимы History',
+              text: 'Режимы History',
               link: '/guide/essentials/history-mode.html',
             },
           ],
