@@ -1,16 +1,16 @@
-# Named Routes
+# Именованные маршруты %{#named-routes}%
 
 <VueSchoolLink
   href="https://vueschool.io/lessons/named-routes"
-  title="Learn about the named routes"
+  title="Узнайте всё об именованных маршрутах"
 />
 
-Alongside the `path`, you can provide a `name` to any route. This has the following advantages:
+Параллельно с `path`, вы можете указать `name` для любого маршрута. Это имеет следующие преимущества:
 
-- No hardcoded URLs
-- Automatic encoding/decoding of `params`
-- Prevents you from having a typo in the url
-- Bypassing path ranking (e.g. to display a )
+- Нет жестко закодированных URL
+- Автоматическое кодирование/декодирование `params`
+- Помогает избежать ошибок в URL
+- Обход ранжирования пути (например, для отображения a)
 
 ```js
 const routes = [
@@ -22,7 +22,7 @@ const routes = [
 ]
 ```
 
-To link to a named route, you can pass an object to the `router-link` component's `to` prop:
+Для связи с именованным маршрутом можно передать объект в качестве входного парамета `to` компонента `router-link`:
 
 ```html
 <router-link :to="{ name: 'user', params: { username: 'erina' }}">
@@ -30,14 +30,14 @@ To link to a named route, you can pass an object to the `router-link` component'
 </router-link>
 ```
 
-This is the exact same object used programmatically with `router.push()`:
+Это точно такой же объект, который используется программно с помощью `router.push()`:
 
 ```js
 router.push({ name: 'user', params: { username: 'erina' } })
 ```
 
-In both cases, the router will navigate to the path `/user/erina`.
+В обоих случаях маршрутизатор будет переходить по пути `/user/erina`.
 
-Full example [here](https://github.com/vuejs/vue-router/blob/dev/examples/named-routes/app.js).
+Полный пример можно посмотреть [здесь](https://github.com/vuejs/vue-router/blob/dev/examples/named-routes/app.js).
 
-Each name **must be unique** across all routes. If you add the same name to multiple routes, the router will only keep the last one. You can read more about this [in the Dynamic Routing](../advanced/dynamic-routing.md#removing-routes) section.
+Каждое имя **должно быть уникальным** для всех маршрутов. Если вы добавите одно и то же имя в несколько маршрутов, маршрутизатор сохранит только последний из них. Подробнее об этом можно прочитать в разделе [Динамическая маршрутизация](../advanced/dynamic-routing.md#removing-routes).
