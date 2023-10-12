@@ -1,5 +1,5 @@
 <template>
-  <h3>{{ name }} Sponsors</h3>
+  <h3>{{ translatedNameToRussian }} спонсоры</h3>
 
   <p>
     <a
@@ -53,6 +53,17 @@ const list = computed(() =>
     imgSrc: isDark.value ? sponsor.imgSrcDark : sponsor.imgSrcLight,
   }))
 )
+
+const translatedNameToRussian = computed(() => {
+  let sponsorsName = {
+    Gold: 'Золотые',
+    Platinum: 'Платиновые',
+    Silver: 'Серебряные',
+    Bronze: 'Бронзовые',
+  }
+
+  return sponsorsName[props.name]
+})
 </script>
 
 <style scoped>
