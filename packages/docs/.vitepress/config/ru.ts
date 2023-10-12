@@ -102,7 +102,7 @@ export const ruConfig: LocaleSpecificConfig<DefaultTheme.Config> = {
               link: '/guide/essentials/named-views.html',
             },
             {
-              text: 'Перенаправления и псевдонимы',
+              text: 'Перенаправление и псевдонимы',
               link: '/guide/essentials/redirect-and-alias.html',
             },
             {
