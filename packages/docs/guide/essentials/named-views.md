@@ -1,11 +1,11 @@
-# Named Views
+# Именованные представления %{#named-views}%
 
 <VueSchoolLink
   href="https://vueschool.io/lessons/vue-router-4-named-views"
-  title="Learn how to use named views"
+  title="Узнайте, как использовать именованные представления"
 />
 
-Sometimes you need to display multiple views at the same time instead of nesting them, e.g. creating a layout with a `sidebar` view and a `main` view. This is where named views come in handy. Instead of having one single outlet in your view, you can have multiple and give each of them a name. A `router-view` without a name will be given `default` as its name.
+Иногда вам нужно отображать несколько представлений одновременно, а не вкладывать их друг в друга, например, создавать макет с представлением `sidebar` и `main`. В этом случае именованные представления пригодятся. Вместо одного единственного выхода в вашем представлении, вы можете иметь несколько и дать каждому из них имя. `router-view` без имени будет иметь имя `default`.
 
 ```html
 <router-view class="view left-sidebar" name="LeftSidebar"></router-view>
@@ -13,9 +13,9 @@ Sometimes you need to display multiple views at the same time instead of nesting
 <router-view class="view right-sidebar" name="RightSidebar"></router-view>
 ```
 
-A view is rendered by using a component, therefore multiple views require
-multiple components for the same route. Make sure to use the `components` (with
-an **s**) option:
+Представление рендерится с помощью компонента, поэтому для нескольких представлений требуется
+несколько компонентов для одного и того же маршрута. Обязательно используйте опцию `components` (с окончанием
+**s**):
 
 ```js
 const router = createRouter({
@@ -25,9 +25,9 @@ const router = createRouter({
       path: '/',
       components: {
         default: Home,
-        // short for LeftSidebar: LeftSidebar
+        // сокращение для LeftSidebar: LeftSidebar
         LeftSidebar,
-        // they match the `name` attribute on `<router-view>`
+        // они соответствуют атрибуту `name` на `<router-view>`
         RightSidebar,
       },
     },
@@ -35,11 +35,11 @@ const router = createRouter({
 })
 ```
 
-A working demo of this example can be found [here](https://codesandbox.io/s/named-views-vue-router-4-examples-rd20l).
+Рабочее демо этого примера можно найти [здесь](https://codesandbox.io/s/named-views-vue-router-4-examples-rd20l).
 
-## Nested Named Views
+## Вложенные именованные представления %{#nested-named-views}%
 
-It is possible to create complex layouts using named views with nested views. When doing so, you will also need to give nested `router-view` a name. Let's take a Settings panel example:
+Можно создавать сложные макеты, используя именованные представления вместе со вложенными. При этом вложенному `router-view` также необходимо присвоить имя. Рассмотрим пример с панелью настроек:
 
 ```
 /settings/emails                                       /settings/profile
@@ -53,13 +53,13 @@ It is possible to create complex layouts using named views with nested views. Wh
 +-----------------------------------+                  +------------------------------+
 ```
 
-- `Nav` is just a regular component
-- `UserSettings` is the parent view component
-- `UserEmailsSubscriptions`, `UserProfile`, `UserProfilePreview` are nested view components
+- `Nav` является обычным компонентом
+- `UserSettings` - родительский компонент представления
+- `UserEmailsSubscriptions`, `UserProfile`, `UserProfilePreview` - вложенные компоненты представления
 
-**Note**: _Let's forget about how the HTML/CSS should look like to represent such layout and focus on the components used._
+**Примечание**: _Давайте забудем о том, как должен выглядеть HTML/CSS для представления такого макета, и сосредоточимся на используемых компонентах._
 
-The `<template>` section for `UserSettings` component in the above layout would look something like this:
+Секция `<template>` для компонента `UserSettings` в приведенном выше макете будет выглядеть примерно так:
 
 ```html
 <!-- UserSettings.vue -->
@@ -71,12 +71,12 @@ The `<template>` section for `UserSettings` component in the above layout would 
 </div>
 ```
 
-Then you can achieve the layout above with this route configuration:
+Затем вы можете создать макет, как показано выше, с помощью этой конфигурации маршрута:
 
 ```js
 {
   path: '/settings',
-  // You could also have named views at the top
+  // Также можно иметь именованные представления в корне
   component: UserSettings,
   children: [{
     path: 'emails',
@@ -91,4 +91,4 @@ Then you can achieve the layout above with this route configuration:
 }
 ```
 
-A working demo of this example can be found [here](https://codesandbox.io/s/nested-named-views-vue-router-4-examples-re9yl?&initialpath=%2Fsettings%2Femails).
+Рабоче демо этого примера можно найти [здесь](https://codesandbox.io/s/nested-named-views-vue-router-4-examples-re9yl?&initialpath=%2Fsettings%2Femails).
