@@ -1,11 +1,11 @@
-# Route Meta Fields
+# Метаданные маршрутов %{#route-meta-fields}%
 
 <VueSchoolLink
   href="https://vueschool.io/lessons/route-meta-fields"
-  title="Learn how to use route meta fields"
+  title="Узнайте, как использоать метаданные в маршрутах"
 />
 
-Sometimes, you might want to attach arbitrary information to routes like： transition names, or roles to control who can access the route, etc. This can be achieved through the `meta` property which accepts an object of properties and can be accessed on the route location and navigation guards. You can define `meta` properties like this:
+Иногда вам может потребоваться прикрепить произвольную информацию к маршрутам, например: имена переходов анимации или роли пользователей для управления доступом к маршруту и т. д. Это можно сделать с помощью свойства `meta`, которое принимает объект свойств и может быть доступно на странице маршрута и навигационных хуках. Вы можете определить `meta` свойства следующим образом:
 
 ```js
 const routes = [
@@ -16,13 +16,13 @@ const routes = [
       {
         path: 'new',
         component: PostsNew,
-        // only authenticated users can create posts
+        // только авторизованные пользователи могут создавать сообщения
         meta: { requiresAuth: true },
       },
       {
         path: ':id',
         component: PostsDetail,
-        // anybody can read a post
+        // кто угодно может прочитать сообщение
         meta: { requiresAuth: false },
       },
     ],
@@ -30,50 +30,54 @@ const routes = [
 ]
 ```
 
-So how do we access this `meta` field?
+Как же получить доступ к этому `meta` полю?
 
 <!-- TODO: the explanation about route records should be explained before and things should be moved here -->
 
-First, each route object in the `routes` configuration is called a **route record**. Route records may be nested. Therefore when a route is matched, it can potentially match more than one route record.
+Во-первых, каждый объект маршрута в конфигурации `routes` называется **записью маршрута**. Записи маршрутов могут быть вложенными. Поэтому при сопоставлении маршрута он может соответствовать более чем одной записи маршрута.
 
-For example, with the above route config, the URL `/posts/new` will match both the parent route record (`path: '/posts'`) and the child route record (`path: 'new'`).
+Например, в приведенной выше конфигурации маршрута URL `/posts/new` будет соответствовать как родительской записи маршрута (`path: '/posts'`), так и дочерней записи (`path: 'new'`).
 
-All route records matched by a route are exposed on the `$route` object (and also route objects in navigation guards) as the `$route.matched` Array. We could loop through that array to check all `meta` fields, but Vue Router also provides you a `$route.meta` that is a non-recursive merge of **all `meta`** fields from parent to child. Meaning you can simply write
+Все совпавшие записи маршрутов оказываются доступны в объекте `$route` (а также через объекты маршрутов в навигационных хуках) как массив `$route.matched`. Таким образом, для проверки метаданных в записях маршрутов нам понадобится обойти `$route.matched` в цикле, но Vue Router также предоставляет объект`$route.meta`, который представляет собой не рекурсивное объединение всех **`meta` полей** от родителя к потомку. Это означает, что вы можете просто написать:
 
 ```js
 router.beforeEach((to, from) => {
-  // instead of having to check every route record with
+  // вместо того, чтобы проверять каждую запись маршрута с помощью
   // to.matched.some(record => record.meta.requiresAuth)
   if (to.meta.requiresAuth && !auth.isLoggedIn()) {
-    // this route requires auth, check if logged in
-    // if not, redirect to login page.
+    // данный маршрут требует авторизации, проверяем,
+    // вошел ли пользователь в систему
+    // если нет, то перенаправляем на страницу входа.
     return {
       path: '/login',
-      // save the location we were at to come back later
+      // сохранить адрес, в котором мы находились,
+      // чтобы вернуться к нему позже
       query: { redirect: to.fullPath },
     }
   }
 })
 ```
 
-## TypeScript
+## TypeScript %{#typescript}%
 
-It is possible to type the meta field by extending the `RouteMeta` interface from `vue-router`:
+Чтобы типизировать meta поля, необходимо расширить интерфейс `RouteMeta` из `vue-router`:
 
 ```ts
-// This can be directly added to any of your `.ts` files like `router.ts`
-// It can also be added to a `.d.ts` file. Make sure it's included in
-// project's tsconfig.json "files"
+// Этот код может быть напрямую добавлен в любой из ваших файлов `.ts`,
+// например `router.ts`
+// Он также может быть добавлен в файл `.d.ts`.
+// Убедитесь, что он включен в  "файлы" tsconfig.json проекта
 import 'vue-router'
 
-// To ensure it is treated as a module, add at least one `export` statement
+// Для того чтобы он рассматривался как модуль,
+// добавьте хотя бы один оператор `export`
 export {}
 
 declare module 'vue-router' {
   interface RouteMeta {
-    // is optional
+    // опционально
     isAdmin?: boolean
-    // must be declared by every route
+    // должно быть определено для каждого маршрута
     requiresAuth: boolean
   }
 }
