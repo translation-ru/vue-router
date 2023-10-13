@@ -1,11 +1,11 @@
-# Transitions
+# Анимация переходов %{#transitions}%
 
 <VueSchoolLink
   href="https://vueschool.io/lessons/route-transitions"
-  title="Learn about route transitions"
+  title="Узнайте все об анимациях перехода"
 />
 
-In order to use transitions on your route components and animate navigations, you need to use the v-slot API:
+Для того чтобы использовать transitions в компонентах маршрута и анимировать навигацию, необходимо использовать v-slot API:
 
 ```html
 <router-view v-slot="{ Component }">
@@ -15,11 +15,11 @@ In order to use transitions on your route components and animate navigations, yo
 </router-view>
 ```
 
-[All transition APIs](https://v3.vuejs.org/guide/transitions-enterleave.html) work the same here.
+[Всё transition API](https://v3.vuejs.org/guide/transitions-enterleave.html) применимо и здесь.
 
-## Per-Route Transition
+## Анимация перехода для конкретных маршрутов %{#per-route-transition}%
 
-The above usage will apply the same transition for all routes. If you want each route's component to have different transitions, you can instead combine [meta fields](./meta.md) and a dynamic `name` on `<transition>`:
+В приведенном выше случае для всех маршрутов будет применяться один и тот же переход анимации. Если необходимо, чтобы каждый компонент маршрута имел разные переходы, можно вместо этого использовать сочетание [meta полей](./meta.md) и динамического входного параметра`name` на компоненте `<transition>`:
 
 ```js
 const routes = [
@@ -38,19 +38,19 @@ const routes = [
 
 ```html
 <router-view v-slot="{ Component, route }">
-  <!-- Use any custom transition and  to `fade` -->
+  <!-- Используйте пользовательский переход анимации или `fade` -->
   <transition :name="route.meta.transition || 'fade'">
     <component :is="Component" />
   </transition>
 </router-view>
 ```
 
-## Route-Based Dynamic Transition
+## Динамическая анимация для маршрутов %{#route-based-dynamic-transition}%
 
-It is also possible to determine the transition to use dynamically based on the relationship between the target route and current route. Using a very similar snippet to the one just before:
+Вы можете динамически определять используемый переход анимации, основываясь на связи между целевым и текущим маршрутами. Для этого используется фрагмент, очень похожий на предыдущий:
 
 ```html
-<!-- use a dynamic transition name -->
+<!-- использование динамического имени перехода -->
 <router-view v-slot="{ Component, route }">
   <transition :name="route.meta.transition">
     <component :is="Component" />
@@ -58,7 +58,7 @@ It is also possible to determine the transition to use dynamically based on the 
 </router-view>
 ```
 
-We can add an [after navigation hook](./navigation-guards.md#global-after-hooks) to dynamically add information to the `meta` field based on the depth of the route
+Мы можем добавить [хуки завершения перехода](./navigation-guards.md#global-after-hooks) для динамического добавления информации в `meta` поле в зависимости от глубины маршрута
 
 ```js
 router.afterEach((to, from) => {
@@ -68,9 +68,9 @@ router.afterEach((to, from) => {
 })
 ```
 
-## Forcing a transition between reused views
+## Принудительная анимация перехода между повторно используемыми представлениями %{#forcing-a-transition-between-reused-views}%
 
-Vue might automatically reuse components that look alike, avoiding any transition. Fortunately, it is possible [to add a `key` attribute](https://v3.vuejs.org/api/special-attributes.html#key) to force transitions. This also allows you to trigger transitions while staying on the same route with different params:
+Vue может автоматически повторно использовать компоненты, когда это возможно, избегая каких-либо переходов анимации. К счастью, есть возможность [добавить атрибут `key`](https://v3.vuejs.org/api/special-attributes.html#key) для принудительного перехода анимации. Это также позволяет вызывать переходы, оставаясь на том же маршруте с разными параметрами:
 
 ```vue
 <router-view v-slot="{ Component, route }">

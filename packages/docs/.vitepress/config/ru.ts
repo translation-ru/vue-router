@@ -133,7 +133,7 @@ export const ruConfig: LocaleSpecificConfig<DefaultTheme.Config> = {
               link: '/guide/advanced/navigation-guards.html',
             },
             {
-              text: 'Мета-данные маршрута',
+              text: 'Метаданные маршрута',
               link: '/guide/advanced/meta.html',
             },
             {
