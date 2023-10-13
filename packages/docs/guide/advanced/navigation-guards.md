@@ -1,92 +1,92 @@
-# Navigation Guards
+# Навигационные хуки %{#navigation-guards}%
 
 <VueSchoolLink
   href="https://vueschool.io/lessons/route-guards"
-  title="Learn how to add navigation guards"
+  title="Узнайте, как добавить навигационные хуки"
 />
 
-As the name suggests, the navigation guards provided by Vue router are primarily used to guard navigations either by redirecting it or canceling it. There are a number of ways to hook into the route navigation process: globally, per-route, or in-component.
+Как следует из названия, хуки навигации, предоставляемые Vue Router, в первую очередь используются для обеспечения безопасности навигации путем перенаправления или отмены перехода. Есть несколько способов внедрить навигационный хук: глобально, на уровне маршрута или внутри компонента.
 
-## Global Before Guards
+## Глобальные хуки перед переходом %{#global-before-guards}%
 
-You can register global before guards using `router.beforeEach`:
+Вы можете зарегистрировать глобальные хуки перед началом перехода навигации, используя `router.beforeEach`:
 
 ```js
 const router = createRouter({ ... })
 
 router.beforeEach((to, from) => {
   // ...
-  // explicitly return false to cancel the navigation
+  // явное возвращение false для отмены перехода
   return false
 })
 ```
 
-Global before guards are called in creation order, whenever a navigation is triggered. Guards may be resolved asynchronously, and the navigation is considered **pending** before all hooks have been resolved.
+Глобальные навигационные хуки вызываются в порядке их создания при каждом навигационном переходе. Допускается асинхронное разрешение хуков — в этом случае переход считается незавершённым до тех пор, пока не будут разрешены все хуки.
 
-Every guard function receives two arguments:
+В каждый навигационный хук передаётся три параметра:
 
-- **`to`**: the target route location [in a normalized format](../../api/#routelocationnormalized) being navigated to.
-- **`from`**: the current route location [in a normalized format](../../api/#routelocationnormalized) being navigated away from.
+- **`to`**: целевой маршрут [в нормализованном формате](../../api/#routelocationnormalized), к которому осуществляется переход.
+- **`from`**: текущий маршрут [в нормализованном формате](../../api/#routelocationnormalized) с которого осуществляется переход.
 
-And can optionally return any of the following values:
+Хук опционально может возвращать любое из следующих значений:
 
-- `false`: cancel the current navigation. If the browser URL was changed (either manually by the user or via back button), it will be reset to that of the `from` route.
-- A [Route Location](../../api/#routelocationraw): Redirect to a different location by passing a route location as if you were calling [`router.push()`](../../api/#push), which allows you to pass options like `replace: true` or `name: 'home'`. The current navigation is dropped and a new one is created with the same `from`.
+- `false`: отменить текущий переход. Если URL-адрес браузера был изменен (вручную пользователем или с помощью кнопки "Назад"), то он будет сброшен на URL-адрес маршрута `from`.
+- [Route Location](../../api/#routelocationraw): Перенаправляет на другое адрес, передавая маршрут, как если бы вы вызывали [`router.push()`](../../api/#push), что позволяет передавать такие опции, как `replace: true` или `name: 'home'`. Текущая переход навигации сбрасывается и создается новый с предыдущим значением `from`.
 
   ```js
   router.beforeEach(async (to, from) => {
     if (
-      // make sure the user is authenticated
+      // проверка, что пользователь авторизован
       !isAuthenticated &&
-      // ❗️ Avoid an infinite redirect
+      // ❗️ Избежать бесконечного перенаправления
       to.name !== 'Login'
     ) {
-      // redirect the user to the login page
+      // перенаправить пользователя на страницу входа
       return { name: 'Login' }
     }
   })
   ```
 
-It's also possible to throw an `Error` if an unexpected situation was met. This will also cancel the navigation and call any callback registered via [`router.onError()`](../../api/#onerror).
+Также хук может выбросить исключение с `Error`, если возникла непредвиденная ситуация. Это приведет к отмене навигации и вызову любого коллбека, зарегистрированного через [`router.onError()`](../../api/#onerror).
 
-If nothing, `undefined` or `true` is returned, **the navigation is validated**, and the next navigation guard is called.
+Если возвращается `undefined`, `true` или вообще ничего не возвращается, то **навигация подтверждается**, и вызывается следующий хук навигации.
 
-All of the things above **work the same way with `async` functions** and Promises:
+Все, что описано выше, **одинаково работает с асинхронными функциями** и Promises:
 
 ```js
 router.beforeEach(async (to, from) => {
-  // canUserAccess() returns `true` or `false`
+  // canUserAccess() возвращает `true` или `false`
   const canAccess = await canUserAccess(to)
   if (!canAccess) return '/login'
 })
 ```
 
-### Optional third argument `next`
+### Необязательный третий аргумент `next` %{#optional-third-argument-next}%
 
-In previous versions of Vue Router, it was also possible to use a _third argument_ `next`, this was a common source of mistakes and went through an [RFC](https://github.com/vuejs/rfcs/blob/master/active-rfcs/0037-router-return-guards.md#motivation) to remove it. However, it is still supported, meaning you can pass a third argument to any navigation guard. In that case, **you must call `next` exactly once** in any given pass through a navigation guard. It can appear more than once, but only if the logical paths have no overlap, otherwise the hook will never be resolved or produce errors. Here is **a bad example** of redirecting the user to `/login` if they are not authenticated:
+В предыдущих версиях Vue Router также была возможность использовать _третий аргумент_ `next`, это было распространенной причиной ошибок и прошло через [RFC](https://github.com/vuejs/rfcs/blob/master/active-rfcs/0037-router-return-guards.md#motivation) для его удаления. Тем не менее, он всё ещё поддерживается, что означает, что вы можете передать третий аргумент любому хуку навигации. В этом случае **вы должны вызвать next ровно один раз** при выполнении хука навигации. Он может появляться несколько раз, но только если логические пути не пересекаются, в противном случае хук не будет разрешен или вызовет ошибки. Вот **плохой пример** перенаправления пользователя по адресу `/login`, если он не авторизован:
 
 ```js
-// BAD
+// ПЛОХО
 router.beforeEach((to, from, next) => {
   if (to.name !== 'Login' && !isAuthenticated) next({ name: 'Login' })
-  // if the user is not authenticated, `next` is called twice
+  // если пользователь не авторизован, то `next` вызывается дважды
   next()
 })
 ```
 
-Here is the correct version:
+Вот правильная версия:
 
 ```js
-// GOOD
+// ХОРОШО
 router.beforeEach((to, from, next) => {
   if (to.name !== 'Login' && !isAuthenticated) next({ name: 'Login' })
   else next()
 })
 ```
 
-## Global Resolve Guards
+## Глобальные хуки разрешения перехода %{#global-resolve-guards}%
 
-You can register a global guard with `router.beforeResolve`. This is similar to `router.beforeEach` because it triggers on **every navigation**, but resolve guards are called right before the navigation is confirmed, **after all in-component guards and async route components are resolved**. Here is an example that ensures the user has given access to the Camera for routes that [have defined a custom meta](./meta.md) property `requiresCamera`:
+Вы можете зарегистрировать данный глобальный хук разрешения перехода при помощи `router.beforeResolve`. Он похож на `router.beforeEach`, потому что срабатывает на каждый **переход навигации**, но разница в том, что хук resolve будет вызван непосредственно перед подтверждением перехода навигации, **после того, как будут разрешены все хуки навигации в компоненте и асинхронные компоненты для маршрута**. Вот пример, который обеспечивает, что пользователь предоставил доступ к камере для маршрутов, которые имеют определенное пользовательское [meta свойство](./meta.md) `requiresCamera`:
 
 ```js
 router.beforeResolve(async to => {
@@ -95,10 +95,10 @@ router.beforeResolve(async to => {
       await askForCameraPermission()
     } catch (error) {
       if (error instanceof NotAllowedError) {
-        // ... handle the error and then cancel the navigation
+        // ... обработать ошибку и отменить переход навигации
         return false
       } else {
-        // unexpected error, cancel the navigation and pass the error to the global handler
+        // непредвиденная ошибка, отменить переход навигации и передать ошибку в глобальный обработчик
         throw error
       }
     }
@@ -106,13 +106,13 @@ router.beforeResolve(async to => {
 })
 ```
 
-`router.beforeResolve` is the ideal spot to fetch data or do any other operation that you want to avoid doing if the user cannot enter a page.
+`router.beforeResolve` - это идеальное место для получения данных или выполнения любой другой операции, которую вы хотите избежать, если пользователь не может зайти на страницу.
 
 <!-- TODO: how to combine with [`meta` fields](./meta.md) to create a [generic fetching mechanism](#TODO). -->
 
-## Global After Hooks
+## Глобальные хуки завершения перехода %{#global-after-guards}%
 
-You can also register global after hooks, however unlike guards, these hooks do not get a `next` function and cannot affect the navigation:
+Вы также можете зарегистрировать глобальные хуки завершения перехода, однако, в отличие от других хуков, эти хуки не получают функцию `next` и не могут влиять на переход навигации:
 
 ```js
 router.afterEach((to, from) => {
@@ -122,9 +122,9 @@ router.afterEach((to, from) => {
 
 <!-- TODO: maybe add links to examples -->
 
-They are useful for analytics, changing the title of the page, accessibility features like announcing the page and many other things.
+Они полезны для аналитики, изменения заголовка страницы, обеспечения доступности, например, объявление страницы и многого другого.
 
-They also reflect [navigation failures](./navigation-failures.md) as the third argument:
+Они также принимают [сбои навигации](./navigation-failures.md) в качестве третьего аргумента :
 
 ```js
 router.afterEach((to, from, failure) => {
@@ -132,11 +132,11 @@ router.afterEach((to, from, failure) => {
 })
 ```
 
-Learn more about navigation failures on [its guide](./navigation-failures.md).
+Подробнее о сбоях навигации можно узнать в [этом руководстве](./navigation-failures.md).
 
-## Global injections within guards
+## Глобальные инъекции внутри хуков %{#global-injections-within-guards}%
 
-Since Vue 3.3, it is possible to use `inject()` within navigation guards. This is useful for injecting global properties like the [pinia stores](https://pinia.vuejs.org). Anything that is provided with `app.provide()` is also accessible within `router.beforeEach()`, `router.beforeResolve()`, `router.afterEach()`:
+С версии Vue 3.3 можно использовать `inject()` внутри навигационных хуков. Это полезно для внедрения глобальных свойств, таких как [хранилища pinia](https://pinia.vuejs.org). Любой объект, предоставленный с помощью `app.provide()`, также доступен в `router.beforeEach()`, `router.beforeResolve()` и `router.afterEach()`:
 
 ```ts
 // main.ts
@@ -152,9 +152,9 @@ router.beforeEach((to, from) => {
 })
 ```
 
-## Per-Route Guard
+## Хуки для конкретных маршрутов %{#per-route-guard}%
 
-You can define `beforeEnter` guards directly on a route's configuration object:
+Хук `beforeEnter` можно указать напрямую для конкретного маршрута в его конфигурации:
 
 ```js
 const routes = [
@@ -162,16 +162,16 @@ const routes = [
     path: '/users/:id',
     component: UserDetails,
     beforeEnter: (to, from) => {
-      // reject the navigation
+      // отменить переход навигации
       return false
     },
   },
 ]
 ```
 
-`beforeEnter` guards **only trigger when entering the route**, they don't trigger when the `params`, `query` or `hash` change e.g. going from `/users/2` to `/users/3` or going from `/users/2#info` to `/users/2#projects`. They are only triggered when navigating **from a different** route.
+Хуки `beforeEnter` срабатывают **только при переходе на маршрут**, они не срабатывают, когда меняется `params`, `query` или `hash`, например, переходя с `/users/2` на `/users/3` или с `/users/2#info` на `/users/2#projects`. Они срабатывают только при переходе с другого маршрута.
 
-You can also pass an array of functions to `beforeEnter`, this is useful when reusing guards for different routes:
+В `beforeEnter` можно передать массив функций, что удобно при повторном использовании хуков для разных маршрутов:
 
 ```js
 function removeQueryParams(to) {
@@ -197,15 +197,15 @@ const routes = [
 ]
 ```
 
-Note it is possible to achieve a similar behavior by using [route meta fields](./meta.md) and [global navigation guards](#global-before-guards).
+Обратите внимание, что подобного поведения можно добиться, используя [meta-свойства маршрута](./meta.md) и [глобальные навигационные хуки](#global-before-guards).
 
-## In-Component Guards
+## Хуки для конкретных компонентов %{#in-component-guard}%
 
-Finally, you can directly define route navigation guards inside route components (the ones passed to the router configuration)
+Наконец, внутри компонентов маршрута (тех, которые передаются в конфигурацию маршрутизатора) можно напрямую определить навигационные хуки.
 
-### Using the options API
+### Использование с Options API %{#using-the-options-api}%
 
-You can add the following options to route components:
+В компоненты маршрута можно добавить следующие опции:
 
 - `beforeRouteEnter`
 - `beforeRouteUpdate`
@@ -215,45 +215,46 @@ You can add the following options to route components:
 const UserDetails = {
   template: `...`,
   beforeRouteEnter(to, from) {
-    // called before the route that renders this component is confirmed.
-    // does NOT have access to `this` component instance,
-    // because it has not been created yet when this guard is called!
+    // вызывается перед подтверждением маршрута, отображающего данный компонент.
+    // НЕ имеет доступа к экземпляру компонента через `this`,
+    // потому что он еще не был создан, когда вызывается этот хук!
   },
   beforeRouteUpdate(to, from) {
-    // called when the route that renders this component has changed, but this component is reused in the new route.
-    // For example, given a route with params `/users/:id`, when we navigate between `/users/1` and `/users/2`,
-    // the same `UserDetails` component instance will be reused, and this hook will be called when that happens.
-    // Because the component is mounted while this happens, the navigation guard has access to `this` component instance.
+    // вызывается, когда маршрут, по которому рендерится данный компонент, изменился,
+    // но этот компонент повторно используется в новом маршруте.
+    // Например, при наличии маршрута с динамическими параметрами `/users/:id`, при переходе между `/users/1` и `/users/2`,
+    // будет повторно использован один и тот же экземпляр компонента `UserDetails`, и при этом будет вызван данный хук.
+    // Поскольку компонент при этом уже смонтирован, хук навигации имеет доступ к экземпляру компонента `this`.
   },
   beforeRouteLeave(to, from) {
-    // called when the route that renders this component is about to be navigated away from.
-    // As with `beforeRouteUpdate`, it has access to `this` component instance.
+    // вызывается при покидании маршрута, соответствующего текущему компоненту.
+    // Как и в случае с `beforeRouteUpdate`, он имеет доступ к экземпляру компонента `this`.
   },
 }
 ```
 
-The `beforeRouteEnter` guard does **NOT** have access to `this`, because the guard is called before the navigation is confirmed, thus the new entering component has not even been created yet.
+Хук `beforeRouteEnter` **НЕ** имеет доступа к `this`, потому что страж вызывается до подтверждения навигации, и, следовательно, новый компонент, который рендерит этот маршрут, еще не был создан.
 
-However, you can access the instance by passing a callback to `next`. The callback will be called when the navigation is confirmed, and the component instance will be passed to the callback as the argument:
+Однако вы можете получить доступ к экземпляру, передав коллбек в `next`. Коллбек будет вызван после подтверждения навигации, и экземпляр компонента будет передан коллбеку в качестве аргумента:
 
 ```js
 beforeRouteEnter (to, from, next) {
   next(vm => {
-    // access to component public instance via `vm`
+    // доступ к публичному экземпляру компонента через `vm`
   })
 }
 ```
 
-Note that `beforeRouteEnter` is the only guard that supports passing a callback to `next`. For `beforeRouteUpdate` and `beforeRouteLeave`, `this` is already available, so passing a callback is unnecessary and therefore _not supported_:
+Обратите внимание, что `beforeRouteEnter` - это единственный хук, который поддерживает передачу коллбека в `next`. Для `beforeRouteUpdate` и `beforeRouteLeave`, `this` уже доступен, поэтому передача коллбека не требуется и, следовательно, _не поддерживается_:
 
 ```js
 beforeRouteUpdate (to, from) {
-  // just use `this`
+  // просто используйте `this`
   this.name = to.params.name
 }
 ```
 
-The **leave guard** is usually used to prevent the user from accidentally leaving the route with unsaved edits. The navigation can be canceled by returning `false`.
+**Хук покидания маршрута** обычно используется, чтобы предотвратить случайное покидание маршрута с несохраненными изменениями. Переход навигации можно отменить, вернув `false`.
 
 ```js
 beforeRouteLeave (to, from) {
@@ -262,21 +263,21 @@ beforeRouteLeave (to, from) {
 }
 ```
 
-### Using the composition API
+### Использование с Composition API %{#using-the-composition-api}%
 
-If you are writing your component using the [composition API and a `setup` function](https://v3.vuejs.org/guide/composition-api-setup.html#setup), you can add update and leave guards through `onBeforeRouteUpdate` and `onBeforeRouteLeave` respectively. Please refer to the [Composition API section](./composition-api.md#navigation-guards) for more details.
+Если вы пишете свой компонент, используя [composition API и функцию setup](https://v3.vuejs.org/guide/composition-api-setup.html#setup), вы можете добавить хуки изменения и покидания маршрута через `onBeforeRouteUpdate` и `onBeforeRouteLeave` соответственно. Дополнительные сведения можно найти в [разделе Composition API](./composition-api.md#navigation-guards).
 
-## The Full Navigation Resolution Flow
+## Полная цепочка обработки навигации %{#the-full-navigation-resolution-flow}%
 
-1. Navigation triggered.
-2. Call `beforeRouteLeave` guards in deactivated components.
-3. Call global `beforeEach` guards.
-4. Call `beforeRouteUpdate` guards in reused components.
-5. Call `beforeEnter` in route configs.
-6. Resolve async route components.
-7. Call `beforeRouteEnter` in activated components.
-8. Call global `beforeResolve` guards.
-9. Navigation is confirmed.
-10. Call global `afterEach` hooks.
-11. DOM updates triggered.
-12. Call callbacks passed to `next` in `beforeRouteEnter` guards with instantiated instances.
+1. Срабатывание навигации.
+2. Вызов хуков `beforeRouteLeave` в деактивируемых компонентах.
+3. Вызов глобальных хуков `beforeEach`.
+4. Вызов хуков `beforeRouteUpdate` в переиспользуемых компонентах.
+5. Вызов `beforeEnter` в конфигурации маршрута.
+6. Разрешение асинхронных компонентов для маршрута.
+7. Вызов `beforeRouteEnter` в активируемых компонентах.
+8. Вызов глобальных хуков `beforeResolve`.
+9. Навигация подтверждена.
+10. Вызов глобальных хуков `afterEach`.
+11. Выполняется обновление DOM.
+12. Вызов коллбеков, переданных в `next` в качестве третьего аргумента хуков `beforeRouteEnter` с созданными экземплярами компонентов.
