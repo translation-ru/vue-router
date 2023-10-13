@@ -1,47 +1,47 @@
-# Scroll Behavior
+# Поведение прокрутки страницы %{#scroll-behavior}%
 
 <VueSchoolLink
   href="https://vueschool.io/lessons/scroll-behavior"
-  title="Learn how to customize scroll behavior"
+  title="Узнайте, как управлять поведением прокрутки страницы"
 />
 
-When using client-side routing, we may want to scroll to top when navigating to a new route, or preserve the scrolling position of history entries just like real page reload does. Vue Router allows you to achieve these and even better, allows you to completely customize the scroll behavior on route navigation.
+При использовании клиентской маршрутизации мы можем захотеть прокрутить страницу вверх при переходе на новый маршрут, или сохранить позицию прокрутки для записей истории, так же, как это происходит при реальной перезагрузке страницы. Vue Router позволяет вам достичь этого, а еще более того, позволяет полностью настраивать поведение прокрутки при навигации по маршруту.
 
-**Note: this feature only works if the browser supports `history.pushState`.**
+**Примечание: данная возможность работает только в том случае, если браузер поддерживает функцию `history.pushState`.**.
 
-When creating the router instance, you can provide the `scrollBehavior` function:
+При создании экземпляра маршрутизатора, можно предоставить функцию `scrollBehavior`:
 
 ```js
 const router = createRouter({
   history: createWebHashHistory(),
   routes: [...],
   scrollBehavior (to, from, savedPosition) {
-    // return desired position
+    // возврат желаемого положения
   }
 })
 ```
 
-The `scrollBehavior` function receives the `to` and `from` route objects, like [Navigation Guards](./navigation-guards.md). The third argument, `savedPosition`, is only available if this is a `popstate` navigation (triggered by the browser's back/forward buttons).
+Функция `scrollBehavior` получает объекты маршрутов `to` и `from`, как в [навигационных хуках](./navigation-guards.md). Третий аргумент, `savedPosition`, доступен только в том случае, если это `popstate` навигация (запускается кнопками браузера назад/вперед).
 
-The function can return a [`ScrollToOptions`](https://developer.mozilla.org/en-US/docs/Web/API/ScrollToOptions) position object:
+Функция может возвращать объект позиции [`ScrollToOptions`](https://developer.mozilla.org/en-US/docs/Web/API/ScrollToOptions):
 
 ```js
 const router = createRouter({
   scrollBehavior(to, from, savedPosition) {
-    // always scroll to top
+    // всегда прокручивать до верха
     return { top: 0 }
   },
 })
 ```
 
-You can also pass a CSS selector or a DOM element via `el`. In that scenario, `top` and `left` will be treated as relative offsets to that element.
+Через `el` можно также передать CSS-селектор или элемент DOM. В этом случае `top` и `left` будут рассматриваться как относительные смещения относительно этого элемента.
 
 ```js
 const router = createRouter({
   scrollBehavior(to, from, savedPosition) {
-    // always scroll 10px above the element #main
+    // всегда прокручивать на 10px выше элемента #main
     return {
-      // could also be
+      // также можно написать
       // el: document.getElementById('main'),
       el: '#main',
       top: -10,
@@ -50,9 +50,9 @@ const router = createRouter({
 })
 ```
 
-If a falsy value or an empty object is returned, no scrolling will happen.
+Если возвращается falsy-значение или пустой объект, то прокрутки не произойдет.
 
-Returning the `savedPosition` will result in a native-like behavior when navigating with back/forward buttons:
+Возвращение значения `savedPosition` приведет к нативному поведению при навигации с помощью кнопок назад/вперед:
 
 ```js
 const router = createRouter({
@@ -66,7 +66,7 @@ const router = createRouter({
 })
 ```
 
-If you want to simulate the "scroll to anchor" behavior:
+Если вы хотите имитировать поведение "прокрутки до якоря":
 
 ```js
 const router = createRouter({
@@ -80,7 +80,7 @@ const router = createRouter({
 })
 ```
 
-If your browser supports [scroll behavior](https://developer.mozilla.org/en-US/docs/Web/API/ScrollToOptions/behavior), you can make it smooth:
+Если ваш браузер поддерживает [поведение прокрутки](https://developer.mozilla.org/en-US/docs/Web/API/ScrollToOptions/behavior), то вы можете сделать его плавным:
 
 ```js
 const router = createRouter({
@@ -95,9 +95,9 @@ const router = createRouter({
 })
 ```
 
-## Delaying the scroll
+## Задержка при прокрутке %{#delaying-the-scroll}%
 
-Sometimes we need to wait a bit before scrolling in the page. For example, when dealing with transitions, we want to wait for the transition to finish before scrolling. To do this you can return a Promise that returns the desired position descriptor. Here is an example where we wait 500ms before scrolling:
+Иногда нам нужно немного подождать, прежде чем прокручивать страницу. Например, при работе с анимациями мы хотим дождаться окончания анимации перед прокруткой. Для этого вы можете вернуть Promise, который разрешится объектом с желаемой позицией прокрутки. Вот пример, где мы ожидаем 500мс перед прокруткой:
 
 ```js
 const router = createRouter({
@@ -111,4 +111,4 @@ const router = createRouter({
 })
 ```
 
-It's possible to hook this up with events from a page-level transition component to make the scroll behavior play nicely with your page transitions, but due to the possible variance and complexity in use cases, we simply provide this primitive to enable specific userland implementations.
+Это можно связать с событиями компонента transition на уровне страницы, чтобы реализовать такое поведение прокрутки, которое сочетается с анимациями перехода между страницами, но из-за множества возможных вариантов и комплексности примеров, мы просто предоставляем этот простой пример, чтобы показать где можно разместить собственную реализацию.
