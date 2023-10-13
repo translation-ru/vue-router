@@ -1,18 +1,18 @@
-# Data Fetching
+# Загрузка данных %{#data-fetching}%
 
-Sometimes you need to fetch data from the server when a route is activated. For example, before rendering a user profile, you need to fetch the user's data from the server. We can achieve this in two different ways:
+Иногда при активации маршрута требуется получить данные с сервера. Например, перед отображением профиля пользователя необходимо получить данные о нем с сервера. Этого можно добиться двумя различными способами:
 
-- **Fetching After Navigation**: perform the navigation first, and fetch data in the incoming component's lifecycle hook. Display a loading state while data is being fetched.
+- **Получение данных после перехода**: сначала перейти к новому маршруту, а затем получить данные в хуке жизненного цикла компонента маршрута. По мере загрузки данных отображать индикатор состояния загрузки.
 
-- **Fetching Before Navigation**: Fetch data before navigation in the route enter guard, and perform the navigation after data has been fetched.
+- **Получение данных перед переходом**: Получение данных перед переходом в навигационном хуке маршрутаи и завершение навигации уже когда они будут получены.
 
-Technically, both are valid choices - it ultimately depends on the user experience you are aiming for.
+С технической точки зрения, оба варианта являются правильными - в конечном итоге все зависит от того, какой UX (user expirience) вы хотите получить.
 
-## Fetching After Navigation
+## Получение данных после перехода %{#fetching-after-navigation}%
 
-When using this approach, we navigate and render the incoming component immediately, and fetch data in the component's `created` hook. It gives us the opportunity to display a loading state while the data is being fetched over the network, and we can also handle loading differently for each view.
+При таком подходе мы сразу же осуществляем переход и рендеринг компонента маршрута, а данные получаем в хуке `created` компонента. Это дает нам возможность отображать состояние загрузки, пока данные пересылаются по сети, а также по-разному обрабатывать загрузку для каждого представления.
 
-Let's assume we have a `Post` component that needs to fetch the data for a post based on `$route.params.id`:
+Предположим, что у нас есть компонент `Post`, которому необходимо получить данные для поста на основе `$route.params.id`:
 
 ```html
 <template>
@@ -39,14 +39,15 @@ export default {
     }
   },
   created() {
-    // watch the params of the route to fetch the data again
+    // следить за изменениями параметров маршрута
+    // для повторной загрузки данных
     this.$watch(
       () => this.$route.params,
       () => {
         this.fetchData()
       },
-      // fetch the data when the view is created and the data is
-      // already being observed
+      // получать данные, когда представление создано и данные
+      // уже реактивно отслеживаются
       { immediate: true }
     )
   },
@@ -54,7 +55,8 @@ export default {
     fetchData() {
       this.error = this.post = null
       this.loading = true
-      // replace `getPost` with your data fetching util / API wrapper
+      // замените `getPost` на вашу утилиту для
+      // получения данных / доступа к API
       getPost(this.$route.params.id, (err, post) => {
         this.loading = false
         if (err) {
@@ -68,10 +70,9 @@ export default {
 }
 ```
 
-## Fetching Before Navigation
+## Получение данных перед переходом %{#fetching-before-navigation}%
 
-With this approach we fetch the data before actually navigating to the new
-route. We can perform the data fetching in the `beforeRouteEnter` guard in the incoming component, and only call `next` when the fetch is complete. The callback passed to `next` will be called **after the component is mounted**:
+При этом подходе мы запрашиваем данные до завершения перехода к новому маршруту. Получение данных выполняется в навигационном хуке `beforeRouteEnter` в компоненте марштура, который вызывает метод `next`, когда данные получены. Коллбек, передаваемый в `next`, будет вызван **после монтирования компонента**:
 
 ```js
 export default {
@@ -83,12 +84,12 @@ export default {
   },
   beforeRouteEnter(to, from, next) {
     getPost(to.params.id, (err, post) => {
-      // `setData` is a method defined below
+      // `setData` - это метод, определенный ниже
       next(vm => vm.setData(err, post))
     })
   },
-  // when route changes and this component is already rendered,
-  // the logic will be slightly different.
+  // когда маршрут изменяется, а этот компонент уже отрисован,
+  // логика будет несколько иной.
   async beforeRouteUpdate(to, from) {
     this.post = null
     try {
@@ -109,7 +110,7 @@ export default {
 }
 ```
 
-The user will stay on the previous view while the resource is being fetched for the incoming view. It is therefore recommended to display a progress bar or some kind of indicator while the data is being fetched. If the data fetch fails, it's also necessary to display some kind of global warning message.
+Пользователь останется на предыдущем представлении, пока данные будут загружаться на новом. Поэтому рекомендуется отображать индикатор загрузки или какой-либо другой индикатор, пока данные загружаются. Если получение данных завершается неудачей, необходимо отображать какое-либо глобальное предупреждение.
 
 <!-- ### Using Composition API -->
 
