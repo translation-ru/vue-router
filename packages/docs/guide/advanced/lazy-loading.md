@@ -1,18 +1,18 @@
-# Lazy Loading Routes
+# Ленивая загрузка маршрутов %{#lazy-loading-routes}%
 
 <VueSchoolLink
   href="https://vueschool.io/lessons/lazy-loading-routes-vue-cli-only"
-  title="Learn about lazy loading routes"
+  title="Узнайте всё о ленивой загрузке маршрутов"
 />
 
-When building apps with a bundler, the JavaScript bundle can become quite large, and thus affect the page load time. It would be more efficient if we can split each route's components into separate chunks, and only load them when the route is visited.
+Если вы собираете ваше приложение при помощи инструментов сборки, итоговый размер Javascript приложения может стать довольно большим, тем самым влиять на время загрузки страницы. Было бы более эффективныее, если бы мы могли разделить компоненты каждого маршрута на отдельные части и загружать их только при посещении маршрута.
 
-Vue Router supports [dynamic imports](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/import) out of the box, meaning you can replace static imports with dynamic ones:
+Vue Router поддерживает [динамические импорты](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/import) из коробки, что дает возможность замены статических импортов на динамические:
 
 ```js
-// replace
+// замените
 // import UserDetails from './views/UserDetails'
-// with
+// на это
 const UserDetails = () => import('./views/UserDetails.vue')
 
 const router = createRouter({
@@ -21,30 +21,30 @@ const router = createRouter({
 })
 ```
 
-The `component` (and `components`) option accepts a function that returns a Promise of a component and Vue Router **will only fetch it when entering the page for the first time**, then use the cached version. Which means you can also have more complex functions as long as they return a Promise:
+Опция `component` (и `components`) принимает функцию, которая возвращает Promise компонента, Vue Router **загрузит его только при первом посещении страницы**, а затем будет использовать закешированную версию. Также вы можете использовать более сложные функции, при условии, что они возвращают Promise:
 
 ```js
 const UserDetails = () =>
   Promise.resolve({
-    /* component definition */
+    /* определение компонентоа */
   })
 ```
 
-In general, it's a good idea **to always use dynamic imports** for all your routes.
+В общем случае целесообразно **всегда использовать динамический импорт** для всех маршрутов.
 
-::: tip Note
-Do **not** use [Async components](https://v3.vuejs.org/guide/component-dynamic-async.html#async-components) for routes. Async components can still be used inside route components but route component themselves are just dynamic imports.
+::: tip Совет
+**Не** используйте [асинхронные компоненты](https://v3.vuejs.org/guide/component-dynamic-async.html#async-components) для маршрутов. Асинхронные компоненты могут все еще использоваться внутри компонентов маршрута, но сами компоненты маршрута - это просто динамические импорты.
 :::
 
-When using a bundler like webpack, this will automatically benefit from [code splitting](https://webpack.js.org/guides/code-splitting/)
+При использовании инструментов сборки, например webpack, это автоматически позволит использовать [разделение кода](https://webpack.js.org/guides/code-splitting/).
 
-When using Babel, you will need to add the [syntax-dynamic-import](https://babeljs.io/docs/plugins/syntax-dynamic-import/) plugin so that Babel can properly parse the syntax.
+При использовании Babel необходимо добавить плагин [syntax-dynamic-import](https://babeljs.io/docs/plugins/syntax-dynamic-import/), чтобы Babel мог правильно анализировать синтаксис.
 
-## Grouping Components in the Same Chunk
+## Группировка компонентов в одном чанке %{#grouping-components-in-the-same-chunk}%
 
-### With webpack
+### С webpack %{#with-webpack}%
 
-Sometimes we may want to group all the components nested under the same route into the same async chunk. To achieve that we need to use [named chunks](https://webpack.js.org/guides/code-splitting/#dynamic-imports) by providing a chunk name using a special comment syntax (requires webpack > 2.4):
+Иногда мы можем захотеть сгруппировать все компоненты, вложенные в один маршрут, в один асинхронный чанк (chunk). Для этого необходимо использовать [именованные чанки](https://webpack.js.org/guides/code-splitting/#dynamic-imports), указав имя чанка с помощью специального синтаксиса комментариев (требуется webpack > 2.4):
 
 ```js
 const UserDetails = () =>
@@ -55,11 +55,11 @@ const UserProfileEdit = () =>
   import(/* webpackChunkName: "group-user" */ './UserProfileEdit.vue')
 ```
 
-webpack will group any async module with the same chunk name into the same async chunk.
+webpack сгруппирует все асинхронные модули с одинаковым именем чанка в один асинхронный.
 
-### With Vite
+### С Vite %{#with-vite}%
 
-In Vite you can define the chunks under the [`rollupOptions`](https://vitejs.dev/config/#build-rollupoptions):
+В Vite вы можете определить чанки в разделе [`rollupOptions`](https://vitejs.dev/config/#build-rollupoptions):
 
 ```js
 // vite.config.js
