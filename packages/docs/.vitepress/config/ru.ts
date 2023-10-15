@@ -153,7 +153,7 @@ export const ruConfig: LocaleSpecificConfig<DefaultTheme.Config> = {
               link: '/guide/advanced/scroll-behavior.html',
             },
             {
-              text: 'Отложенная загрузка маршрутов',
+              text: 'Ленивая загрузка маршрутов',
               link: '/guide/advanced/lazy-loading.html',
             },
             {
