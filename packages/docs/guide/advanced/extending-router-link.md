@@ -1,13 +1,13 @@
-# Extending RouterLink
+# Расширение RouterLink %{#extending-routerlink}%
 
 <VueSchoolLink
   href="https://vueschool.io/lessons/extending-router-link-for-external-urls"
-  title="Learn how to extend router-link"
+  title="Узнайте, как расширить компонент router-link"
 />
 
-The RouterLink component exposes enough `props` to suffice most basic applications but it doesn't try to cover every possible use case and you will likely find yourself using `v-slot` for some advanced cases. In most medium to large sized applications, it's worth creating one if not multiple custom RouterLink components to reuse them across your application. Some examples are Links in a Navigation Menu, handling external links, adding an `inactive-class`, etc.
+Компонент RouterLink предоставляет достаточное количество входных параметров для большинства базовых приложений, но он не пытается охватить каждый возможный случай использования, и вы, вероятно, обнаружите, что в некоторых продвинутых случаях вам потребуется использовать `v-slot`. В большинстве средних и крупных приложений стоит создать один или даже несколько собственных компонентов RouterLink, чтобы повторно использовать их во всем приложении. Некоторые примеры включают в себя ссылки в меню, обработку внешних ссылок, добавление класса для неактивной ссылки (`inactive-class`) и многое другое.
 
-Let's extend RouterLink to handle external links as well and adding a custom `inactive-class` in an `AppLink.vue` file:
+Давайте расширим RouterLink для работы с внешними ссылками и добавим пользовательский `inactive-class` в файл `AppLink.vue`:
 
 ```vue
 <template>
@@ -39,7 +39,7 @@ export default {
   inheritAttrs: false,
 
   props: {
-    // add @ts-ignore if using TypeScript
+    // добавьте @ts-ignore, если используете TypeScript
     ...RouterLink.props,
     inactiveClass: String,
   },
@@ -53,7 +53,7 @@ export default {
 </script>
 ```
 
-If you prefer using a render function or create `computed` properties, you can use the `useLink` from the [Composition API](./composition-api.md):
+Если вы предпочитаете использовать render-функцию или создавать вычисляемые свойства, вы можете воспользоваться `useLink` из [Composition API](./composition-api.md):
 
 ```js
 import { RouterLink, useLink } from 'vue-router'
@@ -62,23 +62,24 @@ export default {
   name: 'AppLink',
 
   props: {
-    // add @ts-ignore if using TypeScript
+    // добавьте @ts-ignore, если используете TypeScript
     ...RouterLink.props,
     inactiveClass: String,
   },
 
   setup(props) {
-    // `props` contains `to` and any other prop that can be passed to <router-link>
+    // `props` содержит `to` и любой другой входной параметр,
+    // который может быть передан <router-link>
     const { navigate, href, route, isActive, isExactActive } = useLink(props)
 
-    // profit!
+    // ...
 
     return { isExternalLink }
   },
 }
 ```
 
-In practice, you might want to use your `AppLink` component for different parts of your application. e.g. using [Tailwind CSS](https://tailwindcss.com), you could create a `NavLink.vue` component with all the classes:
+На практике вы можете использовать компонент `AppLink` для различных мест приложения. Например, используя [Tailwind CSS](https://tailwindcss.com), вы можете создать компонент `NavLink.vue` со всеми классами:
 
 ```vue
 <template>
