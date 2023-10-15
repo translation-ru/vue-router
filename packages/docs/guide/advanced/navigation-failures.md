@@ -1,70 +1,70 @@
-# Waiting for the result of a Navigation
+# Ожидание результата навигации %{#waiting-for-the-result-of-a-navigation}%
 
 <VueSchoolLink
   href="https://vueschool.io/lessons/vue-router-4-detecting-navigation-failures"
-  title="Learn how to detect navigation failures"
+  title="Узнайте, как определить сбои при навигации"
 />
 
-When using `router-link`, Vue Router calls `router.push` to trigger a navigation. While the expected behavior for most links is to navigate a user to a new page, there are a few situations where users will remain on the same page:
+При использовании `router-link`, Vue Router вызывает router.push для запуска навигации. В то время как ожидаемое поведение для большинства ссылок - перевести пользователя на новую страницу, есть несколько ситуаций, когда пользователь останется на той же странице:
 
-- Users are already on the page that they are trying to navigate to.
-- A [navigation guard](./navigation-guards.md) aborts the navigation by doing `return false`.
-- A new navigation guard takes place while the previous one not finished.
-- A [navigation guard](./navigation-guards.md) redirects somewhere else by returning a new location (e.g. `return '/login'`).
-- A [navigation guard](./navigation-guards.md) throws an `Error`.
+- Пользователь уже находится на странице, на которую пытается перейти.
+- [Навигационный хук](./navigation-guards.md) прерывает навигацию, вызывая `return false`.
+- Запускается новый навигационный хук, пока предыдущий еще не закончен.
+- [Навигационный хук](./navigation-guards.md) перенаправляет в другое место, возвращая новый путь (например, `return '/login'`).
+- [Навигационный хук](./navigation-guards.md) выбрасывает `Error`.
 
-If we want to do something after a navigation is finished, we need a way to wait after calling `router.push`. Imagine we have a mobile menu that allows us to go to different pages and we only want to hide the menu once we have navigated to the new page, we might want to do something like this:
+Если мы хотим сделать что-то после завершения перехода навигации, то нам нужен способ подождать после вызова `router.push`. Представьте, что у нас есть мобильное меню, позволяющее переходить на разные страницы, и мы хотим скрыть меню только после перехода на новую страницу. Мы можем сделать примерно следующее:
 
 ```js
 router.push('/my-profile')
 this.isMenuOpen = false
 ```
 
-But this will close the menu right away because **navigations are asynchronous**, we need to `await` the promise returned by `router.push`:
+Но это сразу же закроет меню, поскольку **переходы навигации являются асинхронными**, нам нужно дождаться разрешения Promise, возвращаемого `router.push`:
 
 ```js
 await router.push('/my-profile')
 this.isMenuOpen = false
 ```
 
-Now the menu will close once the navigation is finished but it will also close if the navigation was prevented. We need a way to detect if we actually changed the page we are on or not.
+Теперь меню будет закрываться по завершению перехода навигации, но оно также закроется, если навигация была предотвращена. Нам нужен способ определить, действительно ли мы изменили страницу, на которой находимся, или нет.
 
-## Detecting Navigation Failures
+## Определение сбоев при навигации %{#detecting-navigation-failures}%
 
-If a navigation is prevented, resulting in the user staying on the same page, the resolved value of the `Promise` returned by `router.push` will be a _Navigation Failure_. Otherwise, it will be a _falsy_ value (usually `undefined`). This allows us to differentiate the case where we navigated away from where we are or not:
+Если навигация была предотвращена, в результате чего пользователь остался на той же странице, то разрешенным значением `Promise`, возвращаемым `router.push`, будет _сбой навигации (Navigation Failure)_. В противном случае это будет _falsy_ значение (обычно `undefined`). Это позволяет определить статус перехода навигации:
 
 ```js
 const navigationResult = await router.push('/my-profile')
 
 if (navigationResult) {
-  // navigation prevented
+  // навигация предотвращена
 } else {
-  // navigation succeeded (this includes the case of a redirection)
+  // навигация прошла успешно (в том числе и в случае переадресации)
   this.isMenuOpen = false
 }
 ```
 
-_Navigation Failures_ are `Error` instances with a few extra properties that gives us enough information to know what navigation was prevented and why. To check the nature of a navigation result, use the `isNavigationFailure` function:
+_Сбои навигации_ представляют собой экземпляры `Error` с несколькими дополнительными свойствами, которые предоставляют достаточно информации, чтобы понять, какая навигация была предотвращена и почему. Чтобы проверить характер результата навигации, используйте функцию `isNavigationFailure`:
 
 ```js
 import { NavigationFailureType, isNavigationFailure } from 'vue-router'
 
-// trying to leave the editing page of an article without saving
+// попытка покинуть страницу редактирования статьи без сохранения
 const failure = await router.push('/articles/2')
 
 if (isNavigationFailure(failure, NavigationFailureType.aborted)) {
-  // show a small notification to the user
+  // показать пользователю небольшое уведомление
   showToast('You have unsaved changes, discard and leave anyway?')
 }
 ```
 
-::: tip
-If you omit the second parameter: `isNavigationFailure(failure)`, it will only check if `failure` is a _Navigation Failure_.
+::: tip Совет
+Если опустить второй параметр: `isNavigationFailure(failure)`, то будет проверяться только то, является ли `failure` _сбоем навигации_.
 :::
 
-## Global navigation failures
+## Глобальные навигационные сбои %{#global-navigation-failures}%
 
-You can detect global navigation failures globally by using the [`router.afterEach()` navigation guard](./navigation-guards.md#global-after-hooks):
+Обнаружить сбои навигации на уровне приложения можно с помощью [навигационного хука `router.afterEach()`](./navigation-guards.md#global-after-hooks):
 
 ```ts
 router.afterEach((to, from, failure) => {
@@ -74,20 +74,20 @@ router.afterEach((to, from, failure) => {
 })
 ```
 
-## Differentiating Navigation Failures
+## Типы сбоев навигации %{#differentiating-navigation-failures}%
 
-As we said at the beginning, there are different situations aborting a navigation, all of them resulting in different _Navigation Failures_. They can be differentiated using the `isNavigationFailure` and `NavigationFailureType`. There are three different types:
+Как мы сказали в начале, существуют разные ситуации, при которых отменяется навигация, и все они приводят к разным _сбоям навигации_. Их можно различить с помощью `isNavigationFailure` и `NavigationFailureType`. Существует три разных типа:
 
-- `aborted`: `false` was returned inside of a navigation guard to the navigation.
-- `cancelled`: A new navigation took place before the current navigation could finish. e.g. `router.push` was called while waiting inside of a navigation guard.
-- `duplicated`: The navigation was prevented because we are already at the target location.
+- `aborted`: когда внутри навигационного хука вернулось `false`
+- `cancelled`: Запущена новая навигация до завершения текущей. Например, был вызван `router.push` был вызван во время ожидания внутри навигационного хука.
+- `duplicated`: Навигация была предотвращена, так как мы на этой странице.
 
-## _Navigation Failures_'s properties
+## Свойства _сбоев навигации_ %{#navigation-Failures-s-properties}%
 
-All navigation failures expose `to` and `from` properties to reflect the current location as well as the target location for the navigation that failed:
+Все сбои навигации предоставляют доступ к свойствам `to` и `from`, отражающие текущее местоположение, а также целевое местоположение для неудавшейся навигации:
 
 ```js
-// trying to access the admin page
+// попытка доступа к странице администратора
 router.push('/admin').then(failure => {
   if (isNavigationFailure(failure, NavigationFailureType.aborted)) {
     failure.to.path // '/admin'
@@ -96,15 +96,15 @@ router.push('/admin').then(failure => {
 })
 ```
 
-In all cases, `to` and `from` are normalized route locations.
+Во всех случаях значения `to` и `from` будут объектами нормализованных маршрутов.
 
-## Detecting Redirections
+## Обнаружение перенаправлений %{#detecting-redirections}%
 
-When returning a new location inside of a Navigation Guard, we are triggering a new navigation that overrides the ongoing one. Differently from other return values, a redirection doesn't prevent a navigation, **it creates a new one**. It is therefore checked differently, by reading the `redirectedFrom` property in a Route Location:
+При возвращении нового маршрута внутри навигационного хука, мы запускаем новый переход навигации, который перезаписывает текущий. В отличие от других возвращаемых значений, перенаправление не предотвращает навигацию, **оно создает новую**. Поэтому оно проверяется по-разному, через свойство `redirectedFrom` в Route Location:
 
 ```js
 await router.push('/my-profile')
 if (router.currentRoute.value.redirectedFrom) {
-  // redirectedFrom is resolved route location like to and from in navigation guards
+  // redirectedFrom - это разрешенное местоположение маршрута, как to и from в навигационных хуках
 }
 ```
