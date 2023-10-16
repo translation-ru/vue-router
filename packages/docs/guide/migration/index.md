@@ -1,17 +1,17 @@
-# Migrating from Vue 2
+# Миграция с Vue 2 %{#migrating-from-vue-2}%
 
-Most of Vue Router API has remained unchanged during its rewrite from v3 (for Vue 2) to v4 (for Vue 3) but there are still a few breaking changes that you might encounter while migrating your application. This guide is here to help you understand why these changes happened and how to adapt your application to make it work with Vue Router 4.
+Большая часть Vue Router API осталась неизменной при переписывании с версии 3 (для Vue 2) на версию 4 (для Vue 3). Однако всё равно существуют несколько изменений без обратной совместимости, с которыми вы можете столкнуться при миграции вашего приложения. Это руководство предназначено, чтобы помочь вам понять, почему произошли эти изменения, и как адаптировать ваше приложение, чтобы оно работало с Vue Router 4.
 
-## Breaking Changes
+## Критические изменения %{#breaking-changes}%
 
-Changes are ordered by their usage. It is therefore recommended to follow this list in order.
+Изменения расположены в порядке их использования. Поэтому рекомендуется следовать этому списку по порядку.
 
-### new Router becomes createRouter
+### createRouter заместо new Router %{#new-router-becomes-createrouter}%
 
-Vue Router is no longer a class but a set of functions. Instead of writing `new Router()`, you now have to call `createRouter`:
+Vue Router больше не является классом, а представляет собой набор функций. Вместо того чтобы писать `new Router()`, теперь нужно вызывать `createRouter`:
 
 ```js
-// previously was
+// раньше было
 // import Router from 'vue-router'
 import { createRouter } from 'vue-router'
 
@@ -20,19 +20,19 @@ const router = createRouter({
 })
 ```
 
-### New `history` option to replace `mode`
+### Новая опция `history` для замены `mode` %{#new-history-option-to-replace-mode}%
 
-The `mode: 'history'` option has been replaced with a more flexible one named `history`. Depending on which mode you were using, you will have to replace it with the appropriate function:
+Опция `mode: 'history'` была заменена на более гибкую с названием `history`. В зависимости от того, какой режим вы использовали, вам придется заменить его на соответствующую функцию:
 
 - `"history"`: `createWebHistory()`
 - `"hash"`: `createWebHashHistory()`
 - `"abstract"`: `createMemoryHistory()`
 
-Here is a full snippet:
+Полный пример:
 
 ```js
 import { createRouter, createWebHistory } from 'vue-router'
-// there is also createWebHashHistory and createMemoryHistory
+// существуют также createWebHashHistory и createMemoryHistory
 
 createRouter({
   history: createWebHistory(),
@@ -40,24 +40,24 @@ createRouter({
 })
 ```
 
-On SSR, you need to manually pass the appropriate history:
+При рендеринге на стороне сервера (SSR) необходимо вручную передать соответствующий history:
 
 ```js
 // router.js
 let history = isServer ? createMemoryHistory() : createWebHistory()
 let router = createRouter({ routes, history })
-// somewhere in your server-entry.js
-router.push(req.url) // request url
+// где-то в файле server-entry.js
+router.push(req.url) // url запроса
 router.isReady().then(() => {
-  // resolve the request
+  // разрешенный запрос
 })
 ```
 
-**Reason**: enable tree shaking of non used histories as well as implementing custom histories for advanced use cases like native solutions.
+**Причина**: включение оптимизации встряхивания дерева (tree shaking) неиспользуемых history режимов, а также реализация пользовательских историй для сложных сценариев, таких как нативные решения.
 
-### Moved the `base` option
+### Опция `base` была перемещена %{#moved-the-base-option}%
 
-The `base` option is now passed as the first argument to `createWebHistory` (and other histories):
+Опция `base` теперь передается в качестве первого аргумента функции `createWebHistory` (и других history):
 
 ```js
 import { createRouter, createWebHistory } from 'vue-router'
@@ -67,75 +67,76 @@ createRouter({
 })
 ```
 
-### Removal of the `fallback` option
+### Удаление опции `fallback` %{#removal-of-the-fallback-option}%
 
-The `fallback` option is no longer supported when creating the router:
+Опция `fallback` больше не поддерживается при создании маршрутизатора:
 
 ```diff
 -new VueRouter({
 +createRouter({
 -  fallback: false,
-// other options...
+// другие опции...
 })
 ```
 
-**Reason**: All browsers supported by Vue support the [HTML5 History API](https://developer.mozilla.org/en-US/docs/Web/API/History_API), allowing us to avoid hacks around modifying `location.hash` and directly use `history.pushState()`.
+**Причина**: Все браузеры, поддерживаемые Vue, поддерживают [HTML5 History API](https://developer.mozilla.org/en-US/docs/Web/API/History_API), что позволяет нам избежать хаков с модификацией `location.hash` и напрямую использовать `history.pushState()`.
 
-### Removed `*` (star or catch all) routes
+### Удалены маршруты `*` (звездочка или все) %{#removed-star-or-catch-all-routes}%
 
-Catch all routes (`*`, `/*`) must now be defined using a parameter with a custom regex:
+Теперь все маршруты (`*`, `/*`) должны определяться с помощью параметра с регулярным выражением:
 
 ```js
 const routes = [
-  // pathMatch is the name of the param, e.g., going to /not/found yields
+  // pathMatch - это имя параметра, например, переход на /not/found даст
   // { params: { pathMatch: ['not', 'found'] }}
-  // this is thanks to the last *, meaning repeated params and it is necessary if you
-  // plan on directly navigating to the not-found route using its name
+  // это происходит благодаря последнему *, означающему повторение params, и необходимо, если вы
+  // планируете напрямую перейти к маршруту not-found, используя его имя
   { path: '/:pathMatch(.*)*', name: 'not-found', component: NotFound },
-  // if you omit the last `*`, the `/` character in params will be encoded when resolving or pushing
+  // если опустить последний `*`, то символ `/` в параметрах будет
+  // закодирован при resolve или push
   { path: '/:pathMatch(.*)', name: 'bad-not-found', component: NotFound },
 ]
-// bad example if using named routes:
+// плохой пример при использовании именованных маршрутов:
 router.resolve({
   name: 'bad-not-found',
   params: { pathMatch: 'not/found' },
 }).href // '/not%2Ffound'
-// good example:
+// хороший пример:
 router.resolve({
   name: 'not-found',
   params: { pathMatch: ['not', 'found'] },
 }).href // '/not/found'
 ```
 
-:::tip
-You don't need to add the `*` for repeated params if you don't plan to directly push to the not found route using its name. If you call `router.push('/not/found/url')`, it will provide the right `pathMatch` param.
+:::tip Совет
+Вам не нужно добавлять `*` для повторяющихся параметров, если вы не планируете напрямую переходить на несуществующий маршрут, используя его имя. Если вы вызываете `router.push('/not/found/url')`, то он предоставит правильный параметр `pathMatch`.
 :::
 
-**Reason**: Vue Router doesn't use `path-to-regexp` anymore, instead it implements its own parsing system that allows route ranking and enables dynamic routing. Since we usually add one single catch-all route per project, there is no big benefit in supporting a special syntax for `*`. The encoding of params is encoding across routes, without exception to make things easier to predict.
+**Причина**: Vue Router больше не использует `path-to-regexp`, вместо этого он реализует собственную систему парсинга, которая позволяет ранжировать маршруты и обеспечивает динамическую маршрутизацию. Поскольку мы обычно добавляем всего один универсальный маршрут на проект, нет большой выгоды в поддержке специального синтаксиса для `*`. Кодирование параметров применяется ко всем маршрутам без исключений, чтобы упростить прогнозируемость поведения.
 
-### The `currentRoute` property is now a `ref()`
+### Свойство `currentRoute` теперь является `ref()` %{#the-currentroute-property-is-now-a-ref}%
 
-Previously the properties of the [`currentRoute`](https://v3.router.vuejs.org/api/#router-currentroute) object on a router instance could be accessed directly.
+Раньше доступ к свойствам объекта [`currentRoute`](https://v3.router.vuejs.org/api/#router-currentroute) на экземпляре маршрутизатора можно было получить напрямую.
 
-With the introduction of vue-router v4, the underlying type of the `currentRoute` object on the router instance has changed to `Ref<RouteLocationNormalizedLoaded>`, which comes from the newer [reactivity fundamentals](https://vuejs.org/guide/essentials/reactivity-fundamentals.html) introduced in Vue 3.
+С появлением vue-router v4 базовый тип объекта `currentRoute` у экземпляра маршрутизатора изменился на `Ref<RouteLocationNormalizedLoaded>`, что следует из более новых [основ реактивности](https://vuejs.org/guide/essentials/reactivity-fundamentals.html), представленных во Vue 3.
 
-While this doesn't change anything if you're reading the route with `useRoute()` or `this.$route`, if you're accessing it directly on the router instance, you will need to access the actual route object via `currentRoute.value`:
+Хотя это ничего не меняет, если вы читаете маршрут с помощью `useRoute()` или `this.$route`, если вы обращаетесь к нему напрямую через экземпляр маршрутизатора, то вам нужно будет обращаться к фактическому объекту маршрута через `currentRoute.value`:
 
 ```ts
 const { page } = router.currentRoute.query // [!code --]
 const { page } = router.currentRoute.value.query // [!code ++]
 ```
 
-### Replaced `onReady` with `isReady`
+### `onReady` заменена на `isReady` %{#replaced-onready-with-isready}%
 
-The existing `router.onReady()` function has been replaced with `router.isReady()` which doesn't take any argument and returns a Promise:
+Существующая функция `router.onReady()` была заменена на `router.isReady()`, которая не принимает никаких аргументов и возвращает Promise:
 
 ```js
-// replace
+// была заменена
 router.onReady(onSuccess, onError)
-// with
+// на
 router.isReady().then(onSuccess).catch(onError)
-// or use await:
+// или с использованием await:
 try {
   await router.isReady()
   // onSuccess
@@ -144,15 +145,15 @@ try {
 }
 ```
 
-### `scrollBehavior` changes
+### Изменения `scrollBehavior` %{#scrollbehavior-changes}%
 
-The object returned in `scrollBehavior` is now similar to [`ScrollToOptions`](https://developer.mozilla.org/en-US/docs/Web/API/ScrollToOptions): `x` is renamed to `left` and `y` is renamed to `top`. See [RFC](https://github.com/vuejs/rfcs/blob/master/active-rfcs/0035-router-scroll-position.md).
+Объект, возвращаемый в `scrollBehavior`, теперь аналогичен [`ScrollToOptions`](https://developer.mozilla.org/en-US/docs/Web/API/ScrollToOptions): `x` переименован в `left`, а `y` - в `top`. См. [RFC](https://github.com/vuejs/rfcs/blob/master/active-rfcs/0035-router-scroll-position.md).
 
-**Reason**: making the object similar to `ScrollToOptions` to make it feel more familiar with native JS APIs and potentially enable future new options.
+**Причина**: сделать объект похожим на `ScrollToOptions`, чтобы он был более привычен к нативному JS API и потенциально позволял использовать новые опции в будущем.
 
-### `<router-view>`, `<keep-alive>`, and `<transition>`
+### `<router-view>`, `<keep-alive>` и `<transition>` %{#-router-view-keep-alive-and-transition-}%
 
-`transition` and `keep-alive` must now be used **inside** of `RouterView` via the `v-slot` API:
+Теперь `transition` и `keep-alive` должны использоваться **внутри** `RouterView` через `v-slot` API:
 
 ```vue
 <router-view v-slot="{ Component }">
@@ -164,69 +165,69 @@ The object returned in `scrollBehavior` is now similar to [`ScrollToOptions`](ht
 </router-view>
 ```
 
-**Reason**: This was a necessary change. See the [related RFC](https://github.com/vuejs/rfcs/blob/master/active-rfcs/0034-router-view-keep-alive-transitions.md).
+**Причина**: Это было необходимое изменение. См. [связанный RFC](https://github.com/vuejs/rfcs/blob/master/active-rfcs/0034-router-view-keep-alive-transitions.md).
 
-### Removal of `append` prop in `<router-link>`
+### Удаление свойства `append` в `<router-link>` %{#removal-of-append-prop-in-router-link-}%
 
-The `append` prop has been removed from `<router-link>`. You can manually concatenate the value to an existing `path` instead:
+Свойство `append` было удалено из `<router-link>`. Вместо этого можно вручную конкатенировать значение c существующим `path`:
 
 ```html
-replace
+замените
 <router-link to="child-route" append>to relative child</router-link>
-with
+на это
 <router-link :to="append($route.path, 'child-route')">
   to relative child
 </router-link>
 ```
 
-You must define a global `append` function on your _App_ instance:
+Вы должны определить глобальную функцию `append` для своего экземпляра _App_:
 
 ```js
 app.config.globalProperties.append = (path, pathToAppend) =>
   path + (path.endsWith('/') ? '' : '/') + pathToAppend
 ```
 
-**Reason**: `append` wasn't used very often, is easy to replicate in user land.
+**Причина**: `append` использовался нечасто, его легко воспроизвести в пользовательской среде.
 
-### Removal of `event` and `tag` props in `<router-link>`
+### Удаление входных параметорв `event` и `tag` из `<router-link>` %{#removal-of-event-and-tag-props-in-router-link-}%
 
-Both `event`, and `tag` props have been removed from `<router-link>`. You can use the [`v-slot` API](/guide/advanced/composition-api#uselink) to fully customize `<router-link>`:
+Входные параметры `event` и `tag` были удалены из `<router-link>`. Для полной настройки `<router-link>` можно использовать [`v-slot`](/guide/advanced/composition-api#uselink) API:
 
 ```html
-replace
+замените
 <router-link to="/about" tag="span" event="dblclick">About Us</router-link>
-with
+на это
 <router-link to="/about" custom v-slot="{ navigate }">
   <span @click="navigate" @keypress.enter="navigate" role="link">About Us</span>
 </router-link>
 ```
 
-**Reason**: These props were often used together to use something different from an `<a>` tag but were introduced before the `v-slot` API and are not used enough to justify adding to the bundle size for everybody.
+**Причина**: Эти свойства часто использовались вместе для создания чего-то, отличного от тега `<a>`, но они были введены до появления `v-slot` API и используются недостаточно часто, чтобы оправдать добавление их в размер бандла для всех.
 
-### Removal of the `exact` prop in `<router-link>`
+### Удаление входного параметра `exact` из `<router-link>`. %{#removal-of-the-exact-prop-in-router-link-}%
 
-The `exact` prop has been removed because the caveat it was fixing is no longer present so you should be able to safely remove it. There are however two things you should be aware of:
+Входной параметр `exact` был удален, потому что проблема, которую он решал, больше не существует, поэтому его можно безопасно убрать. Однако есть две вещи, о которых стоит знать:
 
-- Routes are now active based on the route records they represent instead of the generated route location objects and their `path`, `query`, and `hash` properties
-- Only the `path` section is matched, `query`, and `hash` aren't taken into account anymore
+- Теперь маршруты активны на основе записей о маршрутах, которые они представляют, а не на основе сгенерированных объектов местоположения маршрута и их свойств `path`, `query` и `hash`
+- Сопоставляется только секция `path`, `query` и `hash` больше не учитываются
 
-If you wish to customize this behavior, e.g. take into account the `hash` section, you should use the [`v-slot` API](/guide/advanced/composition-api#uselink) to extend `<router-link>`.
+Если вы хотите настроить это поведение, например, учесть секцию `hash`, то для расширения `<router-link>` следует воспользоваться [`v-slot` API](/guide/advanced/composition-api#uselink).
 
-**Reason**: See the [RFC about active matching](https://github.com/vuejs/rfcs/blob/master/active-rfcs/0028-router-active-link.md#summary) changes for more details.
+**Причина**: Подробнее см. изменения в [RFC о сопоставлении активных маршрутов](https://github.com/vuejs/rfcs/blob/master/active-rfcs/0028-router-active-link.md#summary).
 
-### Navigation guards in mixins are ignored
+### Навигационные хуки в миксинах игнорируются %{#navigation-guards-in-mixins-are-ignored}%
 
-At the moment navigation guards in mixins are not supported. You can track its support at [vue-router#454](https://github.com/vuejs/router/issues/454).
+На данный момент навигационные хуки в миксинах не поддерживаются. Отслеживать поддержку можно тут: [vue-router#454](https://github.com/vuejs/router/issues/454).
 
-### Removal of `router.match` and changes to `router.resolve`
+### Удаление `router.match` и изменение `router.resolve` %{#removal-of-router-match-and-changes-to-router-resolve}%
 
-Both `router.match`, and `router.resolve` have been merged together into `router.resolve` with a slightly different signature. [Refer to the API](/api/interfaces/Router.md#Methods-resolve) for more details.
+И `router.match`, и `router.resolve` были объединены в `router.resolve` с несколько иной сигнатурой. [Более подробная информация приведена в API] (/api/interfaces/Router.md#Methods-resolve).
 
-**Reason**: Uniting multiple methods that were used for the same purpose.
+**Причина**: Объединение нескольких методов, которые использовались для одной и той же цели.
 
-### Removal of `router.getMatchedComponents()`
+### Функция `router.getMatchedComponents()` была удалена %{#removal-of-router-getMatchedComponents-}%
 
-The method `router.getMatchedComponents` is now removed as matched components can be retrieved from `router.currentRoute.value.matched`:
+Метод `router.getMatchedComponents` теперь удален, поскольку совпадающие компоненты могут быть получены из `router.currentRoute.value.matched`:
 
 ```js
 router.currentRoute.value.matched.flatMap(record =>
@@ -234,47 +235,47 @@ router.currentRoute.value.matched.flatMap(record =>
 )
 ```
 
-**Reason**: This method was only used during SSR and is a one liner that can be done by the user.
+**Причина**: Данный метод использовался только в SSR и является одноразовым и может быть написан пользователем.
 
-### Redirect records cannot use special paths
+### Записи перенаправления не могут использовать специальные пути %{#redirect-records-cannot-use-special-paths}%
 
-Previously, a non documented feature allowed to set a redirect record to a special path like `/events/:id` and it would reuse an existing param `id`. This is no longer possible and there are two options:
+Ранее не документированная возможность позволяла установить запись перенаправления на специальный путь типа `/events/:id` и при этом повторно использовать существующий параметр `id`. Теперь это невозможно, и есть два варианта:
 
-- Using the name of the route without the param: `redirect: { name: 'events' }`. Note this won't work if the param `:id` is optional
-- Using a function to recreate the new location based on the target: `redirect: to => ({ name: 'events', params: to.params })`
+- Использование имени маршрута без параметра: `redirect: { name: 'events' }`. Обратите внимание, что это не будет работать, если параметр `:id` является необязательным
+- Использование функции для воссоздания нового местоположения на основе цели: `redirect: to => ({ name: 'events', params: to.params })`.
 
-**Reason**: This syntax was rarely used and _another way of doing things_ that wasn't shorter enough compared to the versions above while introducing some complexity and making the router heavier.
+**Причина**: Этот синтаксис использовался редко и был _другим способом выполнения задач_, который не был достаточно коротким по сравнению с версиями выше, при этом вносил некоторую сложность и делал маршрутизатор более тяжелым.
 
-### **All** navigations are now always asynchronous
+### **Все** переходы навигации теперь всегда асинхронные %{#all-navigations-are-now-always-asynchronous}%
 
-All navigations, including the first one, are now asynchronous, meaning that, if you use a `transition`, you may need to wait for the router to be _ready_ before mounting the app:
+Все переходы навигации, включая первую, теперь асинхронные, то есть при использовании `transition` может потребоваться дождаться, пока маршрутизатор будет _готов_ перед монтированием приложения:
 
 ```js
 app.use(router)
-// Note: on Server Side, you need to manually push the initial location
+// Примечание: на стороне сервера необходимо вручную указать начальный маршрут
 router.isReady().then(() => app.mount('#app'))
 ```
 
-Otherwise there will be an initial transition as if you provided the `appear` prop to `transition` because the router displays its initial location (nothing) and then displays the first location.
+В противном случае анимация перехода будет выполнена, как если бы вы предоставили свойство `appear` для `transition`, потому что маршрутизатор отображает своё начальное положение (ничего) и затем отображает первое положение.
 
-Note that **if you have navigation guards upon the initial navigation**, you might not want to block the app render until they are resolved unless you are doing Server Side Rendering. In this scenario, not waiting the router to be ready to mount the app would yield the same result as in Vue 2.
+Обратите внимание, что **если при начальной навигации у вас есть навигационные хуки**, то блокировать рендеринг приложения до их разрешения, возможно, не стоит, если только вы не используете рендеринг на стороне сервера. В этом случае, монтируйте приложение, не дожидаясь готовности маршрутизатора , чтобы получить тот же результат, что и в Vue 2.
 
-### Removal of `router.app`
+### `router.app` был удален %{#removal-of-router-app}%
 
-`router.app` used to represent the last root component (Vue instance) that injected the router. Vue Router can now be safely used by multiple Vue applications at the same time. You can still add it when using the router:
+`router.app` используется для обозначения последнего корневого компонента (экземпляра Vue), который внедрил маршрутизатор. Теперь Vue Router может безопасно использоваться несколькими приложениями Vue одновременно. При использовании маршрутизатора его по-прежнему можно добавлять:
 
 ```js
 app.use(router)
 router.app = app
 ```
 
-You can also extend the TypeScript definition of the `Router` interface to add the `app` property.
+Вы также можете расширить TypeScript определение интерфейса `Router` для добавления свойства `app`.
 
-**Reason**: Vue 3 applications do not exist in Vue 2 and now we properly support multiple applications using the same Router instance, so having an `app` property would have been misleading because it would have been the application instead of the root instance.
+**Причина**: Приложения Vue 3 не существуют во Vue 2, и теперь мы должным образом поддерживаем несколько приложений, использующих один экземпляр Router, поэтому наличие свойства `app` вводило бы в заблуждение, поскольку вместо корневого экземпляра использовалось бы приложение.
 
-### Passing content to route components' `<slot>`
+### Передача контента в `<slot>` компонентов маршрута %{#passing-content-to-route-components-slot-}%
 
-Before you could directly pass a template to be rendered by a route components' `<slot>` by nesting it under a `<router-view>` component:
+Раньше можно было напрямую передать шаблон для отображения через `<slot>` компонентов маршрута , вложив его в компонент `<router-view>`:
 
 ```html
 <router-view>
@@ -282,7 +283,7 @@ Before you could directly pass a template to be rendered by a route components' 
 </router-view>
 ```
 
-Because of the introduction of the `v-slot` api for `<router-view>`, you must pass it to the `<component>` using the `v-slot` API:
+В связи с введением `v-slot` api для `<router-view>`, необходимо передавать его в `<component>`, используя `v-slot` API:
 
 ```html
 <router-view v-slot="{ Component }">
@@ -292,95 +293,95 @@ Because of the introduction of the `v-slot` api for `<router-view>`, you must pa
 </router-view>
 ```
 
-### Removal of `parent` from route locations
+### Удаление `parent` из местоположений маршрутов %{#removal-of-parent-from-route-locations}%
 
-The `parent` property has been removed from normalized route locations (`this.$route` and object returned by `router.resolve`). You can still access it via the `matched` array:
+Свойство `parent` было удалено из нормализованных местоположений маршрутов (`this.$route` и объекта, возвращаемого функцией `router.resolve`). Доступ к нему по-прежнему можно получить через массив `matched`:
 
 ```js
 const parent = this.$route.matched[this.$route.matched.length - 2]
 ```
 
-**Reason**: Having `parent` and `children` creates unnecessary circular references while the properties could be retrieved already through `matched`.
+**Причина**: Наличие `parent` и `children` создает ненужные круговые ссылки, в то время как эти свойства могут быть уже получены через `matched`.
 
-### Removal of `pathToRegexpOptions`
+### Свойство `pathToRegexpOptions` было удалено %{#removal-of-pathtoregexpoptions}%
 
-The `pathToRegexpOptions` and `caseSensitive` properties of route records have been replaced with `sensitive` and `strict` options for `createRouter()`. They can now also be directly passed when creating the router with `createRouter()`. Any other option specific to `path-to-regexp` has been removed as `path-to-regexp` is no longer used to parse paths.
+Свойства `pathToRegexpOptions` и `caseSensitive` записей маршрутов были заменены на опции `sensitive` и `strict` для `createRouter()`. Теперь они также могут передаваться напрямую при создании маршрутизатора с помощью `createRouter()`. Любые другие опции, специфичные для `path-to-regexp`, были удалены, поскольку `path-to-regexp` больше не используется для парсинга путей.
 
-### Removal of unnamed parameters
+### Удаление неименованных параметров %{#removal-of-unnamed-parameters}%
 
-Due to the removal of `path-to-regexp`, unnamed parameters are no longer supported:
+В связи с удалением `path-to-regexp`, неименованные параметры больше не поддерживаются:
 
-- `/foo(/foo)?/suffix` becomes `/foo/:_(foo)?/suffix`
-- `/foo(foo)?` becomes `/foo:_(foo)?`
-- `/foo/(.*)` becomes `/foo/:_(.*)`
+- `/foo(/foo)?/suffix` становится `/foo/:_(foo)?/suffix`
+- `/foo(foo)?` становится `/foo:_(foo)?`
+- `/foo/(.*)` становится `/foo/:_(.*)`
 
-:::tip
-Note you can use any name instead of `_` for the param. The point is to provide one.
+:::tip Совет
+Обратите внимание, что вместо `_` для параметра можно использовать любое имя. Главное, чтобы оно было одно.
 :::
 
-### Usage of `history.state`
+### Использование `history.state` %{#usage-of-history-state}%
 
-Vue Router saves information on the `history.state`. If you have any code manually calling `history.pushState()`, you should likely avoid it or refactor it with a regular `router.push()` and a `history.replaceState()`:
+Vue Router сохраняет информацию в `history.state`. Если у вас есть код, вручную вызывающий `history.pushState()`, то, скорее всего, вам следует отказаться от него или отрефакторить его с помощью обычного `router.push()` и `history.replaceState()`:
 
 ```js
-// replace
+// замените
 history.pushState(myState, '', url)
-// with
+// на это
 await router.push(url)
 history.replaceState({ ...history.state, ...myState }, '')
 ```
 
-Similarly, if you were calling `history.replaceState()` without preserving the current state, you will need to pass the current `history.state`:
+Аналогично, если вы вызывали `history.replaceState()` без сохранения текущего состояния, то вам нужно будет передать текущее `history.state`:
 
 ```js
-// replace
+// замените
 history.replaceState({}, '', url)
-// with
+// на это
 history.replaceState(history.state, '', url)
 ```
 
-**Reason**: We use the history state to save information about the navigation like the scroll position, previous location, etc.
+**Причина**: Мы используем состояние history для сохранения информации о навигации, такой как позиция прокрутки, предыдущее местоположение и т.д.
 
-### `routes` option is required in `options`
+### Опция `routes` обязательна в `options` %{#routes-option-is-required-in-options}%
 
-The property `routes` is now required in `options`.
+Свойство `routes` теперь обязательно в `options`.
 
 ```js
 createRouter({ routes: [] })
 ```
 
-**Reason**: The router is designed to be created with routes even though you can add them later on. You need at least one route in most scenarios and this is written once per app in general.
+**Причина**: Маршрутизатор предназначен для создания маршрутов, хотя вы можете добавить их позже. В большинстве сценариев требуется хотя бы один маршрут, и в общем случае он пишется один раз для каждого приложения.
 
-### Non existent named routes
+### Несуществующие именованные маршруты %{#non-existent-named-routes}%
 
-Pushing or resolving a non existent named route throws an error:
+При push или resolve несуществующего именованного маршрута возникает ошибка:
 
 ```js
-// Oops, we made a typo in name
-router.push({ name: 'homee' }) // throws
-router.resolve({ name: 'homee' }) // throws
+// Упс, мы допустили опечатку в имени
+router.push({ name: 'homee' }) // выбросит ошибку
+router.resolve({ name: 'homee' }) // выбросит ошибку
 ```
 
-**Reason**: Previously, the router would navigate to `/` but display nothing (instead of the home page). Throwing an error makes more sense because we cannot produce a valid URL to navigate to.
+**Причина**: Ранее маршрутизатор переходил по адресу `/`, но ничего не отображал (вместо главной страницы). Выброс ошибки имеет смысл, поскольку мы не можем создать корректный URL для перехода.
 
-### Missing required `params` on named routes
+### Отсутствие обязательных `params` в именованных маршрутах %{#missing-required-params-on-named-routes}%
 
-Pushing or resolving a named route without its required params will throw an error:
+При push или resolve именованного маршрута без необходимых параметров будет выдана ошибка:
 
 ```js
-// given the following route:
+// задан следующий маршрут:
 const routes = [{ path: '/users/:id', name: 'user', component: UserDetails }]
 
-// Missing the `id` param will fail
+// Отсутствие параметра `id` приведет к ошибке
 router.push({ name: 'user' })
 router.resolve({ name: 'user' })
 ```
 
-**Reason**: Same as above.
+**Причина**: Та же, что и выше.
 
-### Named children routes with an empty `path` no longer appends a slash
+### Именованные дочерние маршруты с пустым `path` больше не добавляют слэш %{#Named-children-routes-with-an-empty-path-no-longer-appends-a-slash}%
 
-Given any nested named route with an empty `path`:
+Предположим, у нас есть вложенный именованный маршрут с пустым `path`:
 
 ```js
 const routes = [
@@ -400,13 +401,13 @@ const routes = [
 ]
 ```
 
-Navigating or resolving to the named route `dashboard` will now produce a URL **without a trailing slash**:
+При переходе или разрешении на именованный маршрут `dashboard` теперь будет выдаваться URL **без завершающего слэша**:
 
 ```js
 router.resolve({ name: 'dashboard' }).href // '/dashboard'
 ```
 
-This has an important side effect about children `redirect` records like these:
+Это имеет важный побочный эффект в отношении подобных дочерних `redirect` записей:
 
 ```js
 const routes = [
@@ -414,7 +415,7 @@ const routes = [
     path: '/parent',
     component: Parent,
     children: [
-      // this would now redirect to `/home` instead of `/parent/home`
+      // теперь это будет перенаправление на `/home`, а не на `/parent/home`.
       { path: '', redirect: 'home' },
       { path: 'home', component: Home },
     ],
@@ -422,30 +423,30 @@ const routes = [
 ]
 ```
 
-Note this will work if `path` was `/parent/` as the relative location `home` to `/parent/` is indeed `/parent/home` but the relative location of `home` to `/parent` is `/home`.
+Обратите внимание, что это будет работать, если `path` был `/parent/`, так как относительное расположение `home` к `/parent/` действительно `/parent/home`, но относительное расположение `home` к `/parent` - `/home`.
 
 <!-- Learn more about relative links [in the cookbook](../../cookbook/relative-links.md). -->
 
-**Reason**: This is to make trailing slash behavior consistent: by default all routes allow a trailing slash. It can be disabled by using the `strict` option and manually appending (or not) a slash to the routes.
+**Причина**: Это сделано для того, чтобы сделать поведение с слэшем единообразным: по умолчанию все маршруты допускают слэш. Это можно отключить, используя опцию `strict` и вручную добавляя (или не добавляя) слэш к маршрутам.
 
 <!-- TODO: maybe a cookbook entry -->
 
-### `$route` properties Encoding
+### Кодировка параметров `$route` %{#-route-properties-Encoding}%
 
-Decoded values in `params`, `query`, and `hash` are now consistent no matter where the navigation is initiated (older browsers will still produce unencoded `path` and `fullPath`). The initial navigation should yield the same results as in-app navigations.
+Декодированные значения в `params`, `query` и `hash` теперь совпадают независимо от того, где инициирована навигация (в старых браузерах по-прежнему будут выдаваться некодированные `path` и `fullPath`). Начальная навигация должна давать те же результаты, что и навигация в приложении.
 
-Given any [normalized route location](/api/interfaces/RouteLocationNormalized.md):
+Дано любюе [нормализованное расположение маршрута](/api/interfaces/RouteLocationNormalized.md):
 
-- Values in `path`, `fullPath` are not decoded anymore. They will appear as provided by the browser (most browsers provide them encoded). e.g. directly writing on the address bar `https://example.com/hello world` will yield the encoded version: `https://example.com/hello%20world` and both `path` and `fullPath` will be `/hello%20world`.
-- `hash` is now decoded, that way it can be copied over: `router.push({ hash: $route.hash })` and be used directly in [scrollBehavior](/api/interfaces/RouterOptions.md#Properties-scrollBehavior)'s `el` option.
-- When using `push`, `resolve`, and `replace` and providing a `string` location or a `path` property in an object, **it must be encoded** (like in the previous version). On the other hand, `params`, `query` and `hash` must be provided in its unencoded version.
-- The slash character (`/`) is now properly decoded inside `params` while still producing an encoded version on the URL: `%2F`.
+- Значения в `path`, `fullPath` больше не декодируются. Они будут отображаться в том виде, в каком их предоставляет браузер (большинство браузеров предоставляют их в кодированном виде). Например, при прямой записи в адресной строке `https://example.com/hello world` будет получена кодированная версия: `https://example.com/hello%20world`, а `path` и `fullPath` будут иметь вид `/hello%20world`.
+- Теперь `hash` декодирован, что позволяет скопировать его: `router.push({ hash: $route.hash })` и использовать напрямую в опции `el` в [scrollBehavior](/api/interfaces/RouterOptions.md#Properties-scrollBehavior).
+- При использовании `push`, `resolve` и `replace` и указании в объекте местоположения `string` или свойства `path`, **они должны быть закодированы** (как и в предыдущей версии). С другой стороны, `params`, `query` и `hash` должны предоставляться в некодированном виде.
+- Теперь символ слэша (`/`) корректно декодируется внутри `params`, при этом в URL сохраняется его кодированная версия: `%2F`.
 
-**Reason**: This allows to easily copy existing properties of a location when calling `router.push()` and `router.resolve()`, and make the resulting route location consistent across browsers. `router.push()` is now idempotent, meaning that calling `router.push(route.fullPath)`, `router.push({ hash: route.hash })`, `router.push({ query: route.query })`, and `router.push({ params: route.params })` will not create extra encoding.
+**Причина**: Это позволяет легко копировать существующие свойства местоположения при вызове `router.push()` и `router.resolve()`, а также сделать результирующее местоположение маршрута согласованным в разных браузерах. `router.push()` теперь является идемпотентным, то есть вызов `router.push(route.fullPath)`, `router.push({ hash: route.hash })`, `router.push({ query: route.query })` и `router.push({ params: route.params })` не будет создавать лишней кодировки.
 
-### TypeScript changes
+### Изменения для TypeScript %{#typescript-changes}%
 
-To make typings more consistent and expressive, some types have been renamed:
+Чтобы сделать типизацию более последовательной и выразительной, некоторые типы были переименованы:
 
 | `vue-router@3` | `vue-router@4`          |
 | -------------- | ----------------------- |
@@ -453,10 +454,10 @@ To make typings more consistent and expressive, some types have been renamed:
 | Location       | RouteLocation           |
 | Route          | RouteLocationNormalized |
 
-## New Features
+## Новые возможности %{#new-features}%
 
-Some of new features to keep an eye on in Vue Router 4 include:
+Среди новых возможностей Vue Router 4 следует отметить следующие:
 
-- [Dynamic Routing](../advanced/dynamic-routing.md)
+- [Динамическая маршрутизация](../advanced/dynamic-routing.md)
 - [Composition API](../advanced/composition-api.md)
 <!-- - Custom History implementation -->
