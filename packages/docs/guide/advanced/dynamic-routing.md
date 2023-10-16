@@ -1,17 +1,17 @@
-# Dynamic Routing
+# Динамическая маршрутизация %{#dynamic-routing}%
 
 <VueSchoolLink
   href="https://vueschool.io/lessons/vue-router-4-dynamic-routing"
-  title="Learn how to add routes at runtime"
+  title="Узнайте, как добавлять маршруты в рантайме"
 />
 
-Adding routes to your router is usually done via the [`routes` option](../../api/#routes) but in some situations, you might want to add or remove routes while the application is already running. Application with extensible interfaces like [Vue CLI UI](https://cli.vuejs.org/dev-guide/ui-api.html) can use this to make the application grow.
+Добавление маршрутов в ваш маршрутизатор обычно выполняется с помощью [опции `routes`](../../api/#routes), но в некоторых ситуациях вы можете захотеть добавлять или удалять маршруты, когда приложение уже запущено. Приложения с расширяемыми интерфейсами, такие как [Vue CLI UI](https://cli.vuejs.org/dev-guide/ui-api.html), могут использовать это для расширения функциональности приложения.
 
-## Adding Routes
+## Добавление маршрутов %{#adding-routes}%
 
-Dynamic routing is achieved mainly via two functions: `router.addRoute()` and `router.removeRoute()`. They **only** register a new route, meaning that if the newly added route matches the current location, it would require you to **manually navigate** with `router.push()` or `router.replace()` to display that new route. Let's take a look at an example:
+Динамическая маршрутизация в основном достигается с помощью двух функций: `router.addRoute()` и `router.removeRoute()`. Они **только** регистрируют новый маршрут, и если новый маршрут соответствует текущему местоположению, вам потребуется **вручную выполнить переход навигаци** с использованием `router.push()` или `router.replace()`, чтобы отобразить этот новый маршрут. Давайте посмотрим на пример:
 
-Imagine having the following router with one single route:
+Представьте себе маршрутизатор с одним единственным маршрутом:
 
 ```js
 const router = createRouter({
@@ -20,83 +20,86 @@ const router = createRouter({
 })
 ```
 
-Going to any page, `/about`, `/store`, or `/3-tricks-to-improve-your-routing-code` ends up rendering the `Article` component. If we are on `/about` and we add a new route:
+Перейдите на любую страницу, `/about`, `/store` или `/3-tricks-to-improve-your-routing-code`. Переход навигации закончится отрисовкой компонента `Article`. Если мы находимся на странице `/about` и добавляем новый маршрут:
 
 ```js
 router.addRoute({ path: '/about', component: About })
 ```
 
-The page will still show the `Article` component, we need to manually call `router.replace()` to change the current location and overwrite where we were (instead of pushing a new entry, ending up in the same location twice in our history):
+Страница все равно будет показывать компонент `Article`. Нужно вручную вызвать `router.replace()` для изменения текущего местоположения и перезаписи предыдущего (вместо добавления новой записи и двойного попадания в одно и тоже местоположение в истории):
 
 ```js
 router.addRoute({ path: '/about', component: About })
-// we could also use this.$route or route = useRoute() (inside a setup)
+// мы также могли бы использовать this.$route или
+// route = useRoute() (внутри setup)
 router.replace(router.currentRoute.value.fullPath)
 ```
 
-Remember you can `await router.replace()` if you need to wait for the new route to be displayed.
+Помните, что вы можете сделать `await router.replace()`, если вам необходимо дождаться отображения нового маршрута.
 
-## Adding Routes inside navigation guards
+## Добавление маршрутов внутри навигационных хуков %{#adding-routes-inside-navigation-guards}%
 
-If you decide to add or remove routes inside of a navigation guard, you should not call `router.replace()` but trigger a redirection by returning the new location:
+Если вы решите добавить или удалить маршруты внутри защиты навигации, не вызывайте `router.replace()`, а инициируйте перенаправление, вернув новый адрес:
 
 ```js
 router.beforeEach(to => {
   if (!hasNecessaryRoute(to)) {
     router.addRoute(generateRoute(to))
-    // trigger a redirection
+    // инициализировать перенаправление
     return to.fullPath
   }
 })
 ```
 
-The example above assumes two things: first, the newly added route record will match the `to` location, effectively resulting in a different location from the one we were trying to access. Second, `hasNecessaryRoute()` returns `false` after adding the new route to avoid an infinite redirection.
+Приведенный выше пример предполагает две вещи: во-первых, новая запись о маршруте будет соответствовать местоположению `to`, что фактически приведет к другому местоположению, отличному от того, к которому мы пытались получить доступ. Во-вторых, после добавления нового маршрута функция `hasNecessaryRoute()` возвращает `false`, чтобы избежать бесконечного перенаправления.
 
-Because we are redirecting, we are replacing the ongoing navigation, effectively behaving like the example shown before. In real world scenarios, adding is more likely to happen outside of navigation guards, e.g. when a view component mounts, it register new routes.
+Поскольку мы выполняем перенаправление, мы заменяем текущий переход навигации и фактически ведем себя так же, как в приведенном ранее примере. В реальных сценариях добавление маршрутов скорее всего будет происходить за пределами навигационных хуков, например, когда компонента маршрута будет смонтирован, он зарегистрирует новые маршруты.
 
-## Removing routes
+## Удаление маршрутов %{#removing-routes}%
 
-There are few different ways to remove existing routes:
+Существует несколько способов удаления существующих маршрутов:
 
-- By adding a route with a conflicting name. If you add a route that has the same name as an existing route, it will remove the route first and then add the route:
+- Добавление маршрута с конфликтующим именем. Если вы добавите маршрут с именем, совпадающим с существующим маршрутом, он будет удален, а затем добавлен заново:
 
   ```js
   router.addRoute({ path: '/about', name: 'about', component: About })
-  // this will remove the previously added route because they have
-  // the same name and names are unique across all routes
+  // это приведет к удалению ранее добавленного маршрута,
+  // поскольку они имеют одно и то же имя,
+  // а имена уникальны для всех маршрутов
   router.addRoute({ path: '/other', name: 'about', component: Other })
   ```
 
-- By calling the callback returned by `router.addRoute()`:
+- Вызвав коллбек, возвращаемый функцией `router.addRoute()`:
 
   ```js
   const removeRoute = router.addRoute(routeRecord)
-  removeRoute() // removes the route if it exists
+  removeRoute() // удаляет маршрут, если он существует
   ```
 
-  This is useful when the routes do not have a name
-- By using `router.removeRoute()` to remove a route by its name:
+  Это удобно, когда маршруты не имеют имени
+
+- С помощью `router.removeRoute()` можно удалить маршрут по его имени:
 
   ```js
   router.addRoute({ path: '/about', name: 'about', component: About })
-  // remove the route
+  // удаление маршрута
   router.removeRoute('about')
   ```
 
-  Note you can use `Symbol`s for names in routes if you wish to use this function but want to avoid conflicts in names.
+  Примечание: если вы хотите использовать эту функцию, но хотите избежать конфликтов в именах, вы можете использовать `Symbol` для имен маршрутов.
 
-Whenever a route is removed, **all of its aliases and children** are removed with it.
+При удалении маршрута вместе с ним удаляются **все его псевдонимы и дочерние элементы**.
 
-## Adding nested routes
+## Добавление вложенных маршрутов %{#adding-nested-routes}%
 
-To add nested routes to an existing route, you can pass the _name_ of the route as its first parameter to `router.addRoute()`, this will effectively add the route as if it was added through `children`:
+Чтобы добавить вложенные маршруты, вы можете передать имя родительского маршрута в качестве первого параметра в `router.addRoute()`. Это позволит добавить маршрут так, как если бы он был добавлен через `children`:
 
 ```js
 router.addRoute({ name: 'admin', path: '/admin', component: Admin })
 router.addRoute('admin', { path: 'settings', component: AdminSettings })
 ```
 
-This is equivalent to:
+Это эквивалентно:
 
 ```js
 router.addRoute({
@@ -107,9 +110,9 @@ router.addRoute({
 })
 ```
 
-## Looking at existing routes
+## Проверка существования маршрутов %{#looking-at-existing-routes}%
 
-Vue Router gives you two functions to look at existing routes:
+Vue Router предоставляет две функции для просмотра существующих маршрутов:
 
-- [`router.hasRoute()`](/api/interfaces/Router.md#Methods-hasRoute): check if a route exists
-- [`router.getRoutes()`](/api/interfaces/Router.md#Methods-getRoutes): get an array with all the route records.
+- [`router.hasRoute()`](/api/interfaces/Router.md#Methods-hasRoute): проверка на существования маршрута
+- [`router.getRoutes()`](/api/interfaces/Router.md#Methods-getRoutes): получение массива всех маршруты.
