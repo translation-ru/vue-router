@@ -2,28 +2,27 @@
 editLink: false
 ---
 
-[API Documentation](../index.md) / RouteLocationNormalizedLoaded
+[Документация API](../index.md) / RouteLocationNormalizedLoaded
 
-# Interface: RouteLocationNormalizedLoaded
+# Интерфейс: RouteLocationNormalizedLoaded
 
 [RouteLocationRaw](../index.md#RouteLocationRaw) with
 
-## Hierarchy
+## Иерархия
 
 - `_RouteLocationBase`
 
   ↳ **`RouteLocationNormalizedLoaded`**
 
-## Properties
+## Свойства
 
 ### fullPath
 
 • **fullPath**: `string`
 
-The whole location including the `search` and `hash`. This string is
-percentage encoded.
+Полный адрес, включая `search` и `hash`. Эта строка имеет кодирование символом процента.
 
-#### Inherited from
+#### Наследуется от
 
 \_RouteLocationBase.fullPath
 
@@ -33,9 +32,9 @@ ___
 
 • **hash**: `string`
 
-Hash of the current location. If present, starts with a `#`.
+Хэш текущего адреса. Если присутствует, то начинается с символа `#`.
 
-#### Inherited from
+#### Наследуется от
 
 \_RouteLocationBase.hash
 
@@ -45,10 +44,7 @@ ___
 
 • **matched**: [`RouteLocationMatched`](RouteLocationMatched.md)[]
 
-Array of [RouteLocationMatched](RouteLocationMatched.md) containing only plain components (any
-lazy-loaded components have been loaded and were replaced inside the
-`components` object) so it can be directly used to display routes. It
-cannot contain redirect records either
+Массив [RouteLocationMatched](RouteLocationMatched.md), содержащий только простые компоненты (все лениво-загруженные компоненты были загружены и заменены внутри объекта `components`), поэтому он может быть напрямую использован для отображения маршрутов. Не может содержать записи перенаправления
 
 ___
 
@@ -56,9 +52,9 @@ ___
 
 • **meta**: [`RouteMeta`](RouteMeta.md)
 
-Merged `meta` properties from all the matched route records.
+Объединенные свойства `meta` всех совпадающих записей маршрута.
 
-#### Inherited from
+#### Наследуется от
 
 \_RouteLocationBase.meta
 
@@ -68,9 +64,9 @@ ___
 
 • **name**: `undefined` \| ``null`` \| [`RouteRecordName`](../index.md#RouteRecordName)
 
-Name of the matched record
+Имя совпавшей записи маршрута
 
-#### Inherited from
+#### Наследуется от
 
 \_RouteLocationBase.name
 
@@ -80,9 +76,9 @@ ___
 
 • **params**: [`RouteParams`](../index.md#RouteParams)
 
-Object of decoded params extracted from the `path`.
+Объект декодированных параметров, извлеченных из `path`.
 
-#### Inherited from
+#### Наследуется от
 
 \_RouteLocationBase.params
 
@@ -92,9 +88,9 @@ ___
 
 • **path**: `string`
 
-Percentage encoded pathname section of the URL.
+Секция pathname URL с кодировкой в виде символа процента.
 
-#### Inherited from
+#### Наследуется от
 
 \_RouteLocationBase.path
 
@@ -104,9 +100,9 @@ ___
 
 • **query**: [`LocationQuery`](../index.md#LocationQuery)
 
-Object representation of the `search` property of the current location.
+Объектное представление свойства `search` текущего адреса.
 
-#### Inherited from
+#### Наследуется от
 
 \_RouteLocationBase.query
 
@@ -116,9 +112,8 @@ ___
 
 • **redirectedFrom**: `undefined` \| [`RouteLocation`](RouteLocation.md)
 
-Contains the location we were initially trying to access before ending up
-on the current location.
+Содержит маршрут, к которому мы первоначально пытались получить доступ, прежде чем оказаться в текущем местоположении.
 
-#### Inherited from
+#### Наследуется от
 
 \_RouteLocationBase.redirectedFrom

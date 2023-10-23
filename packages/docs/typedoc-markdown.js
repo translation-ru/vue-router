@@ -10,7 +10,7 @@ const DEFAULT_OPTIONS = {
   cleanOutputDir: true,
   excludeInternal: true,
   readme: 'none',
-  out: path.resolve(__dirname, './api'),
+  out: path.resolve(__dirname, './api_en'),
   entryDocument: 'index.md',
   preserveAnchorCasing: true,
   hideBreadcrumbs: false,

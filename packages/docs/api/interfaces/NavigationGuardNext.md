@@ -2,17 +2,17 @@
 editLink: false
 ---
 
-[API Documentation](../index.md) / NavigationGuardNext
+[Документация API](../index.md) / NavigationGuardNext
 
-# Interface: NavigationGuardNext
+# Интерфейс: NavigationGuardNext
 
-## Callable
+## Вызов
 
 ### NavigationGuardNext
 
 ▸ **NavigationGuardNext**(): `void`
 
-#### Returns
+#### Возвращает
 
 `void`
 
@@ -20,13 +20,13 @@ editLink: false
 
 ▸ **NavigationGuardNext**(`error`): `void`
 
-#### Parameters
+#### Параметры
 
-| Name | Type |
-| :------ | :------ |
-| `error` | `Error` |
+| Название | Тип     |
+| :------- | :------ |
+| `error`  | `Error` |
 
-#### Returns
+#### Возвращает
 
 `void`
 
@@ -34,13 +34,13 @@ editLink: false
 
 ▸ **NavigationGuardNext**(`location`): `void`
 
-#### Parameters
+#### Параметры
 
-| Name | Type |
-| :------ | :------ |
+| Название   | Тип                                                |
+| :--------- | :------------------------------------------------- |
 | `location` | [`RouteLocationRaw`](../index.md#RouteLocationRaw) |
 
-#### Returns
+#### Возвращает
 
 `void`
 
@@ -48,13 +48,13 @@ editLink: false
 
 ▸ **NavigationGuardNext**(`valid`): `void`
 
-#### Parameters
+#### Параметры
 
-| Name | Type |
-| :------ | :------ |
-| `valid` | `undefined` \| `boolean` |
+| Название | Тип                      |
+| :------- | :----------------------- |
+| `valid`  | `undefined` \| `boolean` |
 
-#### Returns
+#### Возвращает
 
 `void`
 
@@ -62,12 +62,12 @@ editLink: false
 
 ▸ **NavigationGuardNext**(`cb`): `void`
 
-#### Parameters
+#### Параметры
 
-| Name | Type |
-| :------ | :------ |
-| `cb` | `NavigationGuardNextCallback` |
+| Название | Тип                           |
+| :------- | :---------------------------- |
+| `cb`     | `NavigationGuardNextCallback` |
 
-#### Returns
+#### Возвращает
 
 `void`

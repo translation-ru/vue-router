@@ -2,38 +2,35 @@
 editLink: false
 ---
 
-[API Documentation](../index.md) / RouterHistory
+[Документация API](../index.md) / RouterHistory
 
-# Interface: RouterHistory
+# Интерфейс: RouterHistory
 
-Interface implemented by History implementations that can be passed to the
-router as Router.history
+Интерфейс, который имплементирует реализации истории, которые могут быть переданы роутеру в качестве Router.history.
 
-## Properties
+## Свойства
 
 ### base
 
-• `Readonly` **base**: `string`
+• `Только для чтения` **base**: `string`
 
-Base path that is prepended to every url. This allows hosting an SPA at a
-sub-folder of a domain like `example.com/sub-folder` by having a `base` of
-`/sub-folder`
+Базовый путь, который добавляется ко всем URL. Это позволяет размещать одностраничное приложение (SPA) в подпапке домена, например, `example.com/sub-folder`, установив `base` равным `/sub-folder`.
 
 ___
 
 ### location
 
-• `Readonly` **location**: `string`
+• `Только для чтения` **location**: `string`
 
-Current History location
+Текущее местоположение истории
 
 ___
 
 ### state
 
-• `Readonly` **state**: [`HistoryState`](HistoryState.md)
+• `Только для чтения` **state**: [`HistoryState`](HistoryState.md)
 
-Current History state
+Текущее состояние истории
 
 ## Methods
 
@@ -41,15 +38,15 @@ Current History state
 
 ▸ **createHref**(`location`): `string`
 
-Generates the corresponding href to be used in an anchor tag.
+Генерирует соответствующий href для использования в якорной ссылке.
 
-#### Parameters
+#### Параметры
 
-| Name | Type | Description |
-| :------ | :------ | :------ |
-| `location` | `string` | history location that should create an href |
+| Название   | Тип      | Описание                                   |
+| :--------- | :------- | :----------------------------------------- |
+| `location` | `string` | адрес истории, который должен создать href |
 
-#### Returns
+#### Возвращает
 
 `string`
 
@@ -59,9 +56,9 @@ ___
 
 ▸ **destroy**(): `void`
 
-Clears any event listener attached by the history implementation.
+Очищает все слушатели событий, добавленные реализацией истории.
 
-#### Returns
+#### Возвращает
 
 `void`
 
@@ -71,24 +68,24 @@ ___
 
 ▸ **go**(`delta`, `triggerListeners?`): `void`
 
-Traverses history in a given direction.
+Перемещение истории в заданном направлении.
 
-#### Parameters
+#### Параметры
 
-| Name | Type | Description |
-| :------ | :------ | :------ |
-| `delta` | `number` | distance to travel. If delta is \< 0, it will go back, if it's \> 0, it will go forward by that amount of entries. |
-| `triggerListeners?` | `boolean` | whether this should trigger listeners attached to the history |
+| Название            | Тип       | Описание                                                                                                                                                |
+| :------------------ | :-------- | :------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `delta`             | `number`  | расстояние, на которое нужно переместиться. Если delta \< 0, то будет совершено перемещение назад, а если \> 0, то вперед на заданное количество шагов. |
+| `triggerListeners?` | `boolean` | следует ли запускать слушателей, добавленных к истории                                                                                                  |
 
-#### Returns
+#### Возвращает
 
 `void`
 
-**`Example`**
+**`Пример`**
 
 ```js
-myHistory.go(-1) // equivalent to window.history.back()
-myHistory.go(1) // equivalent to window.history.forward()
+myHistory.go(-1) // эквивалент window.history.back()
+myHistory.go(1) // эквивалент window.history.forward()
 ```
 
 ___
@@ -97,35 +94,29 @@ ___
 
 ▸ **listen**(`callback`): () => `void`
 
-Attach a listener to the History implementation that is triggered when the
-navigation is triggered from outside (like the Browser back and forward
-buttons) or when passing `true` to RouterHistory.back and
-RouterHistory.forward
+Добавляет к реализации истории слушатель, который будет срабатывать при вызове навигации снаружи (например, через кнопки браузера "назад" и "вперед" ) или при передаче `true` в RouterHistory.back и RouterHistory.forward
 
-#### Parameters
+#### Параметры
 
-| Name | Type | Description |
-| :------ | :------ | :------ |
-| `callback` | `NavigationCallback` | listener to attach |
+| Название   | Тип                  | Описание                 |
+| :--------- | :------------------- | :----------------------- |
+| `callback` | `NavigationCallback` | слушатель для добавления |
 
-#### Returns
+#### Возвращает
 
 `fn`
 
-a callback to remove the listener
+коллбек для удаления слушателя
 
 ▸ (): `void`
 
-Attach a listener to the History implementation that is triggered when the
-navigation is triggered from outside (like the Browser back and forward
-buttons) or when passing `true` to RouterHistory.back and
-RouterHistory.forward
+Добавляет к реализации истории слушатель, который будет срабатывать при вызове навигации снаружи (например, через кнопки браузера "назад" и "вперед" ) или при передаче `true` в RouterHistory.back и RouterHistory.forward
 
-##### Returns
+##### Возвращает
 
 `void`
 
-a callback to remove the listener
+коллбек для удаления слушателя
 
 ___
 
@@ -133,17 +124,16 @@ ___
 
 ▸ **push**(`to`, `data?`): `void`
 
-Navigates to a location. In the case of an HTML5 History implementation,
-this will call `history.pushState` to effectively change the URL.
+Осуществляет переход к местоположению. В случае HTML5 History, это вызовет `history.pushState` для эффективного изменения URL.
 
-#### Parameters
+#### Параметры
 
-| Name | Type | Description |
-| :------ | :------ | :------ |
-| `to` | `string` | location to push |
-| `data?` | [`HistoryState`](HistoryState.md) | optional [HistoryState](HistoryState.md) to be associated with the navigation entry |
+| Название | Тип                               | Описание                                                                    |
+| :------- | :-------------------------------- | :-------------------------------------------------------------------------- |
+| `to`     | `string`                          | описания пути для перехода                                                  |
+| `data?`  | [`HistoryState`](HistoryState.md) | опциональное [HistoryState](HistoryState.md), связанное с записью навигации |
 
-#### Returns
+#### Возвращает
 
 `void`
 
@@ -153,16 +143,15 @@ ___
 
 ▸ **replace**(`to`, `data?`): `void`
 
-Same as [push](RouterHistory.md#push) but performs a `history.replaceState`
-instead of `history.pushState`
+Аналогично [push](RouterHistory.md#push), но заместо `history.replaceState` вызывается `history.pushState`
 
-#### Parameters
+#### Параметры
 
-| Name | Type | Description |
-| :------ | :------ | :------ |
-| `to` | `string` | location to set |
-| `data?` | [`HistoryState`](HistoryState.md) | optional [HistoryState](HistoryState.md) to be associated with the navigation entry |
+| Название | Тип                               | Описание                                                                    |
+| :------- | :-------------------------------- | :-------------------------------------------------------------------------- |
+| `to`     | `string`                          | описание пути                                                               |
+| `data?`  | [`HistoryState`](HistoryState.md) | опциональное [HistoryState](HistoryState.md), связанное с записью навигации |
 
-#### Returns
+#### Возвращает
 
 `void`

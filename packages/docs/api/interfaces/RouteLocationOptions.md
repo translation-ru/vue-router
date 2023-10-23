@@ -2,36 +2,33 @@
 editLink: false
 ---
 
-[API Documentation](../index.md) / RouteLocationOptions
+[Документация API](../index.md) / RouteLocationOptions
 
-# Interface: RouteLocationOptions
+# Интерфейс: RouteLocationOptions
 
-Common options for all navigation methods.
+Общие опции для всех методов навигации.
 
-## Properties
+## Свойства
 
 ### force
 
-• `Optional` **force**: `boolean`
+• `Опционально` **force**: `boolean`
 
-Triggers the navigation even if the location is the same as the current one.
-Note this will also add a new entry to the history unless `replace: true`
-is passed.
+Запускает переход навигации, даже если местоположение совпадает с текущим.
+Обратите внимание, что это также добавит новую запись в историю, если только не будет передано `replace: true`.
 
 ___
 
 ### replace
 
-• `Optional` **replace**: `boolean`
+• `Опционально` **replace**: `boolean`
 
-Replace the entry in the history instead of pushing a new entry
+Замена записи в истории вместо создания новой
 
 ___
 
 ### state
 
-• `Optional` **state**: [`HistoryState`](HistoryState.md)
+• `Опционально` **state**: [`HistoryState`](HistoryState.md)
 
-State to save using the History API. This cannot contain any reactive
-values and some primitives like Symbols are forbidden. More info at
-https://developer.mozilla.org/en-US/docs/Web/API/History/state
+Состояние для сохранения с помощью History API. Оно не может содержать никаких реактивных значений, а некоторые примитивы, например, Symbols, запрещены. Дополнительная информация на https://developer.mozilla.org/en-US/docs/Web/API/History/state

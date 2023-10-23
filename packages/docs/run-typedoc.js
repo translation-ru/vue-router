@@ -2,7 +2,7 @@ const { createTypeDocApp } = require('./typedoc-markdown')
 const path = require('path')
 
 createTypeDocApp({
-  name: 'API Documentation',
+  name: 'Документация API',
   tsconfig: path.resolve(__dirname, './typedoc.tsconfig.json'),
   // entryPointStrategy: 'packages',
   githubPages: false,

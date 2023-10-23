@@ -2,25 +2,25 @@
 editLink: false
 ---
 
-[API Documentation](../index.md) / NavigationFailure
+[Документация API](../index.md) / NavigationFailure
 
-# Interface: NavigationFailure
+# Интерфейс: NavigationFailure
 
-Extended Error that contains extra information regarding a failed navigation.
+Расширенная ошибка, содержащая дополнительную информацию о сбое навигации.
 
-## Hierarchy
+## Иерархия
 
 - `Error`
 
   ↳ **`NavigationFailure`**
 
-## Properties
+## Свойства
 
 ### cause
 
-• `Optional` **cause**: `unknown`
+• `Опционально` **cause**: `unknown`
 
-#### Inherited from
+#### Наследуется от
 
 Error.cause
 
@@ -30,7 +30,7 @@ ___
 
 • **from**: [`RouteLocationNormalized`](RouteLocationNormalized.md)
 
-Route location we were navigating from
+Адрес маршрута, от которого начинается переход навигации
 
 ___
 
@@ -38,7 +38,7 @@ ___
 
 • **message**: `string`
 
-#### Inherited from
+#### Наследуется от
 
 Error.message
 
@@ -48,7 +48,7 @@ ___
 
 • **name**: `string`
 
-#### Inherited from
+#### Наследуется от
 
 Error.name
 
@@ -56,9 +56,9 @@ ___
 
 ### stack
 
-• `Optional` **stack**: `string`
+• `Опционально` **stack**: `string`
 
-#### Inherited from
+#### Наследуется от
 
 Error.stack
 
@@ -68,7 +68,7 @@ ___
 
 • **to**: [`RouteLocationNormalized`](RouteLocationNormalized.md)
 
-Route location we were navigating to
+Адрес маршрута, к которому производится переход навигации
 
 ___
 
@@ -76,4 +76,4 @@ ___
 
 • **type**: `NAVIGATION_ABORTED` \| `NAVIGATION_CANCELLED` \| `NAVIGATION_DUPLICATED`
 
-Type of the navigation. One of [NavigationFailureType](../enums/NavigationFailureType.md)
+Тип навигации. Один из [NavigationFailureType](../enums/NavigationFailureType.md)

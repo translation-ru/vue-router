@@ -2,26 +2,25 @@
 editLink: false
 ---
 
-[API Documentation](../index.md) / RouteRecordNormalized
+[Документация API](../index.md) / RouteRecordNormalized
 
-# Interface: RouteRecordNormalized
+# Интерфейс: RouteRecordNormalized
 
-Normalized version of a [route record](../index.md#RouteRecord).
+Нормализованная версия [записи маршрута](../index.md#RouteRecord).
 
-## Hierarchy
+## Иерархия
 
 - **`RouteRecordNormalized`**
 
   ↳ [`RouteLocationMatched`](RouteLocationMatched.md)
 
-## Properties
+## Свойства
 
 ### aliasOf
 
 • **aliasOf**: `undefined` \| [`RouteRecordNormalized`](RouteRecordNormalized.md)
 
-Defines if this record is the alias of another one. This property is
-`undefined` if the record is the original one.
+Определяет, является ли данная запись псевдонимом другой записи. Это свойство имеет значение`undefined`, если запись не является псевдонимом.
 
 ___
 
@@ -29,7 +28,7 @@ ___
 
 • **beforeEnter**: `undefined` \| [`NavigationGuardWithThis`](NavigationGuardWithThis.md)<`undefined`\> \| [`NavigationGuardWithThis`](NavigationGuardWithThis.md)<`undefined`\>[]
 
-Registered beforeEnter guards
+Зарегестрированный хук beforeEnter
 
 ___
 
@@ -37,7 +36,7 @@ ___
 
 • **children**: [`RouteRecordRaw`](../index.md#RouteRecordRaw)[]
 
-Nested route records.
+Дочерние записи маршрутов.
 
 ___
 
@@ -45,7 +44,7 @@ ___
 
 • **components**: `undefined` \| ``null`` \| `Record`<`string`, `RawRouteComponent`\>
 
-Components to display when the URL matches this route. Allow using named views.
+Компоненты для отображения при совпадении URL-адреса с этим маршрутом. Можно использовать именованные представления.
 
 ___
 
@@ -53,13 +52,8 @@ ___
 
 • **instances**: `Record`<`string`, `undefined` \| ``null`` \| `ComponentPublicInstance`\>
 
-Mounted route component instances
-Having the instances on the record mean beforeRouteUpdate and
-beforeRouteLeave guards can only be invoked with the latest mounted app
-instance if there are multiple application instances rendering the same
-view, basically duplicating the content on the page, which shouldn't happen
-in practice. It will work if multiple apps are rendering different named
-views.
+Смонтированные экземпляры компонентов маршрута
+Если в записи маршрута имеются экземпляры компонентов, что навигационные хуки beforeRouteUpdate и beforeRouteLeave могут быть вызваны только с последним установленным экземпляром приложения, если на странице существует несколько экземпляров приложений, которые рендерят одно и то же представление. В результате происходит фактическое дублирование содержимого на странице, что, как правило, не должно происходить. Однако это будет работать, если несколько приложений рендерят разные именованные представления.
 
 ___
 
@@ -67,7 +61,7 @@ ___
 
 • **meta**: [`RouteMeta`](RouteMeta.md)
 
-Arbitrary data attached to the record.
+Произвольные данные, добавленные к записи.
 
 ___
 
@@ -75,7 +69,7 @@ ___
 
 • **name**: `undefined` \| [`RouteRecordName`](../index.md#RouteRecordName)
 
-Name for the route record. Must be unique.
+Имя для записи маршрута. Должно быть уникальным.
 
 ___
 
@@ -83,8 +77,7 @@ ___
 
 • **path**: `string`
 
-Path of the record. Should start with `/` unless the record is the child of
-another record.
+Путь записи. Должен начинаться с `/`, если только запись не является дочерней по отношению к другой.
 
 ___
 
@@ -92,9 +85,7 @@ ___
 
 • **props**: `Record`<`string`, `_RouteRecordProps`\>
 
-Allow passing down params as props to the component rendered by
-`router-view`. Should be an object with the same keys as `components` or a
-boolean to be applied to every component.
+Позволяет передавать параметры в качестве входных параметров компоненту, отображаемому с помощью `router-view`. Должен быть объектом с теми же ключами, что и `components`, или булевым значением, которое будет применяться к каждому компоненту.
 
 ___
 
@@ -102,6 +93,4 @@ ___
 
 • **redirect**: `undefined` \| `RouteRecordRedirectOption`
 
-Where to redirect if the route is directly matched. The redirection happens
-before any navigation guard and triggers a new navigation with the new
-target location.
+Куда перенаправлять, если маршрут напрямую совпадает. Перенаправление происходит перед любым навигационным хуком и запускает новую навигацию с новым целевым местоположением.

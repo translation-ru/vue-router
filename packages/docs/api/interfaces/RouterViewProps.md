@@ -2,18 +2,18 @@
 editLink: false
 ---
 
-[API Documentation](../index.md) / RouterViewProps
+[Документация API](../index.md) / RouterViewProps
 
-# Interface: RouterViewProps
+# Интерфейс: RouterViewProps
 
-## Properties
+## Свойства
 
 ### name
 
-• `Optional` **name**: `string`
+• `Опционально` **name**: `string`
 
 ___
 
 ### route
 
-• `Optional` **route**: [`RouteLocationNormalized`](RouteLocationNormalized.md)
+• `Опционально` **route**: [`RouteLocationNormalized`](RouteLocationNormalized.md)
