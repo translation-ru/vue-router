@@ -2,31 +2,31 @@
 editLink: false
 ---
 
-[API Documentation](../index.md) / RouterOptions
+[Документация API](../index.md) / RouterOptions
 
-# Interface: RouterOptions
+# Интерфейс: RouterOptions
 
-Options to initialize a [Router](Router.md) instance.
+Параметры инициализации экземпляра [Router](Router.md).
 
-## Hierarchy
+## Иерархия
 
 - [`PathParserOptions`](../index.md#PathParserOptions)
 
   ↳ **`RouterOptions`**
 
-## Properties
+## Свойства
 
 ### end
 
-• `Optional` **end**: `boolean`
+• `Опционально` **end**: `boolean`
 
-Should the RegExp match until the end by appending a `$` to it.
+Должен ли RegExp искать до конца при добавлении к нему `$`.
 
-**`Default Value`**
+**`Значение по умолчанию`**
 
 `true`
 
-#### Inherited from
+#### Наследуется от
 
 PathParserOptions.end
 
@@ -36,18 +36,14 @@ ___
 
 • **history**: [`RouterHistory`](RouterHistory.md)
 
-History implementation used by the router. Most web applications should use
-`createWebHistory` but it requires the server to be properly configured.
-You can also use a _hash_ based history with `createWebHashHistory` that
-does not require any configuration on the server but isn't handled at all
-by search engines and does poorly on SEO.
+Реализация истории, используемая маршрутизатором. Большинство веб-приложений должны использовать `createWebHistory`, но это требует правильной настройки сервера. Вы также можете использовать историю на основе хеша при помощи `createWebHashHistory`, которая не требует никакой конфигурации на сервере, но она не обрабатывается поисковыми системами и имеет плохие показатели для SEO.
 
-**`Example`**
+**`Пример`**
 
 ```js
 createRouter({
   history: createWebHistory(),
-  // other options...
+  // другие опции...
 })
 ```
 
@@ -55,52 +51,51 @@ ___
 
 ### linkActiveClass
 
-• `Optional` **linkActiveClass**: `string`
+• `Опционально` **linkActiveClass**: `string`
 
-Default class applied to active [RouterLink](../index.md#RouterLink). If none is provided,
-`router-link-active` will be applied.
+Класс по умолчанию, применяемый к активному [RouterLink](../index.md#RouterLink). Если ничего не указано,
+будет применяться `router-link-active`.
 
 ___
 
 ### linkExactActiveClass
 
-• `Optional` **linkExactActiveClass**: `string`
+• `Опционально` **linkExactActiveClass**: `string`
 
-Default class applied to exact active [RouterLink](../index.md#RouterLink). If none is provided,
-`router-link-exact-active` will be applied.
+Класс по умолчанию, применяемый к активному "по точному совпадению" [RouterLink](../index.md#RouterLink). Если ничего не указано,
+будет применяться `router-link-exact-active`.
 
 ___
 
 ### parseQuery
 
-• `Optional` **parseQuery**: (`search`: `string`) => [`LocationQuery`](../index.md#LocationQuery)
+• `Опционально` **parseQuery**: (`search`: `string`) => [`LocationQuery`](../index.md#LocationQuery)
 
 #### Type declaration
 
 ▸ (`search`): [`LocationQuery`](../index.md#LocationQuery)
 
-Custom implementation to parse a query. See its counterpart,
-[stringifyQuery](RouterOptions.md#stringifyQuery).
+Пользовательская реализация для парсинга query. См. противоположную функцию [stringifyQuery](RouterOptions.md#stringifyQuery).
 
-##### Parameters
+##### Параметры
 
-| Name | Type |
-| :------ | :------ |
-| `search` | `string` |
+| Название | Параметры |
+| :------- | :-------- |
+| `search` | `string`  |
 
-##### Returns
+##### Возвращает
 
 [`LocationQuery`](../index.md#LocationQuery)
 
-**`Example`**
+**`Пример`**
 
-Let's say you want to use the [qs package](https://github.com/ljharb/qs)
-to parse queries, you can provide both `parseQuery` and `stringifyQuery`:
+Допустим, вы хотите использовать [пакет qs](https://github.com/ljharb/qs) для парсинга query. Вы можете предоставить как `parseQuery`, так и `stringifyQuery`:
+
 ```js
 import qs from 'qs'
 
 createRouter({
-  // other options...
+  // другие опции...
   parseQuery: qs.parse,
   stringifyQuery: qs.stringify,
 })
@@ -112,23 +107,22 @@ ___
 
 • **routes**: readonly [`RouteRecordRaw`](../index.md#RouteRecordRaw)[]
 
-Initial list of routes that should be added to the router.
+Начальный список маршрутов, которые должны быть добавлены в маршрутизатор.
 
 ___
 
 ### scrollBehavior
 
-• `Optional` **scrollBehavior**: [`RouterScrollBehavior`](RouterScrollBehavior.md)
+• `Опционально` **scrollBehavior**: [`RouterScrollBehavior`](RouterScrollBehavior.md)
 
-Function to control scrolling when navigating between pages. Can return a
-Promise to delay scrolling. Check ScrollBehavior.
+Функция для управления прокруткой при переходе между страницами. Может возвращать Promise для задержки прокрутки. См. ScrollBehavior.
 
-**`Example`**
+**`Пример`**
 
 ```js
 function scrollBehavior(to, from, savedPosition) {
-  // `to` and `from` are both route locations
-  // `savedPosition` can be null if there isn't one
+  // `to` и `from` - это оба описания маршрутов
+  // `savedPosition` может быть null, если его нет
 }
 ```
 
@@ -136,15 +130,15 @@ ___
 
 ### sensitive
 
-• `Optional` **sensitive**: `boolean`
+• `Опционально` **sensitive**: `boolean`
 
-Makes the RegExp case-sensitive.
+Сделать RegExp регистрозависимым.
 
-**`Default Value`**
+**`Значение по умолчанию`**
 
 `false`
 
-#### Inherited from
+#### Наследуется от
 
 PathParserOptions.sensitive
 
@@ -152,15 +146,15 @@ ___
 
 ### strict
 
-• `Optional` **strict**: `boolean`
+• `Опционально` **strict**: `boolean`
 
-Whether to disallow a trailing slash or not.
+Запрещать или не запрещать слэш в конце строки.
 
-**`Default Value`**
+**`Значение по умолчанию`**
 
 `false`
 
-#### Inherited from
+#### Наследуется от
 
 PathParserOptions.strict
 
@@ -168,21 +162,21 @@ ___
 
 ### stringifyQuery
 
-• `Optional` **stringifyQuery**: (`query`: [`LocationQueryRaw`](../index.md#LocationQueryRaw)) => `string`
+• `Опционально` **stringifyQuery**: (`query`: [`LocationQueryRaw`](../index.md#LocationQueryRaw)) => `string`
 
-#### Type declaration
+#### Объявление типа
 
 ▸ (`query`): `string`
 
-Custom implementation to stringify a query object. Should not prepend a leading `?`.
-[parseQuery](RouterOptions.md#parseQuery) counterpart to handle query parsing.
+Пользовательская реализация для преобразования объекта запроса в строку query. Не должна добавлять начальный символ `?`.
+[parseQuery](RouterOptions.md#parseQuery) - противоположная функция для парсинга запроса.
 
-##### Parameters
+##### Параметры
 
-| Name | Type |
-| :------ | :------ |
-| `query` | [`LocationQueryRaw`](../index.md#LocationQueryRaw) |
+| Название | Тип                                                |
+| :------- | :------------------------------------------------- |
+| `query`  | [`LocationQueryRaw`](../index.md#LocationQueryRaw) |
 
-##### Returns
+##### Возвращает
 
 `string`

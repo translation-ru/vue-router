@@ -2,21 +2,19 @@
 editLink: false
 ---
 
-[API Documentation](../index.md) / NavigationFailureType
+[Документация API](../index.md) / NavigationFailureType
 
-# Enumeration: NavigationFailureType
+# Перечисление: NavigationFailureType
 
-Enumeration with all possible types for navigation failures. Can be passed to
-[isNavigationFailure](../index.md#isNavigationFailure) to check for specific failures.
+Перечисление со всеми возможными типами сбоев навигации. Может быть передано в [isNavigationFailure](../index.md#isNavigationFailure) для проверки конкретных сбоев.
 
-## Enumeration Members
+## Члены перечисления
 
 ### aborted
 
 • **aborted** = ``4``
 
-An aborted navigation is a navigation that failed because a navigation
-guard returned `false` or called `next(false)`
+Прерванной навигацией называется навигация, которая завершилась неудачей из-за того, что навигационный хук вернул `false` или вызвал `next(false)`
 
 ___
 
@@ -24,8 +22,7 @@ ___
 
 • **cancelled** = ``8``
 
-A cancelled navigation is a navigation that failed because a more recent
-navigation finished started (not necessarily finished).
+Отменённой навигацией называется навигация, которая не удалась, потому что более поздняя навигация началась (не обязательно завершилась).
 
 ___
 
@@ -33,5 +30,4 @@ ___
 
 • **duplicated** = ``16``
 
-A duplicated navigation is a navigation that failed because it was
-initiated while already being at the exact same location.
+Дублированной навигацией называется навигация, которая не удалась, потому что она была инициирована, когда приложение уже находится в точно таком же местоположении.

@@ -2,12 +2,12 @@
 editLink: false
 ---
 
-[API Documentation](../index.md) / HistoryState
+[Документация API](../index.md) / HistoryState
 
-# Interface: HistoryState
+# Интерфейс: HistoryState
 
-Allowed HTML history.state
+Разрешенный HTML history.state
 
-## Indexable
+## Индексируемые члены
 
 ▪ [x: `number`]: `HistoryStateValue`

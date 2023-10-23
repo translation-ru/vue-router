@@ -22,6 +22,7 @@ export const ruConfig: LocaleSpecificConfig<DefaultTheme.Config> = {
     },
 
     outline: {
+      level: [2, 3],
       label: 'На этой странице',
     },
 

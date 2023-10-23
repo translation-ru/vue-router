@@ -2,34 +2,33 @@
 editLink: false
 ---
 
-[API Documentation](../index.md) / NavigationGuardWithThis
+[Документация API](../index.md) / NavigationGuardWithThis
 
-# Interface: NavigationGuardWithThis<T\>
+# Интерфейс: NavigationGuardWithThis<T\>
 
-Navigation guard. See [Navigation
-Guards](/guide/advanced/navigation-guards.md).
+Навигационный хук. См. [Навигационные хуки](/guide/advanced/navigation-guards.md).
 
-## Type parameters
+## Параметры типа
 
-| Name |
-| :------ |
-| `T` |
+| Название |
+| :------- |
+| `T`      |
 
-## Callable
+## Вызов
 
 ### NavigationGuardWithThis
 
 ▸ **NavigationGuardWithThis**(`this`, `to`, `from`, `next`): `NavigationGuardReturn` \| `Promise`<`NavigationGuardReturn`\>
 
-#### Parameters
+#### Параметры
 
-| Name | Type |
-| :------ | :------ |
-| `this` | `T` |
-| `to` | [`RouteLocationNormalized`](RouteLocationNormalized.md) |
-| `from` | [`RouteLocationNormalized`](RouteLocationNormalized.md) |
-| `next` | [`NavigationGuardNext`](NavigationGuardNext.md) |
+| Название | Тип                                                     |
+| :------- | :------------------------------------------------------ |
+| `this`   | `T`                                                     |
+| `to`     | [`RouteLocationNormalized`](RouteLocationNormalized.md) |
+| `from`   | [`RouteLocationNormalized`](RouteLocationNormalized.md) |
+| `next`   | [`NavigationGuardNext`](NavigationGuardNext.md)         |
 
-#### Returns
+#### Возвращает
 
 `NavigationGuardReturn` \| `Promise`<`NavigationGuardReturn`\>

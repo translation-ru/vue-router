@@ -2,24 +2,24 @@
 editLink: false
 ---
 
-[API Documentation](../index.md) / NavigationHookAfter
+[Документация API](../index.md) / NavigationHookAfter
 
-# Interface: NavigationHookAfter
+# Интерфейс: NavigationHookAfter
 
-## Callable
+## Вызов
 
 ### NavigationHookAfter
 
 ▸ **NavigationHookAfter**(`to`, `from`, `failure?`): `any`
 
-#### Parameters
+#### Параметры
 
-| Name | Type |
-| :------ | :------ |
-| `to` | [`RouteLocationNormalized`](RouteLocationNormalized.md) |
-| `from` | [`RouteLocationNormalized`](RouteLocationNormalized.md) |
-| `failure?` | `void` \| [`NavigationFailure`](NavigationFailure.md) |
+| Название   | Тип                                                     |
+| :--------- | :------------------------------------------------------ |
+| `to`       | [`RouteLocationNormalized`](RouteLocationNormalized.md) |
+| `from`     | [`RouteLocationNormalized`](RouteLocationNormalized.md) |
+| `failure?` | `void` \| [`NavigationFailure`](NavigationFailure.md)   |
 
-#### Returns
+#### Возвращает
 
 `any`

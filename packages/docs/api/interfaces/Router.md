@@ -2,19 +2,19 @@
 editLink: false
 ---
 
-[API Documentation](../index.md) / Router
+[Документация API](../index.md) / Router
 
-# Interface: Router
+# Интерфейс: Router
 
-Router instance.
+Экземпляр маршрутизатора.
 
-## Properties
+## Свойства
 
 ### currentRoute
 
 • `Readonly` **currentRoute**: `Ref`<[`RouteLocationNormalizedLoaded`](RouteLocationNormalizedLoaded.md)\>
 
-Current [RouteLocationNormalized](RouteLocationNormalized.md)
+Текущий [RouteLocationNormalized](RouteLocationNormalized.md)
 
 ___
 
@@ -22,7 +22,7 @@ ___
 
 • **listening**: `boolean`
 
-Allows turning off the listening of history events. This is a low level api for micro-frontends.
+Позволяет отключить прослушивание событий истории. Это низкоуровневый api для микрофронтендов.
 
 ___
 
@@ -30,54 +30,54 @@ ___
 
 • `Readonly` **options**: [`RouterOptions`](RouterOptions.md)
 
-Original options object passed to create the Router
+Начальный объект опций, переданный для создания маршрутизатора
 
-## Methods
+## Методы
 
 ### addRoute
 
 ▸ **addRoute**(`parentName`, `route`): () => `void`
 
-Add a new [route record](../index.md#RouteRecordRaw) as the child of an existing route.
+Добавление новой [записи маршрута](../index.md#RouteRecordRaw) в качестве дочерней записи существующего маршрута.
 
-#### Parameters
+#### Параметры
 
-| Name | Type | Description |
-| :------ | :------ | :------ |
-| `parentName` | [`RouteRecordName`](../index.md#RouteRecordName) | Parent Route Record where `route` should be appended at |
-| `route` | [`RouteRecordRaw`](../index.md#RouteRecordRaw) | Route Record to add |
+| Название     | Тип                                              | Описание                                                              |
+| :----------- | :----------------------------------------------- | :-------------------------------------------------------------------- |
+| `parentName` | [`RouteRecordName`](../index.md#RouteRecordName) | Название родительской записи маршрута, в которую будет добавлен новый |
+| `route`      | [`RouteRecordRaw`](../index.md#RouteRecordRaw)   | Запьсь маршрута для добавления                                        |
 
-#### Returns
+#### Возвращает
 
 `fn`
 
 ▸ (): `void`
 
-Add a new [route record](../index.md#RouteRecordRaw) as the child of an existing route.
+Добавление новой [записи маршрута](../index.md#RouteRecordRaw) в качестве дочерней записи существующего маршрута.
 
-##### Returns
+##### Возвращает
 
 `void`
 
 ▸ **addRoute**(`route`): () => `void`
 
-Add a new [route record](../index.md#RouteRecordRaw) to the router.
+Добавление в маршрутизатор новой [записи маршрута](../index.md#RouteRecordRaw).
 
-#### Parameters
+#### Параметры
 
-| Name | Type | Description |
-| :------ | :------ | :------ |
-| `route` | [`RouteRecordRaw`](../index.md#RouteRecordRaw) | Route Record to add |
+| Название | Тип                                            | Описание                                     |
+| :------- | :--------------------------------------------- | :------------------------------------------- |
+| `route`  | [`RouteRecordRaw`](../index.md#RouteRecordRaw) | Запись маршрута, которую необходимо добавить |
 
-#### Returns
+#### Возвращает
 
 `fn`
 
 ▸ (): `void`
 
-Add a new [route record](../index.md#RouteRecordRaw) to the router.
+Добавление в маршрутизатор новой [записи маршрута](../index.md#RouteRecordRaw).
 
-##### Returns
+##### Возвращает
 
 `void`
 
@@ -87,33 +87,31 @@ ___
 
 ▸ **afterEach**(`guard`): () => `void`
 
-Add a navigation hook that is executed after every navigation. Returns a
-function that removes the registered hook.
+Добавление навигационного хука, который выполняется после каждого перехода навигации. Возвращает функцию, которая удаляет зарегистрированный хук.
 
-#### Parameters
+#### Параметры
 
-| Name | Type | Description |
-| :------ | :------ | :------ |
-| `guard` | [`NavigationHookAfter`](NavigationHookAfter.md) | navigation hook to add |
+| Название | Тип                                             | Описание                                       |
+| :------- | :---------------------------------------------- | :--------------------------------------------- |
+| `guard`  | [`NavigationHookAfter`](NavigationHookAfter.md) | навигационный хук, который необходимо добавить |
 
-#### Returns
+#### Возвращает
 
 `fn`
 
-a function that removes the registered hook
+функция, удаляющая зарегестрированный навигационный хук
 
 ▸ (): `void`
 
-Add a navigation hook that is executed after every navigation. Returns a
-function that removes the registered hook.
+Добавление навигационного хука, который выполняется после каждого перехода навигации. Возвращает функцию, которая удаляет зарегистрированный хук.
 
-##### Returns
+##### Возвращает
 
 `void`
 
-a function that removes the registered hook
+функция, удаляющая зарегестрированный навигационный хук
 
-**`Example`**
+**`Пример`**
 
 ```js
 router.afterEach((to, from, failure) => {
@@ -123,7 +121,7 @@ router.afterEach((to, from, failure) => {
 })
 ```
 
-**`Example`**
+**`Пример`**
 
 ```js
 router.afterEach((to, from, failure) => {
@@ -139,10 +137,9 @@ ___
 
 ▸ **back**(): `void`
 
-Go back in history if possible by calling `history.back()`. Equivalent to
-`router.go(-1)`.
+Переход по истории назад, если это возможно, при помощи вызова `history.back()`. Эквивалентно `router.go(-1)`.
 
-#### Returns
+#### Возвращает
 
 `void`
 
@@ -152,25 +149,23 @@ ___
 
 ▸ **beforeEach**(`guard`): () => `void`
 
-Add a navigation guard that executes before any navigation. Returns a
-function that removes the registered guard.
+Добавление навигационного хука, который выполняется перед каждым переходом навигации. Возвращает функцию, которая удаляет зарегистрированный хук.
 
-#### Parameters
+#### Параметры
 
-| Name | Type | Description |
-| :------ | :------ | :------ |
-| `guard` | [`NavigationGuardWithThis`](NavigationGuardWithThis.md)<`undefined`\> | navigation guard to add |
+| Название | Тип                                                                   | Описание                                       |
+| :------- | :-------------------------------------------------------------------- | :--------------------------------------------- |
+| `guard`  | [`NavigationGuardWithThis`](NavigationGuardWithThis.md)<`undefined`\> | навигационный хук, который необходимо добавить |
 
-#### Returns
+#### Возвращает
 
 `fn`
 
 ▸ (): `void`
 
-Add a navigation guard that executes before any navigation. Returns a
-function that removes the registered guard.
+Добавление навигационного хука, который выполняется перед каждым переходом навигации. Возвращает функцию, которая удаляет зарегистрированный хук.
 
-##### Returns
+##### Возвращает
 
 `void`
 
@@ -180,37 +175,31 @@ ___
 
 ▸ **beforeResolve**(`guard`): () => `void`
 
-Add a navigation guard that executes before navigation is about to be
-resolved. At this state all component have been fetched and other
-navigation guards have been successful. Returns a function that removes the
-registered guard.
+Добавление навигационного хука, который выполняется перед тем, как навигация будет разрешена. В этом состоянии все компоненты уже загружены, а другие хуки успешно отработали. Возвращает функцию, которая удаляет зарегистрированный хук.
 
-#### Parameters
+#### Параметры
 
-| Name | Type | Description |
-| :------ | :------ | :------ |
-| `guard` | [`NavigationGuardWithThis`](NavigationGuardWithThis.md)<`undefined`\> | navigation guard to add |
+| Название | Тип                                                                   | Описание                                      |
+| :------- | :-------------------------------------------------------------------- | :-------------------------------------------- |
+| `guard`  | [`NavigationGuardWithThis`](NavigationGuardWithThis.md)<`undefined`\> | авигационный хук, который необходимо добавить |
 
-#### Returns
+#### Возвращает
 
 `fn`
 
-a function that removes the registered guard
+функция, удаляющая зарегестрированный навигационный хук
 
 ▸ (): `void`
 
-Add a navigation guard that executes before navigation is about to be
-resolved. At this state all component have been fetched and other
-navigation guards have been successful. Returns a function that removes the
-registered guard.
+Добавление навигационного хука, который выполняется перед тем, как навигация будет разрешена. В этом состоянии все компоненты уже загружены, а другие хуки успешно отработали. Возвращает функцию, которая удаляет зарегистрированный хук.
 
-##### Returns
+##### Возвращает
 
 `void`
 
-a function that removes the registered guard
+функция, удаляющая зарегестрированный навигационный хук
 
-**`Example`**
+**`Пример`**
 
 ```js
 router.beforeResolve(to => {
@@ -218,7 +207,7 @@ router.beforeResolve(to => {
 })
 ```
 
-**`Example`**
+**`Пример`**
 
 ```js
 router.beforeResolve(to => {
@@ -232,10 +221,9 @@ ___
 
 ▸ **forward**(): `void`
 
-Go forward in history if possible by calling `history.forward()`.
-Equivalent to `router.go(1)`.
+Переход по истории вперед, если это возможно, при помощи вызова `history.forward()`. Эквивалентно `router.go(1)`.
 
-#### Returns
+#### Возвращает
 
 `void`
 
@@ -245,9 +233,9 @@ ___
 
 ▸ **getRoutes**(): [`RouteRecordNormalized`](RouteRecordNormalized.md)[]
 
-Get a full list of all the [route records](../index.md#RouteRecord).
+Получение полного списка всех [записей маршрутов](../index.md#RouteRecord).
 
-#### Returns
+#### Возвращает
 
 [`RouteRecordNormalized`](RouteRecordNormalized.md)[]
 
@@ -257,16 +245,15 @@ ___
 
 ▸ **go**(`delta`): `void`
 
-Allows you to move forward or backward through the history. Calls
-`history.go()`.
+Позволяет перемещаться вперед или назад по истории. Вызывает `history.go()`.
 
-#### Parameters
+#### Параметры
 
-| Name | Type | Description |
-| :------ | :------ | :------ |
-| `delta` | `number` | The position in the history to which you want to move, relative to the current page |
+| Название | Тип      | Описание                                                                             |
+| :------- | :------- | :----------------------------------------------------------------------------------- |
+| `delta`  | `number` | Позиция в истории, на которую вы хотите переместиться, относительно текущей страницы |
 
-#### Returns
+#### Возвращает
 
 `void`
 
@@ -276,15 +263,15 @@ ___
 
 ▸ **hasRoute**(`name`): `boolean`
 
-Checks if a route with a given name exists
+Проверка на существования записи маршрута с заданным названием
 
-#### Parameters
+#### Параметры
 
-| Name | Type | Description |
-| :------ | :------ | :------ |
-| `name` | [`RouteRecordName`](../index.md#RouteRecordName) | Name of the route to check |
+| Название | Тип                                              | Описание                              |
+| :------- | :----------------------------------------------- | :------------------------------------ |
+| `name`   | [`RouteRecordName`](../index.md#RouteRecordName) | Название записи маршрута для проверки |
 
-#### Returns
+#### Возвращает
 
 `boolean`
 
@@ -294,17 +281,11 @@ ___
 
 ▸ **isReady**(): `Promise`<`void`\>
 
-Returns a Promise that resolves when the router has completed the initial
-navigation, which means it has resolved all async enter hooks and async
-components that are associated with the initial route. If the initial
-navigation already happened, the promise resolves immediately.
+Возвращает Promise, который будет разрешен, когда маршрутизатор завершит начальную навигацию. Это означает, что он разрешит все начальные асинхронные хуки и асинхронные компоненты, связанные с начальным маршрутом. Если начальная навигация уже произошла, promise разрешается немедленно.
 
-This is useful in server-side rendering to ensure consistent output on both
-the server and the client. Note that on server side, you need to manually
-push the initial location while on client side, the router automatically
-picks it up from the URL.
+Это полезно в рендеринге на стороне сервера для обеспечения согласованного вывода как на сервере, так и на клиенте. Обратите внимание, что на сервере вам необходимо вручную выполнять начальную навигацию, в то время как на клиентской стороне маршрутизатор автоматически получает ее из URL.
 
-#### Returns
+#### Возвращает
 
 `Promise`<`void`\>
 
@@ -314,31 +295,23 @@ ___
 
 ▸ **onError**(`handler`): () => `void`
 
-Adds an error handler that is called every time a non caught error happens
-during navigation. This includes errors thrown synchronously and
-asynchronously, errors returned or passed to `next` in any navigation
-guard, and errors occurred when trying to resolve an async component that
-is required to render a route.
+Добавляет обработчик ошибок, который вызывается каждый раз, когда происходит необработанная ошибка во время навигации. Включает в себя ошибки, выброшенные синхронно и асинхронно, ошибки, возвращенные или переданные в `next` в любом навигационном хуке, а также ошибки, возникшие при попытке разрешить асинхронный компонент, необходимый для отображения маршрута.
 
-#### Parameters
+#### Параметры
 
-| Name | Type | Description |
-| :------ | :------ | :------ |
-| `handler` | `_ErrorListener` | error handler to register |
+| Названием | Тип              | Описание                                       |
+| :-------- | :--------------- | :--------------------------------------------- |
+| `handler` | `_ErrorListener` | обработчик ошибок, который необходимо добавить |
 
-#### Returns
+#### Возвращает
 
 `fn`
 
 ▸ (): `void`
 
-Adds an error handler that is called every time a non caught error happens
-during navigation. This includes errors thrown synchronously and
-asynchronously, errors returned or passed to `next` in any navigation
-guard, and errors occurred when trying to resolve an async component that
-is required to render a route.
+Добавляет обработчик ошибок, который вызывается каждый раз, когда происходит необработанная ошибка во время навигации. Включает в себя ошибки, выброшенные синхронно и асинхронно, ошибки, возвращенные или переданные в `next` в любом навигационном хуке, а также ошибки, возникшие при попытке разрешить асинхронный компонент, необходимый для отображения маршрута.
 
-##### Returns
+##### Возвращает
 
 `void`
 
@@ -348,16 +321,16 @@ ___
 
 ▸ **push**(`to`): `Promise`<`undefined` \| `void` \| [`NavigationFailure`](NavigationFailure.md)\>
 
-Programmatically navigate to a new URL by pushing an entry in the history
-stack.
+Программный переход к новому URL-адресу путем добавления записи в стек истории
+стек.
 
-#### Parameters
+#### Параметры
 
-| Name | Type | Description |
-| :------ | :------ | :------ |
-| `to` | [`RouteLocationRaw`](../index.md#RouteLocationRaw) | Route location to navigate to |
+| Название | Тип                                                | Описание                       |
+| :------- | :------------------------------------------------- | :----------------------------- |
+| `to`     | [`RouteLocationRaw`](../index.md#RouteLocationRaw) | Описание маршрута для перехода |
 
-#### Returns
+#### Возвращает
 
 `Promise`<`undefined` \| `void` \| [`NavigationFailure`](NavigationFailure.md)\>
 
@@ -367,15 +340,15 @@ ___
 
 ▸ **removeRoute**(`name`): `void`
 
-Remove an existing route by its name.
+Удаление существующей записи маршрута по её названию.
 
-#### Parameters
+#### Параметры
 
-| Name | Type | Description |
-| :------ | :------ | :------ |
-| `name` | [`RouteRecordName`](../index.md#RouteRecordName) | Name of the route to remove |
+| Название | Тип                                              | Описание                                 |
+| :------- | :----------------------------------------------- | :--------------------------------------- |
+| `name`   | [`RouteRecordName`](../index.md#RouteRecordName) | Имя маршрута, который необходимо удалить |
 
-#### Returns
+#### Возвращает
 
 `void`
 
@@ -385,16 +358,15 @@ ___
 
 ▸ **replace**(`to`): `Promise`<`undefined` \| `void` \| [`NavigationFailure`](NavigationFailure.md)\>
 
-Programmatically navigate to a new URL by replacing the current entry in
-the history stack.
+Программный переход к новому URL-адресу путем замены текущей записи в стеке истории.
 
-#### Parameters
+#### Параметры
 
-| Name | Type | Description |
-| :------ | :------ | :------ |
-| `to` | [`RouteLocationRaw`](../index.md#RouteLocationRaw) | Route location to navigate to |
+| Название | Тип                                                | Описание                       |
+| :------- | :------------------------------------------------- | :----------------------------- |
+| `to`     | [`RouteLocationRaw`](../index.md#RouteLocationRaw) | Описание маршрута для перехода |
 
-#### Returns
+#### Возвращает
 
 `Promise`<`undefined` \| `void` \| [`NavigationFailure`](NavigationFailure.md)\>
 
@@ -404,18 +376,15 @@ ___
 
 ▸ **resolve**(`to`, `currentLocation?`): [`RouteLocation`](RouteLocation.md) & { `href`: `string`  }
 
-Returns the [normalized version](RouteLocation.md) of a
-[route location](../index.md#RouteLocationRaw). Also includes an `href` property
-that includes any existing `base`. By default, the `currentLocation` used is
-`router.currentRoute` and should only be overridden in advanced use cases.
+Возвращает [нормализованную версию](RouteLocation.md) [описания маршрута](../index.md#RouteLocationRaw). Также включает свойство `href`, которое включает любое существующее `base`. По умолчанию в качестве `currentLocation` используется `router.currentRoute`, и переопределять его следует только в продвинутых вариантах использования.
 
-#### Parameters
+#### Параметры
 
-| Name | Type | Description |
-| :------ | :------ | :------ |
-| `to` | [`RouteLocationRaw`](../index.md#RouteLocationRaw) | Raw route location to resolve |
-| `currentLocation?` | [`RouteLocationNormalizedLoaded`](RouteLocationNormalizedLoaded.md) | Optional current location to resolve against |
+| Название           | Тип                                                                 | Описание                                                               |
+| :----------------- | :------------------------------------------------------------------ | :--------------------------------------------------------------------- |
+| `to`               | [`RouteLocationRaw`](../index.md#RouteLocationRaw)                  | Необработанное описание маршрута для разрешения                        |
+| `currentLocation?` | [`RouteLocationNormalizedLoaded`](RouteLocationNormalizedLoaded.md) | Необязательное текущее описание маршрута для относительного разрешения |
 
-#### Returns
+#### Возвращает
 
 [`RouteLocation`](RouteLocation.md) & { `href`: `string`  }

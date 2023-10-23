@@ -2,13 +2,13 @@
 editLink: false
 ---
 
-[API Documentation](../index.md) / \_RouteRecordBase
+[Документация API](../index.md) / \_RouteRecordBase
 
-# Interface: \_RouteRecordBase
+# Интерфейс: \_RouteRecordBase
 
-Internal type for common properties among all kind of [RouteRecordRaw](../index.md#RouteRecordRaw).
+Внутренний тип для общих свойств для всех видов [RouteRecordRaw](../index.md#RouteRecordRaw).
 
-## Hierarchy
+## Иерархия
 
 - [`PathParserOptions`](../index.md#PathParserOptions)
 
@@ -24,46 +24,43 @@ Internal type for common properties among all kind of [RouteRecordRaw](../index.
 
   ↳↳ [`RouteRecordRedirect`](RouteRecordRedirect.md)
 
-## Properties
+## Свойства
 
 ### alias
 
-• `Optional` **alias**: `string` \| `string`[]
+• `Опционально` **alias**: `string` \| `string`[]
 
-Aliases for the record. Allows defining extra paths that will behave like a
-copy of the record. Allows having paths shorthands like `/users/:id` and
-`/u/:id`. All `alias` and `path` values must share the same params.
+Псевдонимы для записи. Позволяет определять дополнительные пути, которые будут вести себя как копия записи. Позволяет использовать такие сокращения путей, как `/users/:id` и `/u/:id`. Все значения `alias` и `path` должны иметь одинаковые параметры.
 
 ___
 
 ### beforeEnter
 
-• `Optional` **beforeEnter**: [`NavigationGuardWithThis`](NavigationGuardWithThis.md)<`undefined`\> \| [`NavigationGuardWithThis`](NavigationGuardWithThis.md)<`undefined`\>[]
+• `Опционально` **beforeEnter**: [`NavigationGuardWithThis`](NavigationGuardWithThis.md)<`undefined`\> \| [`NavigationGuardWithThis`](NavigationGuardWithThis.md)<`undefined`\>[]
 
-Before Enter guard specific to this record. Note `beforeEnter` has no
-effect if the record has a `redirect` property.
+Хук beforeEnter, который предназначен только для этой записи. Обратите внимание, что `beforeEnter` не действует если запись имеет свойство `redirect`.
 
 ___
 
 ### children
 
-• `Optional` **children**: [`RouteRecordRaw`](../index.md#RouteRecordRaw)[]
+• `Опционально` **children**: [`RouteRecordRaw`](../index.md#RouteRecordRaw)[]
 
-Array of nested routes.
+Массив дочерних записей маршрутов.
 
 ___
 
 ### end
 
-• `Optional` **end**: `boolean`
+• `Опционально` **end**: `boolean`
 
-Should the RegExp match until the end by appending a `$` to it.
+Должен ли RegExp искать до конца при добавлении к нему `$`.
 
-**`Default Value`**
+**`Значение по умолчанию`**
 
 `true`
 
-#### Inherited from
+#### Наследуется от
 
 PathParserOptions.end
 
@@ -71,17 +68,17 @@ ___
 
 ### meta
 
-• `Optional` **meta**: [`RouteMeta`](RouteMeta.md)
+• `Опционально` **meta**: [`RouteMeta`](RouteMeta.md)
 
-Arbitrary data attached to the record.
+Произвольные данные, добавленные к записи.
 
 ___
 
 ### name
 
-• `Optional` **name**: [`RouteRecordName`](../index.md#RouteRecordName)
+• `Опционально` **name**: [`RouteRecordName`](../index.md#RouteRecordName)
 
-Name for the route record. Must be unique.
+Имя для записи маршрута. Должно быть уникальным.
 
 ___
 
@@ -89,46 +86,43 @@ ___
 
 • **path**: `string`
 
-Path of the record. Should start with `/` unless the record is the child of
-another record.
+Путь записи. Должен начинаться с `/`, если только запись не является дочерней по отношению к другой.
 
-**`Example`**
+**`Пример`**
 
 ```ts
-`/users/:id` matches `/users/1` as well as `/users/posva`.
+`/users/:id` соответствует `/users/1` а также `/users/posva`.
 ```
 
 ___
 
 ### props
 
-• `Optional` **props**: `_RouteRecordProps` \| `Record`<`string`, `_RouteRecordProps`\>
+• `Опционально` **props**: `_RouteRecordProps` \| `Record`<`string`, `_RouteRecordProps`\>
 
-Allow passing down params as props to the component rendered by `router-view`.
+Позволяет передавать параметры в качестве входных параметров компоненту, отображаемому через `router-view`.
 
 ___
 
 ### redirect
 
-• `Optional` **redirect**: `RouteRecordRedirectOption`
+• `Опционально` **redirect**: `RouteRecordRedirectOption`
 
-Where to redirect if the route is directly matched. The redirection happens
-before any navigation guard and triggers a new navigation with the new
-target location.
+Куда перенаправлять, если маршрут напрямую совпадает. Перенаправление происходит перед любым навигационным хуком и запускает новую навигацию с новым целевым местоположением.
 
 ___
 
 ### sensitive
 
-• `Optional` **sensitive**: `boolean`
+• `Опционально` **sensitive**: `boolean`
 
-Makes the RegExp case-sensitive.
+Сделать RegExp регистрозависимым.
 
-**`Default Value`**
+**`Значение по умолчанию`**
 
 `false`
 
-#### Inherited from
+#### Наследуется от
 
 PathParserOptions.sensitive
 
@@ -136,14 +130,14 @@ ___
 
 ### strict
 
-• `Optional` **strict**: `boolean`
+• `Опционально` **strict**: `boolean`
 
-Whether to disallow a trailing slash or not.
+Запрещать или не запрещать слэш в конце строки.
 
-**`Default Value`**
+**`Значение по умолчанию`**
 
 `false`
 
-#### Inherited from
+#### Наследуется от
 
 PathParserOptions.strict

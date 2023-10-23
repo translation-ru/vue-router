@@ -2,27 +2,26 @@
 editLink: false
 ---
 
-[API Documentation](../index.md) / NavigationGuard
+[Документация API](../index.md) / NavigationGuard
 
-# Interface: NavigationGuard
+# Интерфейс: NavigationGuard
 
-Navigation guard. See [Navigation
-Guards](/guide/advanced/navigation-guards.md).
+Навигационный хук. См. [Навигационные хуки](/guide/advanced/navigation-guards.md).
 
-## Callable
+## Вызов
 
 ### NavigationGuard
 
 ▸ **NavigationGuard**(`to`, `from`, `next`): `NavigationGuardReturn` \| `Promise`<`NavigationGuardReturn`\>
 
-#### Parameters
+#### Параметры
 
-| Name | Type |
-| :------ | :------ |
-| `to` | [`RouteLocationNormalized`](RouteLocationNormalized.md) |
-| `from` | [`RouteLocationNormalized`](RouteLocationNormalized.md) |
-| `next` | [`NavigationGuardNext`](NavigationGuardNext.md) |
+| Название | Тип                                                     |
+| :------- | :------------------------------------------------------ |
+| `to`     | [`RouteLocationNormalized`](RouteLocationNormalized.md) |
+| `from`   | [`RouteLocationNormalized`](RouteLocationNormalized.md) |
+| `next`   | [`NavigationGuardNext`](NavigationGuardNext.md)         |
 
-#### Returns
+#### Возвращает
 
 `NavigationGuardReturn` \| `Promise`<`NavigationGuardReturn`\>

@@ -2,16 +2,16 @@
 editLink: false
 ---
 
-[API Documentation](../index.md) / RouteMeta
+[Документация API](../index.md) / RouteMeta
 
-# Interface: RouteMeta
+# Интерфейс: RouteMeta
 
-Interface to type `meta` fields in route records.
+Интерфейс для типизации `meta` в записи маршрута.
 
-**`Example`**
+**`Пример`**
 
 ```ts
-// typings.d.ts or router.ts
+// typings.d.ts или router.ts
 import 'vue-router';
 
 declare module 'vue-router' {
@@ -21,7 +21,7 @@ declare module 'vue-router' {
  }
 ```
 
-## Hierarchy
+## Иерархия
 
 - `Record`<`string` \| `number` \| `symbol`, `unknown`\>
 

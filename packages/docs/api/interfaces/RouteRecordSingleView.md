@@ -2,29 +2,27 @@
 editLink: false
 ---
 
-[API Documentation](../index.md) / RouteRecordSingleView
+[Документация API](../index.md) / RouteRecordSingleView
 
-# Interface: RouteRecordSingleView
+# Интерфейс: RouteRecordSingleView
 
-Route Record defining one single component with the `component` option.
+Запись маршрута, определяющая один единственный компонент с помощью опции `component`.
 
-## Hierarchy
+## Иерархия
 
 - [`_RouteRecordBase`](RouteRecordBase.md)
 
   ↳ **`RouteRecordSingleView`**
 
-## Properties
+## Свойства
 
 ### alias
 
-• `Optional` **alias**: `string` \| `string`[]
+• `Опционально` **alias**: `string` \| `string`[]
 
-Aliases for the record. Allows defining extra paths that will behave like a
-copy of the record. Allows having paths shorthands like `/users/:id` and
-`/u/:id`. All `alias` and `path` values must share the same params.
+Псевдонимы для записи. Позволяет определять дополнительные пути, которые будут вести себя как копия записи. Позволяет использовать такие сокращения путей, как `/users/:id` и `/u/:id`. Все значения `alias` и `path` должны иметь одинаковые параметры.
 
-#### Inherited from
+#### Наследуется от
 
 [_RouteRecordBase](RouteRecordBase.md).[alias](RouteRecordBase.md#alias)
 
@@ -32,12 +30,11 @@ ___
 
 ### beforeEnter
 
-• `Optional` **beforeEnter**: [`NavigationGuardWithThis`](NavigationGuardWithThis.md)<`undefined`\> \| [`NavigationGuardWithThis`](NavigationGuardWithThis.md)<`undefined`\>[]
+• `Опционально` **beforeEnter**: [`NavigationGuardWithThis`](NavigationGuardWithThis.md)<`undefined`\> \| [`NavigationGuardWithThis`](NavigationGuardWithThis.md)<`undefined`\>[]
 
-Before Enter guard specific to this record. Note `beforeEnter` has no
-effect if the record has a `redirect` property.
+Хук beforeEnter, который предназначен только для этой записи. Обратите внимание, что `beforeEnter` не действует если запись имеет свойство `redirect`.
 
-#### Inherited from
+#### Наследуется от
 
 [_RouteRecordBase](RouteRecordBase.md).[beforeEnter](RouteRecordBase.md#beforeEnter)
 
@@ -45,11 +42,11 @@ ___
 
 ### children
 
-• `Optional` **children**: `undefined`
+• `Опционально` **children**: `undefined`
 
-Array of nested routes.
+Массив дочерних записей маршрутов.
 
-#### Overrides
+#### Переопределяет
 
 [_RouteRecordBase](RouteRecordBase.md).[children](RouteRecordBase.md#children)
 
@@ -59,27 +56,27 @@ ___
 
 • **component**: `RawRouteComponent`
 
-Component to display when the URL matches this route.
+Компонент, который будет отображаться при совпадении URL с данным маршрутом.
 
 ___
 
 ### components
 
-• `Optional` **components**: `undefined`
+• `Опционально` **components**: `undefined`
 
 ___
 
 ### end
 
-• `Optional` **end**: `boolean`
+• `Опционально` **end**: `boolean`
 
-Should the RegExp match until the end by appending a `$` to it.
+Должен ли RegExp искать до конца при добавлении к нему `$`.
 
-**`Default Value`**
+**`Значение по умолчанию`**
 
 `true`
 
-#### Inherited from
+#### Наследуется от
 
 [_RouteRecordBase](RouteRecordBase.md).[end](RouteRecordBase.md#end)
 
@@ -87,11 +84,11 @@ ___
 
 ### meta
 
-• `Optional` **meta**: [`RouteMeta`](RouteMeta.md)
+• `Опционально` **meta**: [`RouteMeta`](RouteMeta.md)
 
-Arbitrary data attached to the record.
+Произвольные данные, добавленные к записи.
 
-#### Inherited from
+#### Наследуется от
 
 [_RouteRecordBase](RouteRecordBase.md).[meta](RouteRecordBase.md#meta)
 
@@ -99,11 +96,11 @@ ___
 
 ### name
 
-• `Optional` **name**: [`RouteRecordName`](../index.md#RouteRecordName)
+• `Опционально` **name**: [`RouteRecordName`](../index.md#RouteRecordName)
 
-Name for the route record. Must be unique.
+Имя для записи маршрута. Должно быть уникальным.
 
-#### Inherited from
+#### Наследуется от
 
 [_RouteRecordBase](RouteRecordBase.md).[name](RouteRecordBase.md#name)
 
@@ -113,16 +110,15 @@ ___
 
 • **path**: `string`
 
-Path of the record. Should start with `/` unless the record is the child of
-another record.
+Путь записи. Должен начинаться с `/`, если только запись не является дочерней по отношению к другой.
 
-**`Example`**
+**`Пример`**
 
 ```ts
 `/users/:id` matches `/users/1` as well as `/users/posva`.
 ```
 
-#### Inherited from
+#### Наследуется от
 
 [_RouteRecordBase](RouteRecordBase.md).[path](RouteRecordBase.md#path)
 
@@ -130,11 +126,11 @@ ___
 
 ### props
 
-• `Optional` **props**: `_RouteRecordProps`
+• `Опционально` **props**: `_RouteRecordProps`
 
-Allow passing down params as props to the component rendered by `router-view`.
+Позволяет передавать параметры в качестве входных параметров компоненту, отображаемому через `router-view`.
 
-#### Overrides
+#### Переопределяет
 
 [_RouteRecordBase](RouteRecordBase.md).[props](RouteRecordBase.md#props)
 
@@ -142,13 +138,11 @@ ___
 
 ### redirect
 
-• `Optional` **redirect**: `undefined`
+• `Опционально` **redirect**: `undefined`
 
-Where to redirect if the route is directly matched. The redirection happens
-before any navigation guard and triggers a new navigation with the new
-target location.
+Куда перенаправлять, если маршрут напрямую совпадает. Перенаправление происходит перед любым навигационным хуком и запускает новую навигацию с новым целевым местоположением.
 
-#### Overrides
+#### Переопределяет
 
 [_RouteRecordBase](RouteRecordBase.md).[redirect](RouteRecordBase.md#redirect)
 
@@ -156,15 +150,15 @@ ___
 
 ### sensitive
 
-• `Optional` **sensitive**: `boolean`
+• `Опционально` **sensitive**: `boolean`
 
-Makes the RegExp case-sensitive.
+Сделать RegExp регистрозависимым.
 
-**`Default Value`**
+**`Значение по умолчанию`**
 
 `false`
 
-#### Inherited from
+#### Наследуется от
 
 [_RouteRecordBase](RouteRecordBase.md).[sensitive](RouteRecordBase.md#sensitive)
 
@@ -172,14 +166,14 @@ ___
 
 ### strict
 
-• `Optional` **strict**: `boolean`
+• `Опционально` **strict**: `boolean`
 
-Whether to disallow a trailing slash or not.
+Запрещать или не запрещать слэш в конце строки.
 
-**`Default Value`**
+**`Значение по умолчанию`**
 
 `false`
 
-#### Inherited from
+#### Наследуется от
 
 [_RouteRecordBase](RouteRecordBase.md).[strict](RouteRecordBase.md#strict)

@@ -2,15 +2,15 @@
 editLink: false
 ---
 
-API Documentation
+Документация API
 
-# API Documentation
+# Документация API
 
-## Enumerations
+## Перечисления
 
 - [NavigationFailureType](enums/NavigationFailureType.md)
 
-## Interfaces
+## Интерфейсы
 
 - [HistoryState](interfaces/HistoryState.md)
 - [NavigationFailure](interfaces/NavigationFailure.md)
@@ -38,13 +38,13 @@ API Documentation
 - [RouterViewProps](interfaces/RouterViewProps.md)
 - [\_RouteRecordBase](interfaces/RouteRecordBase.md)
 
-## Type Aliases
+## Псевдонимы типов
 
 ### LocationQuery
 
 Ƭ **LocationQuery**: `Record`<`string`, `LocationQueryValue` \| `LocationQueryValue`[]\>
 
-Normalized query object that appears in [RouteLocationNormalized](interfaces/RouteLocationNormalized.md)
+Нормализованный объект query, который присутствует в [RouteLocationNormalized](interfaces/RouteLocationNormalized.md)
 
 ___
 
@@ -68,7 +68,7 @@ ___
 
 Ƭ **RouteComponent**: `Component` \| `DefineComponent`
 
-Allowed Component in [RouteLocationMatched](interfaces/RouteLocationMatched.md)
+Разрешенный компонент в [RouteLocationMatched](interfaces/RouteLocationMatched.md)
 
 ___
 
@@ -96,7 +96,7 @@ ___
 
 Ƭ **RouteRecord**: [`RouteRecordNormalized`](interfaces/RouteRecordNormalized.md)
 
-Normalized version of a [route record](index.md#RouteRecord).
+Нормализованная версия [записи маршрута](index.md#RouteRecord).
 
 ___
 
@@ -104,7 +104,7 @@ ___
 
 Ƭ **RouteRecordName**: `string` \| `symbol`
 
-Possible values for a user-defined route record's name
+Возможные значения имени записи маршрута, определяемого пользователем
 
 ___
 
@@ -118,13 +118,13 @@ ___
 
 Ƭ **UseLinkOptions**: `VueUseOptions`<`RouterLinkOptions`\>
 
-## Variables
+## Переменные
 
 ### RouterLink
 
 • `Const` **RouterLink**: `_RouterLinkI`
 
-Component to render a link that triggers a navigation on click.
+Компонент для отображения ссылки, вызывающей навигацию по щелчку мыши.
 
 ___
 
@@ -132,11 +132,11 @@ ___
 
 • `Const` **RouterView**: () => { `$props`: `AllowedComponentProps` & `ComponentCustomProps` & `VNodeProps` & [`RouterViewProps`](interfaces/RouterViewProps.md) ; `$slots`: { `default?`: (`__namedParameters`: { `Component`: `VNode`<`RendererNode`, `RendererElement`, { `[key: string]`: `any`;  }\> ; `route`: [`RouteLocationNormalizedLoaded`](interfaces/RouteLocationNormalizedLoaded.md)  }) => `VNode`<`RendererNode`, `RendererElement`, { `[key: string]`: `any`;  }\>[]  }  }
 
-#### Type declaration
+#### Объявление типа
 
 • **new RouterView**()
 
-Component to display the current route the user is at.
+Компонент для отображения текущего маршрута, на котором находится пользователь.
 
 ___
 
@@ -144,41 +144,41 @@ ___
 
 • `Const` **START\_LOCATION**: [`RouteLocationNormalizedLoaded`](interfaces/RouteLocationNormalizedLoaded.md)
 
-Initial route location where the router is. Can be used in navigation guards
-to differentiate the initial navigation.
+Начальное описание маршрута, на котором находится маршрутизатор. Может использоваться в навигационных хуках
+для разграничения начальной навигации.
 
-**`Example`**
+**`Пример`**
 
 ```js
 import { START_LOCATION } from 'vue-router'
 
 router.beforeEach((to, from) => {
   if (from === START_LOCATION) {
-    // initial navigation
+    // начальная навигация
   }
 })
 ```
 
-## Functions
+## Функции
 
 ### createMemoryHistory
 
 ▸ **createMemoryHistory**(`base?`): [`RouterHistory`](interfaces/RouterHistory.md)
 
-Creates an in-memory based history. The main purpose of this history is to handle SSR. It starts in a special location that is nowhere.
-It's up to the user to replace that location with the starter location by either calling `router.push` or `router.replace`.
+Создает историю, хранящуюся в памяти. Основное назначение этой истории - рендеринг на стороне сервера (SSR). Она начинается в специальном месте, которого не существует.
+Пользователь сам должен заменить это место на начальное, вызвав `router.push` или `router.replace`.
 
-#### Parameters
+#### Параметры
 
-| Name | Type | Default value | Description |
-| :------ | :------ | :------ | :------ |
-| `base` | `string` | `''` | Base applied to all urls, defaults to '/' |
+| Название | Тип      | Значение по умолчанию | Описание                                                              |
+| :------- | :------- | :-------------------- | :-------------------------------------------------------------------- |
+| `base`   | `string` | `''`                  | Базовый путь, который добавляется ко всем URL. По умолчанию равен '/' |
 
-#### Returns
+#### Возвращает
 
 [`RouterHistory`](interfaces/RouterHistory.md)
 
-a history object that can be passed to the router constructor
+объект истории, который может быть передан в конструктор маршрутизатора
 
 ___
 
@@ -186,15 +186,15 @@ ___
 
 ▸ **createRouter**(`options`): [`Router`](interfaces/Router.md)
 
-Creates a Router instance that can be used by a Vue app.
+Создает экземпляр Router, который может быть использован приложением Vue.
 
-#### Parameters
+#### Параметры
 
-| Name | Type | Description |
-| :------ | :------ | :------ |
+| Название  | Тип                                            | Описание                                     |
+| :-------- | :--------------------------------------------- | :------------------------------------------- |
 | `options` | [`RouterOptions`](interfaces/RouterOptions.md) | [RouterOptions](interfaces/RouterOptions.md) |
 
-#### Returns
+#### Возвращает
 
 [`Router`](interfaces/Router.md)
 
@@ -204,33 +204,32 @@ ___
 
 ▸ **createWebHashHistory**(`base?`): [`RouterHistory`](interfaces/RouterHistory.md)
 
-Creates a hash history. Useful for web applications with no host (e.g. `file://`) or when configuring a server to
-handle any URL is not possible.
+Создает историю на основе хэшей. Полезно для веб-приложений, не имеющих хоста (например, `file://`), или когда настройка сервера для для работы с любым URL не представляется возможным.
 
-#### Parameters
+#### Параметры
 
-| Name | Type | Description |
-| :------ | :------ | :------ |
-| `base?` | `string` | optional base to provide. Defaults to `location.pathname + location.search` If there is a `<base>` tag in the `head`, its value will be ignored in favor of this parameter **but note it affects all the history.pushState() calls**, meaning that if you use a `<base>` tag, it's `href` value **has to match this parameter** (ignoring anything after the `#`). |
+| Название | Тип      | Описание                                                                                                                                                                                                                                                                                                                                                                                                |
+| :------- | :------- | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `base?`  | `string` | необязательный базовый адрес. По умолчанию `location.pathname + location.search` Если в `head` есть тег `<base>`, то его значение будет проигнорировано в пользу этого параметра **но обратите внимание, что он влияет на все вызовы history.pushState()**, то есть если вы используете тег `<base>`, то его значение `href` **должно соответствовать этому параметру** (игнорируя все, что после `#`). |
 
-#### Returns
+#### Возвращает
 
 [`RouterHistory`](interfaces/RouterHistory.md)
 
-**`Example`**
+**`Пример`**
 
 ```js
-// at https://example.com/folder
-createWebHashHistory() // gives a url of `https://example.com/folder#`
-createWebHashHistory('/folder/') // gives a url of `https://example.com/folder/#`
-// if the `#` is provided in the base, it won't be added by `createWebHashHistory`
-createWebHashHistory('/folder/#/app/') // gives a url of `https://example.com/folder/#/app/`
-// you should avoid doing this because it changes the original url and breaks copying urls
-createWebHashHistory('/other-folder/') // gives a url of `https://example.com/other-folder/#`
+// по адресу https://example.com/folder
+createWebHashHistory() // даст итоговый url `https://example.com/folder#`
+createWebHashHistory('/folder/') //даст итоговый url `https://example.com/folder/#`
+// если `#` указан в base, то он не будет добавлен `createWebHashHistory`
+createWebHashHistory('/folder/#/app/') // даст итоговый url `https://example.com/folder/#/app/`
+// этого не следует делать, так как это изменяет исходный url и нарушает копирование url
+createWebHashHistory('/other-folder/') // даст итоговый url `https://example.com/other-folder/#`
 
-// at file:///usr/etc/folder/index.html
-// for locations with no `host`, the base is ignored
-createWebHashHistory('/iAmIgnored') // gives a url of `file:///usr/etc/folder/index.html#`
+// по адресу file:///usr/etc/folder/index.html
+// для местоположений, не имеющих `host`, base игнорируется
+createWebHashHistory('/iAmIgnored') //даст итоговый url `file:///usr/etc/folder/index.html#`
 ```
 
 ___
@@ -239,15 +238,15 @@ ___
 
 ▸ **createWebHistory**(`base?`): [`RouterHistory`](interfaces/RouterHistory.md)
 
-Creates an HTML5 history. Most common history for single page applications.
+Создает историю HTML5. Наиболее распространенная история для одностраничных приложений.
 
-#### Parameters
+#### Параметры
 
-| Name | Type |
-| :------ | :------ |
-| `base?` | `string` |
+| Название | Тип      |
+| :------- | :------- |
+| `base?`  | `string` |
 
-#### Returns
+#### Возвращает
 
 [`RouterHistory`](interfaces/RouterHistory.md)
 
@@ -257,52 +256,52 @@ ___
 
 ▸ **isNavigationFailure**(`error`, `type?`): error is NavigationRedirectError
 
-Check if an object is a [NavigationFailure](interfaces/NavigationFailure.md).
+Проверка, является ли объект [NavigationFailure](interfaces/NavigationFailure.md).
 
-#### Parameters
+#### Параметры
 
-| Name | Type | Description |
-| :------ | :------ | :------ |
-| `error` | `any` | possible [NavigationFailure](interfaces/NavigationFailure.md) |
-| `type?` | `NAVIGATION_GUARD_REDIRECT` | optional types to check for |
+| Название | Тип                         | Описание                                                                                         |
+| :------- | :-------------------------- | :----------------------------------------------------------------------------------------------- |
+| `error`  | `any`                       | объект, который проверяется на соответствие [NavigationFailure](interfaces/NavigationFailure.md) |
+| `type?`  | `NAVIGATION_GUARD_REDIRECT` | опциональный тип для проверки                                                                    |
 
-#### Returns
+#### Возвращает
 
-error is NavigationRedirectError
+является ли ошибка NavigationRedirectError
 
-**`Example`**
+**`Пример`**
 
 ```js
 import { isNavigationFailure, NavigationFailureType } from 'vue-router'
 
 router.afterEach((to, from, failure) => {
-  // Any kind of navigation failure
+  // Любые сбои в навигации
   if (isNavigationFailure(failure)) {
     // ...
   }
-  // Only duplicated navigations
+  // Только дублированные переходы
   if (isNavigationFailure(failure, NavigationFailureType.duplicated)) {
     // ...
   }
-  // Aborted or canceled navigations
+  // Прерванные или отмененные переходы
   if (isNavigationFailure(failure, NavigationFailureType.aborted | NavigationFailureType.canceled)) {
     // ...
   }
 })
 ```
 
-▸ **isNavigationFailure**(`error`, `type?`): error is NavigationFailure
+▸ **isNavigationFailure**(`error`, `type?`): является ли ошибка NavigationFailure
 
-#### Parameters
+#### Параметры
 
-| Name | Type |
-| :------ | :------ |
-| `error` | `any` |
-| `type?` | `ErrorTypes` \| [`NavigationFailureType`](enums/NavigationFailureType.md) |
+| Название | Тип                                                                       |
+| :------- | :------------------------------------------------------------------------ |
+| `error`  | `any`                                                                     |
+| `type?`  | `ErrorTypes` \| [`NavigationFailureType`](enums/NavigationFailureType.md) |
 
-#### Returns
+#### Возвращает
 
-error is NavigationFailure
+является ли ошибка NavigationFailure
 
 ___
 
@@ -310,15 +309,15 @@ ___
 
 ▸ **loadRouteLocation**(`route`): `Promise`<[`RouteLocationNormalizedLoaded`](interfaces/RouteLocationNormalizedLoaded.md)\>
 
-Ensures a route is loaded, so it can be passed as o prop to `<RouterView>`.
+Обеспечивает загрузку маршрута, чтобы его можно было передать в качестве o входного параметра в `<RouterView>`.
 
-#### Parameters
+#### Параметры
 
-| Name | Type | Description |
-| :------ | :------ | :------ |
-| `route` | [`RouteLocationNormalized`](interfaces/RouteLocationNormalized.md) | resolved route to load |
+| Название | Тип                                                                | Описание               |
+| :------- | :----------------------------------------------------------------- | :--------------------- |
+| `route`  | [`RouteLocationNormalized`](interfaces/RouteLocationNormalized.md) | resolved route to load |
 
-#### Returns
+#### Возвращает
 
 `Promise`<[`RouteLocationNormalizedLoaded`](interfaces/RouteLocationNormalizedLoaded.md)\>
 
@@ -328,17 +327,15 @@ ___
 
 ▸ **onBeforeRouteLeave**(`leaveGuard`): `void`
 
-Add a navigation guard that triggers whenever the component for the current
-location is about to be left. Similar to beforeRouteLeave but can be
-used in any component. The guard is removed when the component is unmounted.
+Добавлееие навигационного хука, который будет срабатывать каждый раз, когда компонент, соответствующий текущему маршруту, готовится покинуть текущий маршрут. Похоже на beforeRouteLeave, но может использоваться в любом компоненте. Этот хук будет автоматически удален, когда компонент размонтируется.
 
-#### Parameters
+#### Параметры
 
-| Name | Type | Description |
-| :------ | :------ | :------ |
+| Название     | Тип                                                | Описание                                         |
+| :----------- | :------------------------------------------------- | :----------------------------------------------- |
 | `leaveGuard` | [`NavigationGuard`](interfaces/NavigationGuard.md) | [NavigationGuard](interfaces/NavigationGuard.md) |
 
-#### Returns
+#### Возвращает
 
 `void`
 
@@ -348,17 +345,15 @@ ___
 
 ▸ **onBeforeRouteUpdate**(`updateGuard`): `void`
 
-Add a navigation guard that triggers whenever the current location is about
-to be updated. Similar to beforeRouteUpdate but can be used in any
-component. The guard is removed when the component is unmounted.
+Добавление навигационного хука, который срабатывает каждый раз, когда текущее маршрут готовится к обновлению. Этот хук похож на beforeRouteUpdate, но может использоваться в любом компоненте. Этот хук будет автоматически удален, когда компонент размонтируется.
 
-#### Parameters
+#### Параметры
 
-| Name | Type | Description |
-| :------ | :------ | :------ |
+| Название      | Тип                                                | Описание                                         |
+| :------------ | :------------------------------------------------- | :----------------------------------------------- |
 | `updateGuard` | [`NavigationGuard`](interfaces/NavigationGuard.md) | [NavigationGuard](interfaces/NavigationGuard.md) |
 
-#### Returns
+#### Возвращает
 
 `void`
 
@@ -368,23 +363,23 @@ ___
 
 ▸ **useLink**(`props`): `Object`
 
-#### Parameters
+#### Параметры
 
-| Name | Type |
-| :------ | :------ |
-| `props` | `VueUseOptions`<`RouterLinkOptions`\> |
+| Название | Тип                                   |
+| :------- | :------------------------------------ |
+| `props`  | `VueUseOptions`<`RouterLinkOptions`\> |
 
-#### Returns
+#### Возвращает
 
 `Object`
 
-| Name | Type |
-| :------ | :------ |
-| `href` | `ComputedRef`<`string`\> |
-| `isActive` | `ComputedRef`<`boolean`\> |
-| `isExactActive` | `ComputedRef`<`boolean`\> |
-| `navigate` | (`e`: `MouseEvent`) => `Promise`<`void` \| [`NavigationFailure`](interfaces/NavigationFailure.md)\> |
-| `route` | `ComputedRef`<[`RouteLocation`](interfaces/RouteLocation.md) & { `href`: `string`  }\> |
+| Название        | Тип                                                                                                 |
+| :-------------- | :-------------------------------------------------------------------------------------------------- |
+| `href`          | `ComputedRef`<`string`\>                                                                            |
+| `isActive`      | `ComputedRef`<`boolean`\>                                                                           |
+| `isExactActive` | `ComputedRef`<`boolean`\>                                                                           |
+| `navigate`      | (`e`: `MouseEvent`) => `Promise`<`void` \| [`NavigationFailure`](interfaces/NavigationFailure.md)\> |
+| `route`         | `ComputedRef`<[`RouteLocation`](interfaces/RouteLocation.md) & { `href`: `string` }\>               |
 
 ___
 
@@ -392,10 +387,9 @@ ___
 
 ▸ **useRoute**(): [`RouteLocationNormalizedLoaded`](interfaces/RouteLocationNormalizedLoaded.md)
 
-Returns the current route location. Equivalent to using `$route` inside
-templates.
+Возвращает описание текущее маршрута. Эквивалентно использованию `$route` внутри шаблонов.
 
-#### Returns
+#### Возвращает
 
 [`RouteLocationNormalizedLoaded`](interfaces/RouteLocationNormalizedLoaded.md)
 
@@ -405,9 +399,8 @@ ___
 
 ▸ **useRouter**(): [`Router`](interfaces/Router.md)
 
-Returns the router instance. Equivalent to using `$router` inside
-templates.
+Возвращает экземпляр маршрутизатора. Эквивалентно использованию `$router` внутри шаблонов.
 
-#### Returns
+#### Возвращает
 
 [`Router`](interfaces/Router.md)

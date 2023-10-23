@@ -2,33 +2,33 @@
 editLink: false
 ---
 
-[API Documentation](../index.md) / RouterLinkProps
+[Документация API](../index.md) / RouterLinkProps
 
-# Interface: RouterLinkProps
+# Интерфейс: RouterLinkProps
 
-## Hierarchy
+## Иерархия
 
 - `RouterLinkOptions`
 
   ↳ **`RouterLinkProps`**
 
-## Properties
+## Свойства
 
 ### activeClass
 
-• `Optional` **activeClass**: `string`
+• `Опционально` **activeClass**: `string`
 
-Class to apply when the link is active
+Класс, который добавляется, если ссылка активна
 
 ___
 
 ### ariaCurrentValue
 
-• `Optional` **ariaCurrentValue**: ``"location"`` \| ``"time"`` \| ``"page"`` \| ``"step"`` \| ``"date"`` \| ``"true"`` \| ``"false"``
+• `Опционально` **ariaCurrentValue**: ``"location"`` \| ``"time"`` \| ``"page"`` \| ``"step"`` \| ``"date"`` \| ``"true"`` \| ``"false"``
 
-Value passed to the attribute `aria-current` when the link is exact active.
+Значение, передаваемое атрибуту `aria-current`, когда ссылка активна "по точному совпадению".
 
-**`Default Value`**
+**`Значение по умолчанию`**
 
 `'page'`
 
@@ -36,28 +36,27 @@ ___
 
 ### custom
 
-• `Optional` **custom**: `boolean`
+• `Опционально` **custom**: `boolean`
 
-Whether RouterLink should not wrap its content in an `a` tag. Useful when
-using `v-slot` to create a custom RouterLink
+Должен ли RouterLink не оборачивать свое содержимое в тег `a`. Полезно при использовании `v-slot` для создания пользовательского RouterLink
 
 ___
 
 ### exactActiveClass
 
-• `Optional` **exactActiveClass**: `string`
+• `Опционально` **exactActiveClass**: `string`
 
-Class to apply when the link is exact active
+Класс, который добавляется, если ссылка активна "по точному совпадению"
 
 ___
 
 ### replace
 
-• `Optional` **replace**: `boolean`
+• `Опционально` **replace**: `boolean`
 
-Calls `router.replace` instead of `router.push`.
+Вызывать `router.replace` вместо `router.push`.
 
-#### Inherited from
+#### Наследуется от
 
 RouterLinkOptions.replace
 
@@ -67,8 +66,8 @@ ___
 
 • **to**: [`RouteLocationRaw`](../index.md#RouteLocationRaw)
 
-Route Location the link should navigate to when clicked on.
+Описания маршрута с указанием куда должна переходить ссылка при нажатии на нее.
 
-#### Inherited from
+#### Наследуется от
 
 RouterLinkOptions.to

@@ -2,26 +2,26 @@
 editLink: false
 ---
 
-[API Documentation](../index.md) / RouterScrollBehavior
+[Документация API](../index.md) / RouterScrollBehavior
 
-# Interface: RouterScrollBehavior
+# Интерфейс: RouterScrollBehavior
 
-Type of the `scrollBehavior` option that can be passed to `createRouter`.
+Тип опции `scrollBehavior`, которая может быть передана в `createRouter`.
 
-## Callable
+## Вызов
 
 ### RouterScrollBehavior
 
 ▸ **RouterScrollBehavior**(`to`, `from`, `savedPosition`): `Awaitable`<``false`` \| `void` \| `ScrollPosition`\>
 
-#### Parameters
+#### Параметры
 
-| Name | Type | Description |
-| :------ | :------ | :------ |
-| `to` | [`RouteLocationNormalized`](RouteLocationNormalized.md) | Route location where we are navigating to |
-| `from` | [`RouteLocationNormalizedLoaded`](RouteLocationNormalizedLoaded.md) | Route location where we are navigating from |
-| `savedPosition` | ``null`` \| `_ScrollPositionNormalized` | saved position if it exists, `null` otherwise |
+| Название        | Тип                                                                 | Описание                                                            |
+| :-------------- | :------------------------------------------------------------------ | :------------------------------------------------------------------ |
+| `to`            | [`RouteLocationNormalized`](RouteLocationNormalized.md)             | Описание маршрута, откуда производился переход                      |
+| `from`          | [`RouteLocationNormalizedLoaded`](RouteLocationNormalizedLoaded.md) | Описание маршрута, куда был произведен переход                      |
+| `savedPosition` | ``null`` \| `_ScrollPositionNormalized`                               | сохраненная позиция, если она существует, `null` в противном случае |
 
-#### Returns
+#### Возвращает
 
 `Awaitable`<``false`` \| `void` \| `ScrollPosition`\>
