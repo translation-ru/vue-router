@@ -17,7 +17,11 @@ const UserDetails = () => import('./views/UserDetails.vue')
 
 const router = createRouter({
   // ...
-  routes: [{ path: '/users/:id', component: UserDetails }],
+  routes: [
+    { path: '/users/:id', component: UserDetails }
+    // или используйте напрямую в определении маршрута
+    { path: '/users/:id', component: () => import('./views/UserDetails.vue') },
+  ],
 })
 ```
 

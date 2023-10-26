@@ -13,6 +13,7 @@ export default defineConfig({
       link: 'https://router.vuejs.org/zh/',
     },
     ko: { label: '한국어', lang: 'ko-KR', link: 'https://router.vuejs.kr/' },
+
     pt: {
       label: 'Português',
       lang: 'pt-PT',
