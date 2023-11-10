@@ -30,7 +30,7 @@ ___
 
 ### beforeEnter
 
-• `Опционально` **beforeEnter**: [`NavigationGuardWithThis`](NavigationGuardWithThis.md)<`undefined`\> \| [`NavigationGuardWithThis`](NavigationGuardWithThis.md)<`undefined`\>[]
+• `Опционально` **beforeEnter**: [`NavigationGuardWithThis`](NavigationGuardWithThis.md)\<`undefined`\> \| [`NavigationGuardWithThis`](NavigationGuardWithThis.md)\<`undefined`\>[]
 
 Хук beforeEnter, который предназначен только для этой записи. Обратите внимание, что `beforeEnter` не действует если запись имеет свойство `redirect`.
 
@@ -60,7 +60,7 @@ ___
 
 ### components
 
-• **components**: `Record`<`string`, `RawRouteComponent`\>
+• **components**: `Record`\<`string`, `RawRouteComponent`\>
 
 Компоненты для отображения при совпадении URL-адреса с этим маршрутом. Можно использовать именованные представления.
 
@@ -126,7 +126,7 @@ ___
 
 ### props
 
-• `Опционально` **props**: `boolean` \| `Record`<`string`, `_RouteRecordProps`\>
+• `Опционально` **props**: `boolean` \| `Record`\<`string`, `_RouteRecordProps`\>
 
 Позволяет передавать параметры в качестве входных параметров компоненту, отображаемому с помощью `router-view`. Должен быть объектом с теми же ключами, что и `components`, или булевым значением, которое будет применяться к каждому компоненту.
 

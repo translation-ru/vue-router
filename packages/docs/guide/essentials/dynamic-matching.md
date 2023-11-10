@@ -36,7 +36,7 @@ const User = {
 | /users/:username               | /users/eduardo           | `{ username: 'eduardo' }`                |
 | /users/:username/posts/:postId | /users/eduardo/posts/123 | `{ username: 'eduardo', postId: '123' }` |
 
-Помимо `$route.params`, объект `$route` также предоставляет другую полезную информацию, такую как `$route.query` (если есть query в URL), `$route.hash` и так далее. Вы можете ознакомиться с полными деталями в [справочнике по API](../../api/#routelocationnormalized).
+Помимо `$route.params`, объект `$route` также предоставляет другую полезную информацию, такую как `$route.query` (если есть query в URL), `$route.hash` и так далее. Вы можете ознакомиться с полными деталями в [справочнике по API](../../api/interfaces/RouteLocationNormalized.md).
 
 Рабочую демонстрацию этого примера можно найти [здесь](https://codesandbox.io/s/route-params-vue-router-examples-mlb14?from-embed&initialpath=%2Fusers%2Feduardo%2Fposts%2F1).
 
@@ -116,7 +116,7 @@ this.$router.push({
 })
 ```
 
-Подробнее см. в разделе [повторяющиеся параметры](./route-matching-syntax.md#repeatable-params).
+Подробнее см. в разделе [повторяющиеся параметры](./route-matching-syntax.md#Repeatable-params).
 
 Если вы используете [History mode](./history-mode.md), обязательно следуйте инструкциям по правильной настройке вашего сервера.
 

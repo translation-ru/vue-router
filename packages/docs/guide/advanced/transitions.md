@@ -58,7 +58,7 @@ const routes = [
 </router-view>
 ```
 
-Мы можем добавить [хуки завершения перехода](./navigation-guards.md#global-after-hooks) для динамического добавления информации в `meta` поле в зависимости от глубины маршрута
+Мы можем добавить [хуки завершения перехода](./navigation-guards.md#Global-After-Hooks) для динамического добавления информации в `meta` поле в зависимости от глубины маршрута
 
 ```js
 router.afterEach((to, from) => {

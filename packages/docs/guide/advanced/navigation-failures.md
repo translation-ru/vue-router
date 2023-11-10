@@ -64,7 +64,7 @@ if (isNavigationFailure(failure, NavigationFailureType.aborted)) {
 
 ## Глобальные навигационные сбои %{#global-navigation-failures}%
 
-Обнаружить сбои навигации на уровне приложения можно с помощью [навигационного хука `router.afterEach()`](./navigation-guards.md#global-after-hooks):
+Обнаружить сбои навигации на уровне приложения можно с помощью [навигационного хука `router.afterEach()`](./navigation-guards.md#Global-After-Hooks):
 
 ```ts
 router.afterEach((to, from, failure) => {

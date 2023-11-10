@@ -75,7 +75,7 @@ ___
 
 ▸ (`search`): [`LocationQuery`](../index.md#LocationQuery)
 
-Пользовательская реализация для парсинга query. См. противоположную функцию [stringifyQuery](RouterOptions.md#stringifyQuery).
+Пользовательская реализация для парсинга query. См. противоположную функцию [RouterOptions.stringifyQuery](RouterOptions.md#stringifyQuery).
 
 ##### Параметры
 
