@@ -12,7 +12,7 @@ editLink: false
 
 ### currentRoute
 
-• `Readonly` **currentRoute**: `Ref`<[`RouteLocationNormalizedLoaded`](RouteLocationNormalizedLoaded.md)\>
+• `Readonly` **currentRoute**: `Ref`\<[`RouteLocationNormalizedLoaded`](RouteLocationNormalizedLoaded.md)\>
 
 Текущий [RouteLocationNormalized](RouteLocationNormalized.md)
 
@@ -153,9 +153,9 @@ ___
 
 #### Параметры
 
-| Название | Тип                                                                   | Описание                                       |
-| :------- | :-------------------------------------------------------------------- | :--------------------------------------------- |
-| `guard`  | [`NavigationGuardWithThis`](NavigationGuardWithThis.md)<`undefined`\> | навигационный хук, который необходимо добавить |
+| Название | Тип                                                                    | Описание                                       |
+| :------- | :--------------------------------------------------------------------- | :--------------------------------------------- |
+| `guard`  | [`NavigationGuardWithThis`](NavigationGuardWithThis.md)\<`undefined`\> | навигационный хук, который необходимо добавить |
 
 #### Возвращает
 
@@ -179,9 +179,9 @@ ___
 
 #### Параметры
 
-| Название | Тип                                                                   | Описание                                      |
-| :------- | :-------------------------------------------------------------------- | :-------------------------------------------- |
-| `guard`  | [`NavigationGuardWithThis`](NavigationGuardWithThis.md)<`undefined`\> | авигационный хук, который необходимо добавить |
+| Название | Тип                                                                    | Описание                                      |
+| :------- | :--------------------------------------------------------------------- | :-------------------------------------------- |
+| `guard`  | [`NavigationGuardWithThis`](NavigationGuardWithThis.md)\<`undefined`\> | авигационный хук, который необходимо добавить |
 
 #### Возвращает
 
@@ -279,7 +279,7 @@ ___
 
 ### isReady
 
-▸ **isReady**(): `Promise`<`void`\>
+▸ **isReady**(): `Promise`\<`void`\>
 
 Возвращает Promise, который будет разрешен, когда маршрутизатор завершит начальную навигацию. Это означает, что он разрешит все начальные асинхронные хуки и асинхронные компоненты, связанные с начальным маршрутом. Если начальная навигация уже произошла, promise разрешается немедленно.
 
@@ -287,7 +287,7 @@ ___
 
 #### Возвращает
 
-`Promise`<`void`\>
+`Promise`\<`void`\>
 
 ___
 
@@ -319,7 +319,7 @@ ___
 
 ### push
 
-▸ **push**(`to`): `Promise`<`undefined` \| `void` \| [`NavigationFailure`](NavigationFailure.md)\>
+▸ **push**(`to`): `Promise`\<`undefined` \| `void` \| [`NavigationFailure`](NavigationFailure.md)\>
 
 Программный переход к новому URL-адресу путем добавления записи в стек истории
 стек.
@@ -332,7 +332,7 @@ ___
 
 #### Возвращает
 
-`Promise`<`undefined` \| `void` \| [`NavigationFailure`](NavigationFailure.md)\>
+`Promise`\<`undefined` \| `void` \| [`NavigationFailure`](NavigationFailure.md)\>
 
 ___
 
@@ -356,7 +356,7 @@ ___
 
 ### replace
 
-▸ **replace**(`to`): `Promise`<`undefined` \| `void` \| [`NavigationFailure`](NavigationFailure.md)\>
+▸ **replace**(`to`): `Promise`\<`undefined` \| `void` \| [`NavigationFailure`](NavigationFailure.md)\>
 
 Программный переход к новому URL-адресу путем замены текущей записи в стеке истории.
 
@@ -368,13 +368,13 @@ ___
 
 #### Возвращает
 
-`Promise`<`undefined` \| `void` \| [`NavigationFailure`](NavigationFailure.md)\>
+`Promise`\<`undefined` \| `void` \| [`NavigationFailure`](NavigationFailure.md)\>
 
 ___
 
 ### resolve
 
-▸ **resolve**(`to`, `currentLocation?`): [`RouteLocation`](RouteLocation.md) & { `href`: `string`  }
+▸ **resolve**(`to`, `currentLocation?`): [`RouteLocation`](RouteLocation.md) & \{ `href`: `string`  }
 
 Возвращает [нормализованную версию](RouteLocation.md) [описания маршрута](../index.md#RouteLocationRaw). Также включает свойство `href`, которое включает любое существующее `base`. По умолчанию в качестве `currentLocation` используется `router.currentRoute`, и переопределять его следует только в продвинутых вариантах использования.
 
@@ -387,4 +387,4 @@ ___
 
 #### Возвращает
 
-[`RouteLocation`](RouteLocation.md) & { `href`: `string`  }
+[`RouteLocation`](RouteLocation.md) & \{ `href`: `string`  }

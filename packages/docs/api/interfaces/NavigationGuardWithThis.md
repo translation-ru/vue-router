@@ -4,7 +4,7 @@ editLink: false
 
 [Документация API](../index.md) / NavigationGuardWithThis
 
-# Интерфейс: NavigationGuardWithThis<T\>
+# Интерфейс: NavigationGuardWithThis\<T\>
 
 Навигационный хук. См. [Навигационные хуки](/guide/advanced/navigation-guards.md).
 
@@ -18,7 +18,7 @@ editLink: false
 
 ### NavigationGuardWithThis
 
-▸ **NavigationGuardWithThis**(`this`, `to`, `from`, `next`): `NavigationGuardReturn` \| `Promise`<`NavigationGuardReturn`\>
+▸ **NavigationGuardWithThis**(`this`, `to`, `from`, `next`): `NavigationGuardReturn` \| `Promise`\<`NavigationGuardReturn`\>
 
 #### Параметры
 
@@ -31,4 +31,4 @@ editLink: false
 
 #### Возвращает
 
-`NavigationGuardReturn` \| `Promise`<`NavigationGuardReturn`\>
+`NavigationGuardReturn` \| `Promise`\<`NavigationGuardReturn`\>

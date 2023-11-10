@@ -143,7 +143,7 @@ ___
 
 ▸ **replace**(`to`, `data?`): `void`
 
-Аналогично [push](RouterHistory.md#push), но заместо `history.replaceState` вызывается `history.pushState`
+Аналогично [RouterHistory.push](RouterHistory.md#push), но заместо `history.replaceState` вызывается `history.pushState`
 
 #### Параметры
 

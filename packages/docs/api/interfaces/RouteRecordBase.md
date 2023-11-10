@@ -36,7 +36,7 @@ ___
 
 ### beforeEnter
 
-• `Опционально` **beforeEnter**: [`NavigationGuardWithThis`](NavigationGuardWithThis.md)<`undefined`\> \| [`NavigationGuardWithThis`](NavigationGuardWithThis.md)<`undefined`\>[]
+• `Опционально` **beforeEnter**: [`NavigationGuardWithThis`](NavigationGuardWithThis.md)\<`undefined`\> \| [`NavigationGuardWithThis`](NavigationGuardWithThis.md\<`undefined`\>[]
 
 Хук beforeEnter, который предназначен только для этой записи. Обратите внимание, что `beforeEnter` не действует если запись имеет свойство `redirect`.
 
@@ -98,7 +98,7 @@ ___
 
 ### props
 
-• `Опционально` **props**: `_RouteRecordProps` \| `Record`<`string`, `_RouteRecordProps`\>
+• `Опционально` **props**: `_RouteRecordProps` \| `Record`\<`string`, `_RouteRecordProps`\>
 
 Позволяет передавать параметры в качестве входных параметров компоненту, отображаемому через `router-view`.
 
@@ -126,7 +126,7 @@ ___
 
 PathParserOptions.sensitive
 
-___
+---
 
 ### strict
 

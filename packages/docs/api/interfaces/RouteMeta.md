@@ -23,6 +23,6 @@ declare module 'vue-router' {
 
 ## Иерархия
 
-- `Record`<`string` \| `number` \| `symbol`, `unknown`\>
+- `Record`\<`string` \| `number` \| `symbol`, `unknown`\>
 
   ↳ **`RouteMeta`**

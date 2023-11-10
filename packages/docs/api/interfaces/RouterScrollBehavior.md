@@ -12,7 +12,7 @@ editLink: false
 
 ### RouterScrollBehavior
 
-▸ **RouterScrollBehavior**(`to`, `from`, `savedPosition`): `Awaitable`<``false`` \| `void` \| `ScrollPosition`\>
+▸ **RouterScrollBehavior**(`to`, `from`, `savedPosition`): `Awaitable`\<``false`` \| `void` \| `ScrollPosition`\>
 
 #### Параметры
 
@@ -24,4 +24,4 @@ editLink: false
 
 #### Возвращает
 
-`Awaitable`<``false`` \| `void` \| `ScrollPosition`\>
+`Awaitable`\<``false`` \| `void` \| `ScrollPosition`\>

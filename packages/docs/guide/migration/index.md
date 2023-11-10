@@ -211,7 +211,7 @@ app.config.globalProperties.append = (path, pathToAppend) =>
 - Теперь маршруты активны на основе записей о маршрутах, которые они представляют, а не на основе сгенерированных объектов местоположения маршрута и их свойств `path`, `query` и `hash`
 - Сопоставляется только секция `path`, `query` и `hash` больше не учитываются
 
-Если вы хотите настроить это поведение, например, учесть секцию `hash`, то для расширения `<router-link>` следует воспользоваться [`v-slot` API](/guide/advanced/composition-api#uselink).
+Если вы хотите настроить это поведение, например, учесть секцию `hash`, то для расширения `<router-link>` следует воспользоваться [`v-slot` API](/guide/advanced/composition-api#useLink).
 
 **Причина**: Подробнее см. изменения в [RFC о сопоставлении активных маршрутов](https://github.com/vuejs/rfcs/blob/master/active-rfcs/0028-router-active-link.md#summary).
 
@@ -221,7 +221,7 @@ app.config.globalProperties.append = (path, pathToAppend) =>
 
 ### Удаление `router.match` и изменение `router.resolve` %{#removal-of-router-match-and-changes-to-router-resolve}%
 
-И `router.match`, и `router.resolve` были объединены в `router.resolve` с несколько иной сигнатурой. [Более подробная информация приведена в API] (/api/interfaces/Router.md#Methods-resolve).
+И `router.match`, и `router.resolve` были объединены в `router.resolve` с несколько иной сигнатурой. [Более подробная информация приведена в API] (/api/interfaces/Router.md#resolve).
 
 **Причина**: Объединение нескольких методов, которые использовались для одной и той же цели.
 
@@ -438,7 +438,7 @@ const routes = [
 Дано любюе [нормализованное расположение маршрута](/api/interfaces/RouteLocationNormalized.md):
 
 - Значения в `path`, `fullPath` больше не декодируются. Они будут отображаться в том виде, в каком их предоставляет браузер (большинство браузеров предоставляют их в кодированном виде). Например, при прямой записи в адресной строке `https://example.com/hello world` будет получена кодированная версия: `https://example.com/hello%20world`, а `path` и `fullPath` будут иметь вид `/hello%20world`.
-- Теперь `hash` декодирован, что позволяет скопировать его: `router.push({ hash: $route.hash })` и использовать напрямую в опции `el` в [scrollBehavior](/api/interfaces/RouterOptions.md#Properties-scrollBehavior).
+- Теперь `hash` декодирован, что позволяет скопировать его: `router.push({ hash: $route.hash })` и использовать напрямую в опции `el` в [scrollBehavior](/api/interfaces/RouterOptions.md#scrollBehavior).
 - При использовании `push`, `resolve` и `replace` и указании в объекте местоположения `string` или свойства `path`, **они должны быть закодированы** (как и в предыдущей версии). С другой стороны, `params`, `query` и `hash` должны предоставляться в некодированном виде.
 - Теперь символ слэша (`/`) корректно декодируется внутри `params`, при этом в URL сохраняется его кодированная версия: `%2F`.
 

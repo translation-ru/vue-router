@@ -26,7 +26,7 @@ ___
 
 ### beforeEnter
 
-• **beforeEnter**: `undefined` \| [`NavigationGuardWithThis`](NavigationGuardWithThis.md)<`undefined`\> \| [`NavigationGuardWithThis`](NavigationGuardWithThis.md)<`undefined`\>[]
+• **beforeEnter**: `undefined` \| [`NavigationGuardWithThis`](NavigationGuardWithThis.md)\<`undefined`\> \| [`NavigationGuardWithThis`](NavigationGuardWithThis.md)\<`undefined`\>[]
 
 Зарегестрированный хук beforeEnter
 
@@ -42,7 +42,7 @@ ___
 
 ### components
 
-• **components**: `undefined` \| ``null`` \| `Record`<`string`, `RawRouteComponent`\>
+• **components**: `undefined` \| ``null`` \| `Record`\<`string`, `RawRouteComponent`\>
 
 Компоненты для отображения при совпадении URL-адреса с этим маршрутом. Можно использовать именованные представления.
 
@@ -50,7 +50,7 @@ ___
 
 ### instances
 
-• **instances**: `Record`<`string`, `undefined` \| ``null`` \| `ComponentPublicInstance`\>
+• **instances**: `Record`\<`string`, `undefined` \| ``null`` \| `ComponentPublicInstance`\>
 
 Смонтированные экземпляры компонентов маршрута
 Если в записи маршрута имеются экземпляры компонентов, что навигационные хуки beforeRouteUpdate и beforeRouteLeave могут быть вызваны только с последним установленным экземпляром приложения, если на странице существует несколько экземпляров приложений, которые рендерят одно и то же представление. В результате происходит фактическое дублирование содержимого на странице, что, как правило, не должно происходить. Однако это будет работать, если несколько приложений рендерят разные именованные представления.
@@ -83,7 +83,7 @@ ___
 
 ### props
 
-• **props**: `Record`<`string`, `_RouteRecordProps`\>
+• **props**: `Record`\<`string`, `_RouteRecordProps`\>
 
 Позволяет передавать параметры в качестве входных параметров компоненту, отображаемому с помощью `router-view`. Должен быть объектом с теми же ключами, что и `components`, или булевым значением, которое будет применяться к каждому компоненту.
 

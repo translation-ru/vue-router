@@ -6,7 +6,7 @@ editLink: false
 
 # Интерфейс: RouteLocationNormalized
 
-Аналогичен [RouteLocation](RouteLocation.md), но его [matched](RouteLocationNormalized.md#matched) не может содержать записей перенаправления
+Аналогичен [RouteLocation](RouteLocation.md), но его [RouteLocationNormalized.matched](RouteLocationNormalized.md#matched) не может содержать записей перенаправления
 
 ## Иерархия
 
