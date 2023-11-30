@@ -24,7 +24,7 @@ const routes = [
 
 Для связи с именованным маршрутом можно передать объект в качестве входного парамета `to` компонента `router-link`:
 
-```html
+```vue-html
 <router-link :to="{ name: 'user', params: { username: 'erina' }}">
   User
 </router-link>

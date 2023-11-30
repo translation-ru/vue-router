@@ -7,7 +7,7 @@
 
 想要在你的路径组件上使用转场，并对导航进行动画处理，你需要使用 [v-slot API](/guide/advanced/composition-api#uselink)：
 
-```html
+```vue-html
 <router-view v-slot="{ Component }">
   <transition name="fade">
     <component :is="Component" />
@@ -15,7 +15,7 @@
 </router-view>
 ```
 
-[Transition 的 API](https://v3.vuejs.org/guide/transitions-enterleave.html) 在这里同样适用。
+[Transition 的 API](https://cn.vuejs.org/guide/built-ins/transition.html) 在这里同样适用。
 
 ## 单个路由的过渡
 
@@ -36,7 +36,7 @@ const routes = [
 ]
 ```
 
-```html
+```vue-html
 <router-view v-slot="{ Component, route }">
   <!-- 使用任何自定义过渡和回退到 `fade` -->
   <transition :name="route.meta.transition || 'fade'">
@@ -49,7 +49,7 @@ const routes = [
 
 也可以根据目标路由和当前路由之间的关系，动态地确定使用的过渡。使用和刚才非常相似的片段：
 
-```html
+```vue-html
 <!-- 使用动态过渡名称 -->
 <router-view v-slot="{ Component, route }">
   <transition :name="route.meta.transition">
@@ -70,9 +70,9 @@ router.afterEach((to, from) => {
 
 ## 强制在复用的视图之间进行过渡
 
-Vue 可能会自动复用看起来相似的组件，从而忽略了任何过渡。幸运的是，可以[添加一个 `key` 属性](https://v3.vuejs.org/api/special-attributes.html#key)来强制过渡。这也允许你在相同路由上使用不同的参数触发过渡：
+Vue 可能会自动复用看起来相似的组件，从而忽略了任何过渡。幸运的是，可以[添加一个 `key` 属性](https://cn.vuejs.org/api/built-in-special-attributes.html#key)来强制过渡。这也允许你在相同路由上使用不同的参数触发过渡：
 
-```vue
+```vue-html
 <router-view v-slot="{ Component, route }">
   <transition name="fade">
     <component :is="Component" :key="route.path" />

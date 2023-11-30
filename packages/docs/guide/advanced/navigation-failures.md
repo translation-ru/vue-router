@@ -69,7 +69,7 @@ if (isNavigationFailure(failure, NavigationFailureType.aborted)) {
 ```ts
 router.afterEach((to, from, failure) => {
   if (failure) {
-    sendToAnalytics(to, from failure)
+    sendToAnalytics(to, from, failure)
   }
 })
 ```

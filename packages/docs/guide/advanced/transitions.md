@@ -5,9 +5,9 @@
   title="Узнайте все об анимациях перехода"
 />
 
-Для того чтобы использовать transitions в компонентах маршрута и анимировать навигацию, необходимо использовать v-slot API:
+Для того чтобы использовать transitions в компонентах маршрута и анимировать навигацию, необходимо использовать [слот `<RouterView>`](./router-view-slot):
 
-```html
+```vue-html
 <router-view v-slot="{ Component }">
   <transition name="fade">
     <component :is="Component" />
@@ -15,7 +15,7 @@
 </router-view>
 ```
 
-[Всё transition API](https://v3.vuejs.org/guide/transitions-enterleave.html) применимо и здесь.
+[Всё transition API](https://vuejs.org/guide/built-ins/transition.html) применимо и здесь.
 
 ## Анимация перехода для конкретных маршрутов %{#per-route-transition}%
 
@@ -36,7 +36,7 @@ const routes = [
 ]
 ```
 
-```html
+```vue-html
 <router-view v-slot="{ Component, route }">
   <!-- Используйте пользовательский переход анимации или `fade` -->
   <transition :name="route.meta.transition || 'fade'">
@@ -49,7 +49,7 @@ const routes = [
 
 Вы можете динамически определять используемый переход анимации, основываясь на связи между целевым и текущим маршрутами. Для этого используется фрагмент, очень похожий на предыдущий:
 
-```html
+```vue-html
 <!-- использование динамического имени перехода -->
 <router-view v-slot="{ Component, route }">
   <transition :name="route.meta.transition">
@@ -70,9 +70,9 @@ router.afterEach((to, from) => {
 
 ## Принудительная анимация перехода между повторно используемыми представлениями %{#forcing-a-transition-between-reused-views}%
 
-Vue может автоматически повторно использовать компоненты, когда это возможно, избегая каких-либо переходов анимации. К счастью, есть возможность [добавить атрибут `key`](https://v3.vuejs.org/api/special-attributes.html#key) для принудительного перехода анимации. Это также позволяет вызывать переходы, оставаясь на том же маршруте с разными параметрами:
+Vue может автоматически повторно использовать компоненты, когда это возможно, избегая каких-либо переходов анимации. К счастью, есть возможность [добавить атрибут `key`](https://vuejs.org/api/built-in-special-attributes.html#key) для принудительного перехода анимации. Это также позволяет вызывать переходы, оставаясь на том же маршруте с разными параметрами:
 
-```vue
+```vue-html
 <router-view v-slot="{ Component, route }">
   <transition name="fade">
     <component :is="Component" :key="route.path" />

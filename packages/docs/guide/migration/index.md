@@ -155,7 +155,7 @@ try {
 
 Теперь `transition` и `keep-alive` должны использоваться **внутри** `RouterView` через `v-slot` API:
 
-```vue
+```vue-html
 <router-view v-slot="{ Component }">
   <transition>
     <keep-alive>
@@ -171,7 +171,7 @@ try {
 
 Свойство `append` было удалено из `<router-link>`. Вместо этого можно вручную конкатенировать значение c существующим `path`:
 
-```html
+```vue-html
 замените
 <router-link to="child-route" append>to relative child</router-link>
 на это
@@ -193,7 +193,7 @@ app.config.globalProperties.append = (path, pathToAppend) =>
 
 Входные параметры `event` и `tag` были удалены из `<router-link>`. Для полной настройки `<router-link>` можно использовать [`v-slot`](/guide/advanced/composition-api#uselink) API:
 
-```html
+```vue-html
 замените
 <router-link to="/about" tag="span" event="dblclick">About Us</router-link>
 на это
@@ -277,7 +277,7 @@ router.app = app
 
 Раньше можно было напрямую передать шаблон для отображения через `<slot>` компонентов маршрута , вложив его в компонент `<router-view>`:
 
-```html
+```vue-html
 <router-view>
   <p>In Vue Router 3, I render inside the route component</p>
 </router-view>
@@ -285,7 +285,7 @@ router.app = app
 
 В связи с введением `v-slot` api для `<router-view>`, необходимо передавать его в `<component>`, используя `v-slot` API:
 
-```html
+```vue-html
 <router-view v-slot="{ Component }">
   <component :is="Component">
     <p>In Vue Router 3, I render inside the route component</p>

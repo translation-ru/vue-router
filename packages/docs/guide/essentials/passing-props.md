@@ -81,7 +81,7 @@ URL `/search?q=vue` будет передавать `{query: 'vue'}` в каче
 
 ## Через RouterView %{#Via-RouterView}%
 
-Также вы можете передать входные параметры напрямую через `<RouterView>`
+Вы также можете передать любые входные параметры через [слот `<RouterView>`](../advanced/router-view-slot):
 
 ```vue-html
 <RouterView v-slot="{ Component }">
@@ -89,7 +89,7 @@ URL `/search?q=vue` будет передавать `{query: 'vue'}` в каче
     :is="Component"
     view-prop="value"
    />
-</RouterView
+</RouterView>
 ```
 
 ::: warning Предупреждение
