@@ -5,7 +5,7 @@
   title="Узнайте, как использовать Vue Router с composition API"
 />
 
-Введение `setup` функции и Vue [Composition API](https://v3.vuejs.org/guide/composition-api-introduction.html) открывают новые возможности, но для того, чтобы полностью использовать потенциал Vue Router, нам необходимо использовать несколько новых функций для замены доступа к `this` и навигационным хукам в компонентах.
+Введение `setup` функции и Vue [Composition API](https://vuejs.org/guide/extras/composition-api-faq.html) открывают новые возможности, но для того, чтобы полностью использовать потенциал Vue Router, нам необходимо использовать несколько новых функций для замены доступа к `this` и навигационным хукам в компонентах.
 
 ## Доступ к маршрутизатору и текущему маршруту внутри `setup` функции %{#accessing-the-router-and-current-route-inside-setup}%
 

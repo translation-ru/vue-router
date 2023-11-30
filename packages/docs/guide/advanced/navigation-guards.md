@@ -265,7 +265,7 @@ beforeRouteLeave (to, from) {
 
 ### Использование с Composition API %{#using-the-composition-api}%
 
-Если вы пишете свой компонент, используя [composition API и функцию setup](https://v3.vuejs.org/guide/composition-api-setup.html#setup), вы можете добавить хуки изменения и покидания маршрута через `onBeforeRouteUpdate` и `onBeforeRouteLeave` соответственно. Дополнительные сведения можно найти в [разделе Composition API](./composition-api.md#navigation-guards).
+Если вы пишете свой компонент, используя [composition API и функцию setup](https://vuejs.org/api/composition-api-setup.html), вы можете добавить хуки изменения и покидания маршрута через `onBeforeRouteUpdate` и `onBeforeRouteLeave` соответственно. Дополнительные сведения можно найти в [разделе Composition API](./composition-api.md#navigation-guards).
 
 ## Полная цепочка обработки навигации %{#the-full-navigation-resolution-flow}%
 

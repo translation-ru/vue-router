@@ -7,7 +7,7 @@
 
 Иногда вам нужно отображать несколько представлений одновременно, а не вкладывать их друг в друга, например, создавать макет с представлением `sidebar` и `main`. В этом случае именованные представления пригодятся. Вместо одного единственного выхода в вашем представлении, вы можете иметь несколько и дать каждому из них имя. `router-view` без имени будет иметь имя `default`.
 
-```html
+```vue-html
 <router-view class="view left-sidebar" name="LeftSidebar"></router-view>
 <router-view class="view main-content"></router-view>
 <router-view class="view right-sidebar" name="RightSidebar"></router-view>
@@ -61,7 +61,7 @@ const router = createRouter({
 
 Секция `<template>` для компонента `UserSettings` в приведенном выше макете будет выглядеть примерно так:
 
-```html
+```vue-html
 <!-- UserSettings.vue -->
 <div>
   <h1>User Settings</h1>

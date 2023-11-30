@@ -146,6 +146,10 @@ export const ruConfig: LocaleSpecificConfig<DefaultTheme.Config> = {
               link: '/guide/advanced/composition-api.html',
             },
             {
+              text: 'Слот RouterView',
+              link: '/guide/advanced/router-view-slot.html',
+            },
+            {
               text: 'Анимация переходов',
               link: '/guide/advanced/transitions.html',
             },
