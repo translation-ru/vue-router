@@ -71,7 +71,24 @@ ___
 
 • `Опционально` **parseQuery**: (`search`: `string`) => [`LocationQuery`](../index.md#LocationQuery)
 
-#### Type declaration
+Пользовательская реализация для парсинга query. См. ее аналог,
+[RouterOptions.stringifyQuery](RouterOptions.md#stringifyQuery).
+
+**`Пример`**
+
+Допустим, вы хотите использовать пакет [qs](https://github.com/ljharb/qs)
+для парсинга query, вы можете предоставить как `parseQuery`, так и `stringifyQuery`:
+```js
+import qs from 'qs'
+
+createRouter({
+  // другие опции...
+  parseQuery: qs.parse,
+  stringifyQuery: qs.stringify,
+})
+```
+
+#### Объявление типа
 
 ▸ (`search`): [`LocationQuery`](../index.md#LocationQuery)
 
@@ -163,6 +180,9 @@ ___
 ### stringifyQuery
 
 • `Опционально` **stringifyQuery**: (`query`: [`LocationQueryRaw`](../index.md#LocationQueryRaw)) => `string`
+
+Пользовательская реализация для преобразования объекта запроса в строку query. Не должна добавлять начальный символ `?`.
+[parseQuery](RouterOptions.md#parseQuery) - противоположная функция для парсинга запроса.
 
 #### Объявление типа
 

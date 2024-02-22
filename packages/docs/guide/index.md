@@ -17,7 +17,8 @@ title="Узнайте, как создавать мощные одностран
   <p>
     <!-- используйте компонент router-link для навигации. -->
     <!-- укажите ссылку, передавая входной параметр `to`. -->
-    <!-- `<router-link>` создаст тег `<a>` с правильным атрибутом `href` -->
+    <!-- `<router-link>` создаст тег `<a>` с -->
+    <!-- правильным атрибутом `href` -->
     <router-link to="/">Go to Home</router-link>
     <router-link to="/about">Go to About</router-link>
   </p>
@@ -57,7 +58,8 @@ const routes = [
 // Здесь можно передать дополнительные опции, но давайте
 // пока оставим все так.
 const router = VueRouter.createRouter({
-  // 4. Предоставьте реализацию history для использования. Для простоты мы используем hash.
+  // 4. Предоставьте реализацию history для использования. 
+  // Для простоты мы используем hash.
   history: VueRouter.createWebHashHistory(),
   routes, // сокращение от `routes: routes`
 })
