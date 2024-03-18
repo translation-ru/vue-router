@@ -232,9 +232,9 @@ const routes = [
 - `beforeRouteUpdate`
 - `beforeRouteLeave`
 
-```js
-const UserDetails = {
-  template: `...`,
+```vue
+<script>
+export default {
   beforeRouteEnter(to, from) {
     // вызывается перед подтверждением маршрута, отображающего данный компонент.
     // НЕ имеет доступа к экземпляру компонента через `this`,
@@ -252,6 +252,7 @@ const UserDetails = {
     // Как и в случае с `beforeRouteUpdate`, он имеет доступ к экземпляру компонента `this`.
   },
 }
+</script>
 ```
 
 Хук `beforeRouteEnter` **НЕ** имеет доступа к `this`, потому что страж вызывается до подтверждения навигации, и, следовательно, новый компонент, который рендерит этот маршрут, еще не был создан.
@@ -286,7 +287,7 @@ beforeRouteLeave (to, from) {
 
 ### Использование с Composition API %{#using-the-composition-api}%
 
-Если вы пишете свой компонент, используя [composition API и функцию setup](https://vuejs.org/api/composition-api-setup.html), вы можете добавить хуки изменения и покидания маршрута через `onBeforeRouteUpdate` и `onBeforeRouteLeave` соответственно. Дополнительные сведения можно найти в [разделе Composition API](./composition-api.md#navigation-guards).
+Если вы пишете свой компонент, используя Composition API, вы можете добавить хуки изменения и покидания маршрута через `onBeforeRouteUpdate` и `onBeforeRouteLeave` соответственно. Дополнительные сведения можно найти в [разделе Composition API](./composition-api.md#navigation-guards).
 
 ## Полная цепочка обработки навигации %{#the-full-navigation-resolution-flow}%
 

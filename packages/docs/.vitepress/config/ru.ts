@@ -96,6 +96,10 @@ export const ruConfig: LocaleSpecificConfig<DefaultTheme.Config> = {
               link: '/guide/essentials/route-matching-syntax.html',
             },
             {
+              text: 'Именованные представления',
+              link: '/guide/essentials/named-views.html',
+            },
+            {
               text: 'Вложенные маршруты',
               link: '/guide/essentials/nested-routes.html',
             },
@@ -106,10 +110,6 @@ export const ruConfig: LocaleSpecificConfig<DefaultTheme.Config> = {
             {
               text: 'Именованные маршруты',
               link: '/guide/essentials/named-routes.html',
-            },
-            {
-              text: 'Именованные представления',
-              link: '/guide/essentials/named-views.html',
             },
             {
               text: 'Перенаправление и псевдонимы',

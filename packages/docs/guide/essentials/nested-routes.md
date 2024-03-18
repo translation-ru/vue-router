@@ -22,16 +22,24 @@
 
 В качестве примера можно привести приложение, созданное нами в предыдущей главе:
 
-```html
-<div id="app">
-  <router-view></router-view>
-</div>
+```vue
+<!-- App.vue -->
+<template>
+  <router-view />
+</template>
+```
+
+```vue
+<!-- User.vue -->
+<template>
+  <div>
+    User {{ $route.params.id }}
+  </div>
+</template>
 ```
 
 ```js
-const User = {
-  template: '<div>User {{ $route.params.id }}</div>',
-}
+import User from './User.vue'
 
 // маршруты передаются в `createRouter`
 const routes = [{ path: '/user/:id', component: User }]
@@ -39,15 +47,14 @@ const routes = [{ path: '/user/:id', component: User }]
 
 Здесь `<router-view>` - это `router-view` верхнего уровня. Он отображает компонент, соответствующий маршруту верхнего уровня. Аналогично, рендеримый компонент может содержать собственные вложенные `<router-view>`. Например, если мы добавим его внутрь шаблона компонента `User`:
 
-```js
-const User = {
-  template: `
-    <div class="user">
-      <h2>User {{ $route.params.id }}</h2>
-      <router-view></router-view>
-    </div>
-  `,
-}
+```vue
+<!-- User.vue -->
+<template>
+  <div class="user">
+    <h2>User {{ $route.params.id }}</h2>
+    <router-view />
+  </div>
+</template>
 ```
 
 Чтобы рендерить компоненты в этот вложенный `router-view`, необходимо использовать опцию `children` в любом из маршрутов:

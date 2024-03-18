@@ -8,9 +8,7 @@
 Очень часто нам придется сопоставлять маршруты с заданным шаблоном с одним и тем же компонентом. Например, у нас может быть компонент `User`, который должен отображаться для всех пользователей, но с разными ID пользователей. Во Vue Router мы можем использовать динамический сегмент в маршруте, чтобы достич этого, Этот сегмент называется _параметром (param)_:
 
 ```js
-const User = {
-  template: '<div>User</div>',
-}
+import User from './User.vue'
 
 // маршруты передаются в `createRouter`.
 const routes = [
@@ -21,22 +19,25 @@ const routes = [
 
 Теперь URL-адреса типа `/users/johnny` и `/users/jolyne` будут сопоставляться с одним и тем же маршрутом.
 
-_Параметр_ обозначается двоеточием `:`. Когда маршрут найден, значение его _параметров_ будет раскрываться как `this.$route.params` в каждом компоненте. Таким образом, мы можем вывести ID текущего пользователя, обновив шаблон `User` на следующий:
+_Параметр_ обозначается двоеточием `:`. Когда маршрут найден, значение его _параметров_ будет раскрываться как `route.params` в каждом компоненте. Таким образом, мы можем вывести ID текущего пользователя, обновив шаблон `User` на следующий:
 
-```js
-const User = {
-  template: '<div>User {{ $route.params.id }}</div>',
-}
+```vue
+<template>
+  <div>
+    <!-- The current route is accessible as $route in the template -->
+    User {{ $route.params.id }}
+  </div>
+</template>
 ```
 
-В одном маршруте может быть несколько _параметров_, которые будут сопоставлены с соответствующими полями в `$route.params`. Примеры:
+В одном маршруте может быть несколько _параметров_, которые будут сопоставлены с соответствующими полями в `route.params`. Примеры:
 
-| шаблон                         | сопоставленный путь      | \$route.params                           |
+| шаблон                         | сопоставленный путь      | route.params                           |
 | ------------------------------ | ------------------------ | ---------------------------------------- |
 | /users/:username               | /users/eduardo           | `{ username: 'eduardo' }`                |
 | /users/:username/posts/:postId | /users/eduardo/posts/123 | `{ username: 'eduardo', postId: '123' }` |
 
-Помимо `$route.params`, объект `$route` также предоставляет другую полезную информацию, такую как `$route.query` (если есть query в URL), `$route.hash` и так далее. Вы можете ознакомиться с полными деталями в [справочнике по API](../../api/interfaces/RouteLocationNormalized.md).
+Помимо `route.params`, объект `route` также предоставляет другую полезную информацию, такую как `route.query` (если есть query в URL), `route.hash` и так далее. Вы можете ознакомиться с полными деталями в [справочнике по API](../../api/interfaces/RouteLocationNormalized.md).
 
 Рабочую демонстрацию этого примера можно найти [здесь](https://codesandbox.io/s/route-params-vue-router-examples-mlb14?from-embed&initialpath=%2Fusers%2Feduardo%2Fposts%2F1).
 
@@ -57,33 +58,69 @@ const User = {
 
 Следует отметить, что при использовании маршрутов с параметрами, когда пользователь переходит с `/users/johnny` на `/users/jolyne`, будет использоваться тот же экземпляр компонента. Поскольку оба маршрута отображают один и тот же компонент, это более эффективно, чем уничтожение старого экземпляра и создание нового. **Однако это также означает, что хуки жизненного цикла компонента не будут вызваны**.
 
-Для реагирования на изменения параметров в том же компоненте, вы можете просто следить за любым свойством объекта `$route`, в данном случае за `$route.params`:
+Для реагирования на изменения параметров в том же компоненте, вы можете просто следить за любым свойством объекта `route`, в данном случае за `route.params`:
 
-```js
-const User = {
-  template: '...',
+::: code-group
+
+```vue [Composition API]
+<script setup>
+import { watch } from 'vue'
+import { useRoute } from 'vue-router'
+
+const route = useRoute()
+
+watch(() => route.params.id, (newId, oldId) => {
+   // обработка изменения параметров маршрута...
+})
+</script>
+```
+
+```vue [Options API]
+<script>
+export default {
   created() {
     this.$watch(
-      () => this.$route.params,
-      (toParams, previousParams) => {
-        // обработка изменения параметров маршрута...
+      () => this.$route.params.id,
+      (newId, oldId) => {
+         // обработка изменения параметров маршрута...
       }
     )
   },
 }
+</script>
 ```
+
+:::
 
 Или воспользуйтесь [хуком навигации](../advanced/navigation-guards.md) `beforeRouteUpdate`, который также позволяет отменить навигацию:
 
-```js
-const User = {
-  template: '...',
+::: code-group
+
+```vue [Composition API]
+<script setup>
+import { onBeforeRouteUpdate } from 'vue-router'
+// ...
+
+onBeforeRouteUpdate(async (to, from) => {
+ // обработка изменения параметров маршрута...
+  userData.value = await fetchUser(to.params.id)
+})
+</script>
+```
+
+```vue [Options API]
+<script>
+export default {
   async beforeRouteUpdate(to, from) {
     // обработка изменения параметров маршрута...
     this.userData = await fetchUser(to.params.id)
   },
+  // ...
 }
+</script>
 ```
+
+:::
 
 ## Страница ошибки 404 / отслеживание ненайденных маршрутов %{#сatch-all-404-not-found-route}%
 
@@ -96,9 +133,9 @@ const User = {
 
 ```js
 const routes = [
-  // будет сопоставляться всем маршрутам и будет помещено в `$route.params.pathMatch`.
+  // будет сопоставляться всем маршрутам и будет помещено в `route.params.pathMatch`.
   { path: '/:pathMatch(.*)*', name: 'NotFound', component: NotFound },
-  // будет сопоставляться всему, что начинается с `/user-`, и будет помещено в `$route.params.afterUser`.
+  // будет сопоставляться всему, что начинается с `/user-`, и будет помещено в `route.params.afterUser`.
   { path: '/user-:afterUser(.*)', component: UserGeneric },
 ]
 ```
@@ -106,13 +143,13 @@ const routes = [
 В данном конкретном случае мы используем [пользовательское регулярное выражение](./route-matching-syntax.md#custom-regexp-in-params), заключенное в круглые скобки, и помечаем параметр `pathMatch` как [опционально повторяемый](./route-matching-syntax.md#optional-parameters). Это позволяет нам при необходимости перейти прямо к этому маршруту, разбив `path` на массив:
 
 ```js
-this.$router.push({
+router.push({
   name: 'NotFound',
   // сохранить текущий путь и удалить первый символ, чтобы целевой URL не начинался с `//`.
-  params: { pathMatch: this.$route.path.substring(1).split('/') },
+  params: { pathMatch: route.path.substring(1).split('/') },
   // сохраняем существующий запрос и хэш, если таковой имеется
-  query: this.$route.query,
-  hash: this.$route.hash,
+  query: route.query,
+  hash: route.hash,
 })
 ```
 

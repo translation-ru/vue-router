@@ -5,25 +5,63 @@
   title="Узнайте, как передавать входные параметры компонентам маршрута"
 />
 
-Использование `$route` в компоненте создает тесную связь с маршрутом, что ограничивает гибкость компонента, так как его можно использовать только на определенных URL-адресах. Хотя это не обязательно плохо, мы можем изменить это поведение с помощью опции `props`:
+Использование `$route` или `useRoute()` в компоненте создает тесную связь с маршрутом, что ограничивает гибкость компонента, так как его можно использовать только на определенных URL-адресах. Хотя это не обязательно плохо, мы можем изменить это поведение с помощью опции `props`:
 
-Мы можем заменить
+Давайте вернемся к нашему предыдущему примеру:
 
-```js
-const User = {
-  template: '<div>User {{ $route.params.id }}</div>',
-}
-const routes = [{ path: '/user/:id', component: User }]
+```vue
+<!-- User.vue -->
+<template>
+  <div>User {{ $route.params.id }}</div>
+</template>
 ```
 
-на
+маршрутизатор:
 
 ```js
-const User = {
-  // обязательно добавьте входной параметр, названный точно так же, как параметр маршрута
-  props: ['id'],
-  template: '<div>User {{ id }}</div>'
+import User from './User.vue'
+
+// передается в  `createRouter`.
+const routes = [{ path: '/users/:id', component: User }]
+```
+
+Мы можем устранить прямую зависимость от `$route` в `User.vue`, объявив вместо этого входной параметр:
+
+::: code-group
+
+```vue [Composition API]
+<!-- User.vue -->
+<script setup>
+defineProps({
+  id: String
+})
+</script>
+
+<template>
+  <div>User {{ id }}</div>
+</template>
+```
+
+```vue [Options API]
+<!-- User.vue -->
+<script>
+export default {
+  props: {
+    id: String
+  },
 }
+</script>
+
+<template>
+  <div>User {{ id }}</div>
+</template>
+```
+
+:::
+
+Затем мы можем настроить маршрут на передачу параметра `id` в качестве входного параметра, установив `props: true`:
+
+```js
 const routes = [{ path: '/user/:id', component: User, props: true }]
 ```
 

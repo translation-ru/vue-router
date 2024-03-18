@@ -2,18 +2,6 @@
 
 <VueMasteryLogoLink></VueMasteryLogoLink>
 
-## Прямое скачивание / CDN %{#direct-download-cdn}%
-
-[https://unpkg.com/vue-router@4](https://unpkg.com/vue-router@4)
-
-<!--email_off-->
-
-[Unpkg.com](https://unpkg.com) предоставляет ссылки на CDN, основанные на npm. Ссылка выше всегда будет указывать на последний релиз на npm. Вы также можете использовать конкретную версию/тег с помощью URL-адресов, например https://unpkg.com/vue-router@4.0.15/dist/vue-router.global.js.
-
-<!--/email_off-->
-
-Это предоставит доступ к Vue Router через глобальный объект `VueRouter`, например, `VueRouter.createRouter(...)`.
-
 ## Пакетные менеджеры %{#Package-managers}%
 
 Если у вас уже есть проект, использующий менеджер пакетов JavaScript, вы можете установить Vue Router из реестра npm:
@@ -55,3 +43,15 @@ pnpm create vue
 Вам будет предложено ответить на несколько вопросов о том, какой проект вы хотите создать. Если вы решите установить Vue Router, пример приложения также продемонстрирует некоторые из основных возможностей Vue Router.
 
 Проекты, использующие менеджеры пакетов, обычно используют ES-модули для доступа к Vue Router, например, `import { createRouter } from 'vue-router'`.
+
+## Прямое скачивание / CDN %{#direct-download-cdn}%
+
+[https://unpkg.com/vue-router@4](https://unpkg.com/vue-router@4)
+
+<!--email_off-->
+
+[Unpkg.com](https://unpkg.com) предоставляет ссылки на CDN, основанные на npm. Ссылка выше всегда будет указывать на последний релиз на npm. Вы также можете использовать конкретную версию/тег с помощью URL-адресов, например https://unpkg.com/vue-router@4.0.15/dist/vue-router.global.js.
+
+<!--/email_off-->
+
+Это предоставит доступ к Vue Router через глобальный объект `VueRouter`, например, `VueRouter.createRouter(...)`.
