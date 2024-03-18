@@ -10,14 +10,16 @@
 
 ## Получение данных после перехода %{#fetching-after-navigation}%
 
-При таком подходе мы сразу же осуществляем переход и рендеринг компонента маршрута, а данные получаем в хуке `created` компонента. Это дает нам возможность отображать состояние загрузки, пока данные пересылаются по сети, а также по-разному обрабатывать загрузку для каждого представления.
+При таком подходе мы сразу же осуществляем переход и рендеринг компонента маршрута, а данные получаем в самом компоненте. Это дает нам возможность отображать состояние загрузки, пока данные пересылаются по сети, а также по-разному обрабатывать загрузку для каждого представления.
 
-Предположим, что у нас есть компонент `Post`, которому необходимо получить данные для поста на основе `$route.params.id`:
+Предположим, что у нас есть компонент `Post`, которому необходимо получить данные для поста на основе `route.params.id`:
 
-```html
+::: code-group
+
+```vue [Composition API]
 <template>
   <div class="post">
-    <div v-if="loading" class="loading">Loading...</div>
+    <div v-if="loading" class="loading">Загрузка...</div>
 
     <div v-if="error" class="error">{{ error }}</div>
 
@@ -27,9 +29,55 @@
     </div>
   </div>
 </template>
+
+<script setup>
+import { ref, watch } from 'vue'
+import { useRoute } from 'vue-router'
+import { getPost } from './api.js'
+
+const route = useRoute()
+
+const loading = ref(false)
+const post = ref(null)
+const error = ref(null)
+
+// наблюдение за  параметром маршрута, чтобы снова получить данные
+// watch the params of the route to fetch the data again
+watch(() => route.params.id, fetchData, { immediate: true })
+
+async function fetchData(id) {
+  error.value = post.value = null
+  loading.value = true
+
+  try {
+    // замените `getPost` на вашу утилиту для получения данных / обертку API
+    post.value = await getPost(id)
+  } catch (err) {
+    error.value = err.toString()
+  } finally {
+    loading.value = false
+  }
+}
+</script>
 ```
 
-```js
+```vue [Options API]
+<template>
+  <div class="post">
+    <div v-if="loading" class="loading">Загрузка...</div>
+
+    <div v-if="error" class="error">{{ error }}</div>
+
+    <div v-if="post" class="content">
+      <h2>{{ post.title }}</h2>
+      <p>{{ post.body }}</p>
+    </div>
+  </div>
+</template>
+
+<script>
+import { getPost } from './api.js'
+
 export default {
   data() {
     return {
@@ -42,33 +90,33 @@ export default {
     // следить за изменениями параметров маршрута
     // для повторной загрузки данных
     this.$watch(
-      () => this.$route.params,
-      () => {
-        this.fetchData()
-      },
+      () => this.$route.params.id,
+      this.fetchData,
       // получать данные, когда представление создано и данные
       // уже реактивно отслеживаются
       { immediate: true }
     )
   },
   methods: {
-    fetchData() {
+    async fetchData(id) {
       this.error = this.post = null
       this.loading = true
-      // замените `getPost` на вашу утилиту для
-      // получения данных / доступа к API
-      getPost(this.$route.params.id, (err, post) => {
+
+      try {
+        // замените `getPost` на вашу утилиту для получения данных / доступа к API
+        this.post = await getPost(id)
+      } catch (err) {
+        this.error = err.toString()
+      } finally {
         this.loading = false
-        if (err) {
-          this.error = err.toString()
-        } else {
-          this.post = post
-        }
-      })
+      }
     },
   },
 }
+</script>
 ```
+
+:::
 
 ## Получение данных перед переходом %{#fetching-before-navigation}%
 
@@ -82,29 +130,28 @@ export default {
       error: null,
     }
   },
-  beforeRouteEnter(to, from, next) {
-    getPost(to.params.id, (err, post) => {
-      // `setData` - это метод, определенный ниже
-      next(vm => vm.setData(err, post))
-    })
+  async beforeRouteEnter(to, from, next) {
+    try {
+      const post = await getPost(to.params.id)
+      // `setPost` - это метод, определенный ниже
+      next(vm => vm.setPost(post))
+    } catch (err) {
+      // `setError` - это метод, определенный ниже
+      next(vm => vm.setError(err))
+    }
   },
   // когда маршрут изменяется, а этот компонент уже отрисован,
   // логика будет несколько иной.
-  async beforeRouteUpdate(to, from) {
+  beforeRouteUpdate(to, from) {
     this.post = null
-    try {
-      this.post = await getPost(to.params.id)
-    } catch (error) {
-      this.error = error.toString()
-    }
+    getPost(to.params.id).then(this.setPost).catch(this.setError)
   },
   methods: {
-    setData(error, post) {
-      if (error) {
-        this.error = error
-      } else {
-        this.post = post
-      }
+    setPost(post) {
+      this.post = post
+    },
+    setError(err) {
+      this.error = err.toString()
     }
   }
 }

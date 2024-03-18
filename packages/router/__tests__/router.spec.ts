@@ -330,6 +330,22 @@ describe('Router', () => {
     expect(route1.params).toEqual({ p: 'a' })
   })
 
+  it('warns on undefined location during dev', async () => {
+    const { router } = await newRouter()
+
+    const route1 = router.resolve(undefined as any)
+    expect('router.resolve() was passed an invalid location').toHaveBeenWarned()
+    expect(route1.path).toBe('/')
+  })
+
+  it('warns on null location during dev', async () => {
+    const { router } = await newRouter()
+
+    const route1 = router.resolve(null as any)
+    expect('router.resolve() was passed an invalid location').toHaveBeenWarned()
+    expect(route1.path).toBe('/')
+  })
+
   it('removes null/undefined optional params when current location has it', async () => {
     const { router } = await newRouter()
 
@@ -1075,6 +1091,23 @@ describe('Router', () => {
       expect(router.currentRoute.value).toMatchObject({
         name: 'Param',
       })
+    })
+
+    it('warns when the parent route is missing', async () => {
+      const { router } = await newRouter()
+      router.addRoute('parent-route', {
+        path: '/p',
+        component: components.Foo,
+      })
+      expect(
+        'Parent route "parent-route" not found when adding child route'
+      ).toHaveBeenWarned()
+    })
+
+    it('warns when removing a missing route', async () => {
+      const { router } = await newRouter()
+      router.removeRoute('route-name')
+      expect('Cannot remove non-existent route "route-name"').toHaveBeenWarned()
     })
   })
 })

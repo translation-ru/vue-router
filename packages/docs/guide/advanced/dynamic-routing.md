@@ -30,8 +30,7 @@ router.addRoute({ path: '/about', component: About })
 
 ```js
 router.addRoute({ path: '/about', component: About })
-// мы также могли бы использовать this.$route или
-// route = useRoute() (внутри setup)
+// мы также могли бы использовать this.$route или useRoute()
 router.replace(router.currentRoute.value.fullPath)
 ```
 
