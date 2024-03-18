@@ -5,7 +5,7 @@ const i18nLabels: {
 } = {
   en: 'The translation is synced to the docs on ${date} of which the commit hash is <code>${hash}</code>.',
   zh: '该翻译已同步到了 ${date} 的版本，其对应的 commit hash 是 <code>${hash}</code>。',
-  ru: 'Перевод синхронизирован с документацией от ${date}, хэш коммита которой <code>${hash}</code>.',
+  ru: 'Перевод синхронизирован с документацией от ${date}, хэш коммита <code>${hash}</code>.',
 }
 </script>
 
