@@ -57,7 +57,7 @@ export const ruConfig: LocaleSpecificConfig<DefaultTheme.Config> = {
           },
           {
             text: 'Сертификация по Vue.js',
-            link: 'https://certification.vuejs.org/?friend=VUEROUTER',
+            link: 'https://certificates.dev/vuejs/?friend=VUEROUTER&utm_source=router_vuejs&utm_medium=link&utm_campaign=router_vuejs_links&utm_content=navbar',
           },
         ],
       },
@@ -81,7 +81,6 @@ export const ruConfig: LocaleSpecificConfig<DefaultTheme.Config> = {
         },
         {
           text: 'Основы',
-          collapsible: false,
           items: [
             {
               text: 'Начало работы',
@@ -120,6 +119,10 @@ export const ruConfig: LocaleSpecificConfig<DefaultTheme.Config> = {
               link: '/guide/essentials/passing-props.html',
             },
             {
+              text: 'Active links',
+              link: '/guide/essentials/active-links.html',
+            },
+            {
               text: 'Режимы History',
               link: '/guide/essentials/history-mode.html',
             },
@@ -127,7 +130,6 @@ export const ruConfig: LocaleSpecificConfig<DefaultTheme.Config> = {
         },
         {
           text: 'Продвинутые темы',
-          collapsible: false,
           items: [
             {
               text: 'Навигационные хуки',

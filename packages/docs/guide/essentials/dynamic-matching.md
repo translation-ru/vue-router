@@ -32,7 +32,7 @@ _Параметр_ обозначается двоеточием `:`. Когда
 
 В одном маршруте может быть несколько _параметров_, которые будут сопоставлены с соответствующими полями в `route.params`. Примеры:
 
-| шаблон                         | сопоставленный путь      | route.params                           |
+| шаблон                         | сопоставленный путь      | route.params                             |
 | ------------------------------ | ------------------------ | ---------------------------------------- |
 | /users/:username               | /users/eduardo           | `{ username: 'eduardo' }`                |
 | /users/:username/posts/:postId | /users/eduardo/posts/123 | `{ username: 'eduardo', postId: '123' }` |
@@ -69,9 +69,12 @@ import { useRoute } from 'vue-router'
 
 const route = useRoute()
 
-watch(() => route.params.id, (newId, oldId) => {
-   // обработка изменения параметров маршрута...
-})
+watch(
+  () => route.params.id,
+  (newId, oldId) => {
+    // обработка изменения параметров маршрута...
+  }
+)
 </script>
 ```
 
@@ -82,7 +85,7 @@ export default {
     this.$watch(
       () => this.$route.params.id,
       (newId, oldId) => {
-         // обработка изменения параметров маршрута...
+        // обработка изменения параметров маршрута...
       }
     )
   },
@@ -92,7 +95,7 @@ export default {
 
 :::
 
-Или воспользуйтесь [хуком навигации](../advanced/navigation-guards.md) `beforeRouteUpdate`, который также позволяет отменить навигацию:
+Или воспользуйтесь [хуком навигации](../advanced/navigation-guards.md) `beforeRouteUpdate`, который также позволяет вам отменить навигацию:
 
 ::: code-group
 
@@ -102,7 +105,7 @@ import { onBeforeRouteUpdate } from 'vue-router'
 // ...
 
 onBeforeRouteUpdate(async (to, from) => {
- // обработка изменения параметров маршрута...
+  // обработка изменения параметров маршрута...
   userData.value = await fetchUser(to.params.id)
 })
 </script>
