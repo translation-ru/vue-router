@@ -119,7 +119,7 @@ export const ruConfig: LocaleSpecificConfig<DefaultTheme.Config> = {
               link: '/guide/essentials/passing-props.html',
             },
             {
-              text: 'Активные сссылки',
+              text: 'Активные ссылки',
               link: '/guide/essentials/active-links.html',
             },
             {
