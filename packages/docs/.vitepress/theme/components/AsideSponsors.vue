@@ -50,9 +50,9 @@ const asideSponsors = computed(() => {
   >
     <img width="22" height="22" src="/mp-pinia-logo.svg" />
     <span>
-      <p class="extra-info">Complete guide to</p>
+      <p class="extra-info">Полное руководство по</p>
       <p class="heading">Mastering Pinia</p>
-      <p class="extra-info">written by its creator</p>
+      <p class="extra-info">написанное его создателем</p>
     </span>
   </a>
 
@@ -63,9 +63,9 @@ const asideSponsors = computed(() => {
   >
     <img width="22" height="22" src="/vue-cert-logo.svg" />
     <span>
-      <p class="extra-info">The official</p>
-      <p class="heading">Vue.js Certification</p>
-      <p class="extra-info">Get certified!</p>
+      <p class="extra-info">Официальная</p>
+      <p class="heading">Сертификация Vue.js</p>
+      <p class="extra-info">Получите сертификат!</p>
     </span>
   </a>
 </template>
