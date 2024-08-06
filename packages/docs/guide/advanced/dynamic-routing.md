@@ -20,7 +20,7 @@ const router = createRouter({
 })
 ```
 
-Перейдите на любую страницу, `/about`, `/store` или `/3-tricks-to-improve-your-routing-code`. Переход навигации закончится отрисовкой компонента `Article`. Если мы находимся на странице `/about` и добавляем новый маршрут:
+Перейдите на любую страницу, например, `/about`, `/store` или `/3-tricks-to-improve-your-routing-code`. Переход навигации закончится отрисовкой компонента `Article`. Если мы находимся на странице `/about` и добавляем новый маршрут:
 
 ```js
 router.addRoute({ path: '/about', component: About })
@@ -113,5 +113,5 @@ router.addRoute({
 
 Vue Router предоставляет две функции для просмотра существующих маршрутов:
 
-- [`router.hasRoute()`](/api/interfaces/Router.md#hasRoute): проверка на существования маршрута
+- [`router.hasRoute()`](/api/interfaces/Router.md#hasRoute): проверка на существования маршрута.
 - [`router.getRoutes()`](/api/interfaces/Router.md#getRoutes): получение массива всех маршруты.

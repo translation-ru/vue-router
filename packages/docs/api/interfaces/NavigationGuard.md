@@ -6,22 +6,22 @@ editLink: false
 
 # Интерфейс: NavigationGuard
 
-Навигационный хук. См. [Навигационные хуки](/guide/advanced/navigation-guards.md).
+Навигационный хук.
 
 ## Вызов
 
 ### NavigationGuard
 
-▸ **NavigationGuard**(`to`, `from`, `next`): `NavigationGuardReturn` \| `Promise`\<`NavigationGuardReturn`\>
+▸ **NavigationGuard**(`to`, `from`, `next`): [`_Awaitable`](../index.md#_Awaitable)\<[`NavigationGuardReturn`](../index.md#NavigationGuardReturn)\>
 
 #### Параметры
 
-| Название | Тип                                                     |
-| :------- | :------------------------------------------------------ |
-| `to`     | [`RouteLocationNormalized`](RouteLocationNormalized.md) |
-| `from`   | [`RouteLocationNormalized`](RouteLocationNormalized.md) |
-| `next`   | [`NavigationGuardNext`](NavigationGuardNext.md)         |
+| Название | Тип                                                                               |
+| :------- | :-------------------------------------------------------------------------------- |
+| `to`     | [`RouteLocationNormalizedGeneric`](RouteLocationNormalizedGeneric.md)             |
+| `from`   | [`RouteLocationNormalizedLoadedGeneric`](RouteLocationNormalizedLoadedGeneric.md) |
+| `next`   | [`NavigationGuardNext`](NavigationGuardNext.md)                                   |
 
 #### Возвращает
 
-`NavigationGuardReturn` \| `Promise`\<`NavigationGuardReturn`\>
+[`_Awaitable`](../index.md#_Awaitable)\<[`NavigationGuardReturn`](../index.md#NavigationGuardReturn)\>

@@ -6,20 +6,22 @@ editLink: false
 
 # Интерфейс: NavigationHookAfter
 
+Навигационный хук срабатывает после завершения навигации.
+
 ## Вызов
 
 ### NavigationHookAfter
 
-▸ **NavigationHookAfter**(`to`, `from`, `failure?`): `any`
+▸ **NavigationHookAfter**(`to`, `from`, `failure?`): `unknown`
 
 #### Параметры
 
-| Название   | Тип                                                     |
-| :--------- | :------------------------------------------------------ |
-| `to`       | [`RouteLocationNormalized`](RouteLocationNormalized.md) |
-| `from`     | [`RouteLocationNormalized`](RouteLocationNormalized.md) |
-| `failure?` | `void` \| [`NavigationFailure`](NavigationFailure.md)   |
+| Название | Тип |
+| :------ | :------ |
+| `to` | [`RouteLocationNormalizedGeneric`](RouteLocationNormalizedGeneric.md) |
+| `from` | [`RouteLocationNormalizedLoadedGeneric`](RouteLocationNormalizedLoadedGeneric.md) |
+| `failure?` | `void` \| [`NavigationFailure`](NavigationFailure.md) |
 
 #### Возвращает
 
-`any`
+`unknown`

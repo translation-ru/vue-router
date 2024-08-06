@@ -16,11 +16,11 @@ editLink: false
 
 #### Параметры
 
-| Название        | Тип                                                                 | Описание                                                            |
-| :-------------- | :------------------------------------------------------------------ | :------------------------------------------------------------------ |
-| `to`            | [`RouteLocationNormalized`](RouteLocationNormalized.md)             | Описание маршрута, откуда производился переход                      |
-| `from`          | [`RouteLocationNormalizedLoaded`](RouteLocationNormalizedLoaded.md) | Описание маршрута, куда был произведен переход                      |
-| `savedPosition` | ``null`` \| `_ScrollPositionNormalized`                               | сохраненная позиция, если она существует, `null` в противном случае |
+| Название | Тип | Описание |
+| :------ | :------ | :------ |
+| `to` | [`RouteLocationNormalizedGeneric`](RouteLocationNormalizedGeneric.md) | Описание маршрута, откуда производился переход |
+| `from` | [`RouteLocationNormalizedLoadedGeneric`](RouteLocationNormalizedLoadedGeneric.md) | Описание маршрута, куда был произведен переход |
+| `savedPosition` | ``null`` \| `_ScrollPositionNormalized` | сохраненная позиция, если она существует, `null` в противном случае |
 
 #### Возвращает
 

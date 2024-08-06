@@ -37,7 +37,7 @@ _Параметр_ обозначается двоеточием `:`. Когда
 | /users/:username               | /users/eduardo           | `{ username: 'eduardo' }`                |
 | /users/:username/posts/:postId | /users/eduardo/posts/123 | `{ username: 'eduardo', postId: '123' }` |
 
-Помимо `route.params`, объект `route` также предоставляет другую полезную информацию, такую как `route.query` (если есть query в URL), `route.hash` и так далее. Вы можете ознакомиться с полными деталями в [справочнике по API](../../api/interfaces/RouteLocationNormalized.md).
+Помимо `route.params`, объект `route` также предоставляет другую полезную информацию, такую как `route.query` (если есть query в URL), `route.hash` и так далее. Вы можете ознакомиться с полными деталями в [справочнике по API](../../api/#RouteLocationNormalized).
 
 Рабочую демонстрацию этого примера можно найти [здесь](https://codesandbox.io/s/route-params-vue-router-examples-mlb14?from-embed&initialpath=%2Fusers%2Feduardo%2Fposts%2F1).
 

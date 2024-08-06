@@ -96,7 +96,7 @@ ___
 
 ### name
 
-• `Опционально` **name**: [`RouteRecordName`](../index.md#RouteRecordName)
+• `Опционально` **name**: [`RouteRecordNameGeneric`](../index.md#RouteRecordNameGeneric)
 
 Имя для записи маршрута. Должно быть уникальным.
 
@@ -126,7 +126,7 @@ ___
 
 ### props
 
-• `Опционально` **props**: `_RouteRecordProps`
+• `Опционально` **props**: [`_RouteRecordProps`](../index.md#_RouteRecordProps)
 
 Позволяет передавать параметры в качестве входных параметров компоненту, отображаемому через `router-view`.
 
@@ -138,7 +138,7 @@ ___
 
 ### redirect
 
-• `Опционально` **redirect**: `RouteRecordRedirectOption`
+• `Опционально` **redirect**: [`RouteRecordRedirectOption`](../index.md#RouteRecordRedirectOption)
 
 Куда перенаправлять, если маршрут напрямую совпадает. Перенаправление происходит перед любым навигационным хуком и запускает новую навигацию с новым целевым местоположением.
 

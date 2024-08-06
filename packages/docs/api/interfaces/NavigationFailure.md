@@ -28,7 +28,7 @@ ___
 
 ### from
 
-• **from**: [`RouteLocationNormalized`](RouteLocationNormalized.md)
+• **from**: [`RouteLocationNormalizedGeneric`](RouteLocationNormalizedGeneric.md)
 
 Адрес маршрута, от которого начинается переход навигации
 
@@ -66,7 +66,7 @@ ___
 
 ### to
 
-• **to**: [`RouteLocationNormalized`](RouteLocationNormalized.md)
+• **to**: [`RouteLocationNormalizedGeneric`](RouteLocationNormalizedGeneric.md)
 
 Адрес маршрута, к которому производится переход навигации
 
@@ -74,6 +74,6 @@ ___
 
 ### type
 
-• **type**: `NAVIGATION_ABORTED` \| `NAVIGATION_CANCELLED` \| `NAVIGATION_DUPLICATED`
+• **type**: [`NAVIGATION_ABORTED`](../enums/ErrorTypes.md#NAVIGATION_ABORTED) \| [`NAVIGATION_CANCELLED`](../enums/ErrorTypes.md#NAVIGATION_CANCELLED) \| [`NAVIGATION_DUPLICATED`](../enums/ErrorTypes.md#NAVIGATION_DUPLICATED)
 
 Тип навигации. Один из [NavigationFailureType](../enums/NavigationFailureType.md)

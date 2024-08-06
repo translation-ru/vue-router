@@ -12,9 +12,9 @@ editLink: false
 
 ### currentRoute
 
-• `Readonly` **currentRoute**: `Ref`\<[`RouteLocationNormalizedLoaded`](RouteLocationNormalizedLoaded.md)\>
+• `Readonly` **currentRoute**: `Ref`\<[`RouteLocationNormalizedLoadedGeneric`](RouteLocationNormalizedLoadedGeneric.md)\>
 
-Текущий [RouteLocationNormalized](RouteLocationNormalized.md)
+Текущий [RouteLocationNormalized](../index.md#RouteLocationNormalized)
 
 ___
 
@@ -42,10 +42,10 @@ ___
 
 #### Параметры
 
-| Название     | Тип                                              | Описание                                                              |
-| :----------- | :----------------------------------------------- | :-------------------------------------------------------------------- |
-| `parentName` | [`RouteRecordName`](../index.md#RouteRecordName) | Название родительской записи маршрута, в которую будет добавлен новый |
-| `route`      | [`RouteRecordRaw`](../index.md#RouteRecordRaw)   | Запьсь маршрута для добавления                                        |
+| Название | Тип | Описание |
+| :------ | :------ | :------ |
+| `parentName` | `NonNullable`\<[`RouteRecordNameGeneric`](../index.md#RouteRecordNameGeneric)\> | Родительская запись маршрута, в которую должен быть добавлен `route` |
+| `route` | [`RouteRecordRaw`](../index.md#RouteRecordRaw) | Запись маршрута для добавления |
 
 #### Возвращает
 
@@ -182,6 +182,18 @@ router.beforeResolve(to => {
 
 ___
 
+### clearRoutes
+
+▸ **clearRoutes**(): `void`
+
+Delete all routes from the router matcher.
+
+#### Returns
+
+`void`
+
+___
+
 ### forward
 
 ▸ **forward**(): `void`
@@ -232,13 +244,32 @@ ___
 
 #### Параметры
 
-| Название | Тип                                              | Описание                              |
-| :------- | :----------------------------------------------- | :------------------------------------ |
-| `name`   | [`RouteRecordName`](../index.md#RouteRecordName) | Название записи маршрута для проверки |
+| Название | Тип | Описание |
+| :------ | :------ | :------ |
+| `name` | `NonNullable`\<[`RouteRecordNameGeneric`](../index.md#RouteRecordNameGeneric)\> |  Название записи маршрута для проверки |
 
 #### Возвращает
 
 `boolean`
+
+___
+
+### install
+
+▸ **install**(`app`): `void`
+
+Called automatically by `app.use(router)`. Should not be called manually by
+the user. This will trigger the initial navigation when on client side.
+
+#### Parameters
+
+| Name | Type | Description |
+| :------ | :------ | :------ |
+| `app` | `App`\<`any`\> | Application that uses the router |
+
+#### Returns
+
+`void`
 
 ___
 
@@ -289,9 +320,9 @@ ___
 
 #### Параметры
 
-| Название | Тип                                                | Описание                       |
-| :------- | :------------------------------------------------- | :----------------------------- |
-| `to`     | [`RouteLocationRaw`](../index.md#RouteLocationRaw) | Описание маршрута для перехода |
+| Название | Тип | Описание |
+| :------ | :------ | :------ |
+| `to` | `string` \| [`RouteLocationAsRelativeGeneric`](RouteLocationAsRelativeGeneric.md) \| [`RouteLocationAsPathGeneric`](RouteLocationAsPathGeneric.md) | Описание маршрута для перехода |
 
 #### Возвращает
 
@@ -307,9 +338,9 @@ ___
 
 #### Параметры
 
-| Название | Тип                                              | Описание                                 |
-| :------- | :----------------------------------------------- | :--------------------------------------- |
-| `name`   | [`RouteRecordName`](../index.md#RouteRecordName) | Имя маршрута, который необходимо удалить |
+| Название | Тип | Описание |
+| :------ | :------ | :------ |
+| `name` | `NonNullable`\<[`RouteRecordNameGeneric`](../index.md#RouteRecordNameGeneric)\> | Имя маршрута, который необходимо удалить |
 
 #### Возвращает
 
@@ -325,9 +356,9 @@ ___
 
 #### Параметры
 
-| Название | Тип                                                | Описание                       |
-| :------- | :------------------------------------------------- | :----------------------------- |
-| `to`     | [`RouteLocationRaw`](../index.md#RouteLocationRaw) | Описание маршрута для перехода |
+| Название | Тип | Описание |
+| :------ | :------ | :------ |
+| `to` | `string` \| [`RouteLocationAsRelativeGeneric`](RouteLocationAsRelativeGeneric.md) \| [`RouteLocationAsPathGeneric`](RouteLocationAsPathGeneric.md) | Описание маршрута для перехода |
 
 #### Возвращает
 
@@ -337,17 +368,35 @@ ___
 
 ### resolve
 
-▸ **resolve**(`to`, `currentLocation?`): [`RouteLocation`](RouteLocation.md) & \{ `href`: `string`  }
+▸ **resolve**\<`Name`\>(`to`, `currentLocation?`): [`RouteLocationResolvedGeneric`](RouteLocationResolvedGeneric.md)
 
-Возвращает [нормализованную версию](RouteLocation.md) [описания маршрута](../index.md#RouteLocationRaw). Также включает свойство `href`, которое включает любое существующее `base`. По умолчанию в качестве `currentLocation` используется `router.currentRoute`, и переопределять его следует только в продвинутых вариантах использования.
+
+#### Типы параметров
+
+| Название | Тип |
+| :------ | :------ |
+| `Name` | extends `string` \| `symbol` = `string` \| `symbol` |
 
 #### Параметры
 
-| Название           | Тип                                                                 | Описание                                                               |
-| :----------------- | :------------------------------------------------------------------ | :--------------------------------------------------------------------- |
-| `to`               | [`RouteLocationRaw`](../index.md#RouteLocationRaw)                  | Необработанное описание маршрута для разрешения                        |
-| `currentLocation?` | [`RouteLocationNormalizedLoaded`](RouteLocationNormalizedLoaded.md) | Необязательное текущее описание маршрута для относительного разрешения |
+| Название | Тип | Описание |
+| :------ | :------ | :------ |
+| `to` | [`RouteLocationAsRelativeTyped`](RouteLocationAsRelativeTyped.md)\<[`RouteMapGeneric`](../index.md#RouteMapGeneric), `Name`\> | Необработанное описание маршрута для разрешения |
+| `currentLocation?` | [`RouteLocationNormalizedLoadedGeneric`](RouteLocationNormalizedLoadedGeneric.md) | Необязательное текущее описание маршрута для относительного разрешения |
 
 #### Возвращает
 
-[`RouteLocation`](RouteLocation.md) & \{ `href`: `string`  }
+[`RouteLocationResolvedGeneric`](RouteLocationResolvedGeneric.md)
+
+▸ **resolve**(`to`, `currentLocation?`): [`RouteLocationResolvedGeneric`](RouteLocationResolvedGeneric.md)
+
+#### Parameters
+
+| Name | Type |
+| :------ | :------ |
+| `to` | `string` \| [`RouteLocationAsRelativeGeneric`](RouteLocationAsRelativeGeneric.md) \| [`RouteLocationAsPathGeneric`](RouteLocationAsPathGeneric.md) |
+| `currentLocation?` | [`RouteLocationNormalizedLoadedGeneric`](RouteLocationNormalizedLoadedGeneric.md) |
+
+#### Returns
+
+[`RouteLocationResolvedGeneric`](RouteLocationResolvedGeneric.md)

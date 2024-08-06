@@ -6,7 +6,11 @@ editLink: false
 
 # Интерфейс: NavigationGuardWithThis\<T\>
 
-Навигационный хук. См. [Навигационные хуки](/guide/advanced/navigation-guards.md).
+Навигационный хук с параметром типа для `this`.
+
+**`Смотрите`**
+
+[TypesConfig](TypesConfig.md)
 
 ## Параметры типа
 
@@ -18,17 +22,17 @@ editLink: false
 
 ### NavigationGuardWithThis
 
-▸ **NavigationGuardWithThis**(`this`, `to`, `from`, `next`): `NavigationGuardReturn` \| `Promise`\<`NavigationGuardReturn`\>
+▸ **NavigationGuardWithThis**(`this`, `to`, `from`, `next`): [`_Awaitable`](../index.md#_Awaitable)\<[`NavigationGuardReturn`](../index.md#NavigationGuardReturn)\>
 
 #### Параметры
 
-| Название | Тип                                                     |
-| :------- | :------------------------------------------------------ |
-| `this`   | `T`                                                     |
-| `to`     | [`RouteLocationNormalized`](RouteLocationNormalized.md) |
-| `from`   | [`RouteLocationNormalized`](RouteLocationNormalized.md) |
-| `next`   | [`NavigationGuardNext`](NavigationGuardNext.md)         |
+| Название | Тип |
+| :------ | :------ |
+| `this` | `T` |
+| `to` | [`RouteLocationNormalizedGeneric`](RouteLocationNormalizedGeneric.md) |
+| `from` | [`RouteLocationNormalizedLoadedGeneric`](RouteLocationNormalizedLoadedGeneric.md) |
+| `next` | [`NavigationGuardNext`](NavigationGuardNext.md) |
 
 #### Возвращает
 
-`NavigationGuardReturn` \| `Promise`\<`NavigationGuardReturn`\>
+[`_Awaitable`](../index.md#_Awaitable)\<[`NavigationGuardReturn`](../index.md#NavigationGuardReturn)\>
