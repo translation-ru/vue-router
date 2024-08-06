@@ -24,7 +24,7 @@ ___
 
 ### ariaCurrentValue
 
-• `Опционально` **ariaCurrentValue**: ``"location"`` \| ``"time"`` \| ``"page"`` \| ``"step"`` \| ``"date"`` \| ``"true"`` \| ``"false"``
+• `Опционально` **ariaCurrentValue**: ``"time"`` \| ``"location"`` \| ``"page"`` \| ``"step"`` \| ``"date"`` \| ``"true"`` \| ``"false"``
 
 Значение, передаваемое атрибуту `aria-current`, когда ссылка активна "по точному совпадению".
 
@@ -64,7 +64,7 @@ ___
 
 ### to
 
-• **to**: [`RouteLocationRaw`](../index.md#RouteLocationRaw)
+• **to**: `string` \| [`RouteLocationAsRelativeGeneric`](RouteLocationAsRelativeGeneric.md) \| [`RouteLocationAsPathGeneric`](RouteLocationAsPathGeneric.md)
 
 Описания маршрута с указанием куда должна переходить ссылка при нажатии на нее.
 

@@ -94,7 +94,7 @@ ___
 
 ### name
 
-• `Опционально` **name**: [`RouteRecordName`](../index.md#RouteRecordName)
+• `Опционально` **name**: [`RouteRecordNameGeneric`](../index.md#RouteRecordNameGeneric)
 
 Имя для записи маршрута. Должно быть уникальным.
 
@@ -136,7 +136,7 @@ ___
 
 ### redirect
 
-• **redirect**: `RouteRecordRedirectOption`
+• **redirect**: [`RouteRecordRedirectOption`](../index.md#RouteRecordRedirectOption)
 
 Куда перенаправлять, если маршрут напрямую совпадает. Перенаправление происходит перед любым навигационным хуком и запускает новую навигацию с новым целевым местоположением.
 

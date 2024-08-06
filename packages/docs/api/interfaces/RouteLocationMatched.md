@@ -64,6 +64,18 @@ ___
 
 ___
 
+### enterCallbacks
+
+• **enterCallbacks**: `Record`\<`string`, [`NavigationGuardNextCallback`](../index.md#NavigationGuardNextCallback)[]\>
+
+Registered beforeRouteEnter callbacks passed to `next` or returned in guards
+
+#### Inherited from
+
+[RouteRecordNormalized](RouteRecordNormalized.md).[enterCallbacks](RouteRecordNormalized.md#enterCallbacks)
+
+___
+
 ### instances
 
 • **instances**: `Record`\<`string`, `undefined` \| ``null`` \| `ComponentPublicInstance`\>
@@ -74,6 +86,18 @@ ___
 #### Наследуется от
 
 [RouteRecordNormalized](RouteRecordNormalized.md).[instances](RouteRecordNormalized.md#instances)
+
+___
+
+### leaveGuards
+
+• **leaveGuards**: `Set`\<[`NavigationGuard`](NavigationGuard.md)\>
+
+Registered leave guards
+
+#### Inherited from
+
+[RouteRecordNormalized](RouteRecordNormalized.md).[leaveGuards](RouteRecordNormalized.md#leaveGuards)
 
 ___
 
@@ -91,7 +115,7 @@ ___
 
 ### name
 
-• **name**: `undefined` \| [`RouteRecordName`](../index.md#RouteRecordName)
+• **name**: [`RouteRecordNameGeneric`](../index.md#RouteRecordNameGeneric)
 
 Название для записи маршрута. Должно быть уникальным.
 
@@ -115,7 +139,7 @@ ___
 
 ### props
 
-• **props**: `Record`\<`string`, `_RouteRecordProps`\>
+• **props**: `Record`\<`string`, [`_RouteRecordProps`](../index.md#_RouteRecordProps)\>
 
 Позволяет передавать параметры в качестве входных параметров компоненту, отображаемому с помощью `router-view`. Должен быть объектом с теми же ключами, что и `components`, или булевым значением, которое будет применяться к каждому компоненту.
 
@@ -127,10 +151,22 @@ ___
 
 ### redirect
 
-• **redirect**: `undefined` \| `RouteRecordRedirectOption`
+• **redirect**: `undefined` \| [`RouteRecordRedirectOption`](../index.md#RouteRecordRedirectOption)
 
 Куда перенаправлять, если маршрут напрямую совпадает. Перенаправление происходит перед любым навигационным хуком и запускает новую навигацию с новым целевым местоположением.
 
 #### Наследуется от
 
 [RouteRecordNormalized](RouteRecordNormalized.md).[redirect](RouteRecordNormalized.md#redirect)
+
+___
+
+### updateGuards
+
+• **updateGuards**: `Set`\<[`NavigationGuard`](NavigationGuard.md)\>
+
+Registered update guards
+
+#### Inherited from
+
+[RouteRecordNormalized](RouteRecordNormalized.md).[updateGuards](RouteRecordNormalized.md#updateGuards)

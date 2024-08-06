@@ -6,6 +6,8 @@ editLink: false
 
 # Интерфейс: NavigationGuardNext
 
+коллбек `next()` передается в навигационные хуки.
+
 ## Вызов
 
 ### NavigationGuardNext
@@ -36,9 +38,9 @@ editLink: false
 
 #### Параметры
 
-| Название   | Тип                                                |
-| :--------- | :------------------------------------------------- |
-| `location` | [`RouteLocationRaw`](../index.md#RouteLocationRaw) |
+| Название | Тип |
+| :------ | :------ |
+| `location` | `string` \| [`RouteLocationAsRelativeGeneric`](RouteLocationAsRelativeGeneric.md) \| [`RouteLocationAsPathGeneric`](RouteLocationAsPathGeneric.md) |
 
 #### Возвращает
 
@@ -64,9 +66,9 @@ editLink: false
 
 #### Параметры
 
-| Название | Тип                           |
-| :------- | :---------------------------- |
-| `cb`     | `NavigationGuardNextCallback` |
+| Название | Тип |
+| :------ | :------ |
+| `cb` | [`NavigationGuardNextCallback`](../index.md#NavigationGuardNextCallback) |
 
 #### Возвращает
 

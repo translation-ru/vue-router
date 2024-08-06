@@ -8,6 +8,18 @@ editLink: false
 
 Общие опции для всех методов навигации.
 
+## Иерархия
+
+- **`RouteLocationOptions`**
+
+  ↳ [`RouteLocationNamedRaw`](RouteLocationNamedRaw.md)
+
+  ↳ [`RouteLocationPathRaw`](RouteLocationPathRaw.md)
+
+  ↳ [`RouteLocationAsRelativeGeneric`](RouteLocationAsRelativeGeneric.md)
+
+  ↳ [`RouteLocationAsPathGeneric`](RouteLocationAsPathGeneric.md)
+
 ## Свойства
 
 ### force
