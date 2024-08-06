@@ -3,7 +3,7 @@ import { Theme } from 'vitepress'
 import DefaultTheme from 'vitepress/theme'
 import AsideSponsors from './components/AsideSponsors.vue'
 // import HomeSponsors from './components/HomeSponsors.vue'
-import TranslationStatus from 'vitepress-translation-helper/ui/TranslationStatus.vue'
+import TranslationStatus from './components/TranslationStatus.vue'
 import './styles/vars.css'
 import './styles/sponsors.css'
 import VueSchoolLink from './components/VueSchoolLink.vue'
@@ -13,6 +13,7 @@ import status from '../translation-status.json'
 
 const i18nLabels = {
   zh: '该翻译已同步到了 ${date} 的版本，其对应的 commit hash 是 <code>${hash}</code>。',
+  ru: 'Перевод синхронизирован с документацией от ${date}, хэш коммита <code>${hash}</code>.',
 }
 
 const theme: Theme = {
