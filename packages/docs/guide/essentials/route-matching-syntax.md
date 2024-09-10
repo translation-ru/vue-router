@@ -88,7 +88,7 @@ const routes = [
 const router = createRouter({
   history: createWebHistory(),
   routes: [
-    // будет соответствовать /users/posva но нет будет для:
+    // будет соответствовать /users/posva но не будет для:
     // - /users/posva/ потому что strict: true
     // - /Users/posva потому что: true
     { path: '/users/:id', sensitive: true },
