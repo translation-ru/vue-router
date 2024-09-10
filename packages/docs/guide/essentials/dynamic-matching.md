@@ -156,7 +156,7 @@ router.push({
 })
 ```
 
-Подробнее см. в разделе [повторяющиеся параметры](./route-matching-syntax.md#Repeatable-params).
+Подробнее см. в разделе [повторяющиеся параметры](./route-matching-syntax.md#repeatable-params).
 
 Если вы используете [History mode](./history-mode.md), обязательно следуйте инструкциям по правильной настройке вашего сервера.
 
