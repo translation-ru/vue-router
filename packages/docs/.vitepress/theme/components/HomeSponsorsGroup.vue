@@ -1,3 +1,34 @@
+<script setup lang="ts">
+import sponsors from './sponsors.json'
+import { computed } from 'vue'
+import { useData } from 'vitepress'
+
+const { name, size = 140 } = defineProps<{
+    name: 'Gold' | 'Platinum' | 'Silver' | 'Bronze'
+    size?: number | string
+  }>()
+
+const translatedNameToRussian = computed(() => {
+  let sponsorsName = {
+    Gold: 'Золотые',
+    Platinum: 'Платиновые',
+    Silver: 'Серебряные',
+    Bronze: 'Бронзовые',
+  }
+
+  return sponsorsName[name]
+})
+
+const { isDark } = useData()
+
+const list = computed(() =>
+  sponsors[name.toLowerCase()].map(sponsor => ({
+    ...sponsor,
+    imgSrc: isDark.value ? sponsor.imgSrcDark : sponsor.imgSrcLight,
+  }))
+)
+</script>
+
 <template>
   <h3>{{ translatedNameToRussian }} спонсоры</h3>
 
@@ -27,41 +58,6 @@
     </a>
   </p>
 </template>
-
-<script setup lang="ts">
-import sponsors from './sponsors.json'
-import { computed } from 'vue'
-import { useData } from 'vitepress'
-
-interface Props {
-  name: 'Gold' | 'Platinum' | 'Silver' | 'Bronze'
-  size?: number | string
-}
-
-const props = withDefaults(defineProps<Props>(), {
-  size: 140,
-})
-
-const { isDark } = useData()
-
-const list = computed(() =>
-  sponsors[props.name.toLowerCase()].map((sponsor) => ({
-    ...sponsor,
-    imgSrc: isDark.value ? sponsor.imgSrcDark : sponsor.imgSrcLight,
-  }))
-)
-
-const translatedNameToRussian = computed(() => {
-  let sponsorsName = {
-    Gold: 'Золотые',
-    Platinum: 'Платиновые',
-    Silver: 'Серебряные',
-    Bronze: 'Бронзовые',
-  }
-
-  return sponsorsName[props.name]
-})
-</script>
 
 <style scoped>
 .sponsor_wrapper {
