@@ -30,7 +30,7 @@ const router = createRouter({
 ```js
 const UserDetails = () =>
   Promise.resolve({
-    /* определение компонентоа */
+    /* определение компонентов */
   })
 ```
 
